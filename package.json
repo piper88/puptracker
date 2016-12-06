@@ -1,0 +1,37 @@
+{
+  "name": "puptracker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prungy88/puptracker.git"
+  },
+  "author": "sarah.debey@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/prungy88/puptracker/issues"
+  },
+  "homepage": "https://github.com/prungy88/puptracker#readme",
+  "dependencies": {
+    "crypto": "0.0.3",
+    "eslint": "^3.11.1",
+    "jsonwebtoken": "^7.2.0",
+    "morgan": "^1.7.0"
+  },
+  "devDependencies": {
+    "bcrypt": "^1.0.0",
+    "bluebird": "^3.4.6",
+    "body-parser": "^1.15.2",
+    "cors": "^2.8.1",
+    "debug": "^2.3.3",
+    "dotenv": "^2.0.0",
+    "express": "^4.14.0",
+    "http-errors": "^1.5.1",
+    "mongoose": "^4.7.1"
+  }
+}
