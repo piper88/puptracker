@@ -2,14 +2,14 @@
 
 const authRouter = require('../route/auth-router.js');
 const userMock = require('./lib/user-mock.js');
-const cleanUpDB = require('./clean-up-mock.js');
+const cleanUpDB = require('./lib/clean-up-mock.js');
 
 const expect = require('chai').expect;
 //will make the fake requests for us
 const request = require('superagent');
 //need to pass the server to the server control
 const server = require('../server.js');
-const serverControl = require('./server-control.js');
+const serverControl = require('./lib/server-control.js');
 //not sure why we need mongoose and bluebird...
 const mongoose = require('mongoose');
 const Promise = require('bluebird');
@@ -23,16 +23,15 @@ mongoose.Promise = Promise;
 describe('testing auth router', function(done) {
     before(done => serverControl.serverUp(server, done));
     after(done => serverControl.serverDown(server, done));
-    afterEach(done => cleanupDB(done));
+    afterEach(done => cleanUpDB(done));
 
     describe('testing POST /api/signup', function() {
       describe('with valid body', function() {
-        before(done => userMock.call(this, done));
         it('should return a token', (done) => {
           request.post(`${url}/api/signup`)
           .send({
-            username: this.tempUser.username,
-            password: this.tempUser.password,
+            username: 'prungy88',
+            password: 'goodpassword',
           })
           .end((err, res) => {
             if (err) return done(err);
@@ -68,7 +67,7 @@ describe('testing auth router', function(done) {
         it('should return a 400 bad request', (done) => {
           request.post(`${url}/api/signup`)
           .send({
-            password: this.tempUser.password,
+            password: this.tempPassword,
           })
           .end((err, res) => {
             expect(res.status).to.equal(400);
@@ -89,16 +88,33 @@ describe('testing auth router', function(done) {
           })
         }); //end of it should return a 400 bad request
       }); //end of describe with no password
+
+      describe('with duplicate username', function() {
+        before(done => userMock.call(this, done));
+        it('should return a 409 error', (done) => {
+          request.post(`${url}/api/signup`)
+          .send({
+            username: this.tempUser.username,
+            password: this.tempPassword,
+          })
+          .end((err, res) => {
+            // console.log('!!!!!!', res);
+            expect(res.status).to.equal(409);
+            done();
+          })
+        });
+      });
     }); //end of POST tests
     describe('testing GET /api/login', function() {
       describe('with valid username and password', function() {
         before(done => userMock.call(this, done));
         it('should return a 200 status', (done) => {
           request.get(`${url}/api/login`)
-          .send({
-            username: this.tempUser.username,
-            password: this.tempUser.password,
-          })
+          .auth(this.tempUser.username, this.tempPassword)
+          // .send({
+          //   username: this.tempUser.username,
+          //   password: this.tempPassword,
+          // })
           .end((err, res) => {
             expect(res.status).to.equal(200);
             done();
@@ -109,24 +125,23 @@ describe('testing auth router', function(done) {
         before(done => userMock.call(this, done));
         it('should return a 400 bad request', (done) => {
           request.get(`${url}/api/login`)
-          .send({
-            username: this.tempUser.username,
-          })
+          .auth(this.tempUser.username)
           .end((err, res) => {
-            expect(res.status).to.equal(400);
+            expect(res.status).to.equal(401);
             done();
           })
         }); //end of it should return a 400 bad request
       }); //end of describe with valid username and no password
       describe('with no username and valid password', function() {
         before(done => userMock.call(this, done));
-        it('should rreturn a 400 bad reuqest', (done) => {
+        it('should return a 400 bad reuqest', (done) => {
           request.get(`${url}/api/login`)
-          .send({
-            password: this.tempUser.password,
-          })
+          .auth(this.tempUser.password)
+          // .send({
+          //   password: this.tempUser.password,
+          // })
           .end((err, res) => {
-            expect(res.status).to.equal(400);
+            expect(res.status).to.equal(401);
             done();
           })
         });

@@ -24,7 +24,7 @@ exports.serverDown = function(server, done){
       server.isRunning = false;
       debug('server is off');
       done();
-    };
+    });
     return;
   }
   done();
