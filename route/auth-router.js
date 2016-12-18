@@ -18,7 +18,9 @@ authRouter.post('/api/signup', jsonParser, function(req, res, next){
   let password = req.body.password;
   delete req.body.password;
 
-  User.generatePasswordHash(password)
+  let user = new User(req.body);
+
+  user.generatePasswordHash(password)
   .then(user => user.save())
   .then(user => user.generateToken())
   .then(token => res.send(token))
@@ -31,6 +33,7 @@ authRouter.get('/api/login', basicAuth, function(req, res, next){
   User.findOne({username: req.auth.username})
   .catch(err => Promise.reject(createError(401, err.message)))
   .then(user => user.comparePasswordHash(req.auth.password))
+  .catch(err => Promise.reject(createError(401, err.message)))
   .then(user => user.generateToken())
   .then(token => res.send(token))
   .catch(next);

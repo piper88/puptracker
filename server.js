@@ -13,7 +13,7 @@ const debug = require('debug')('puptracker:server');
 
 //app modules (aka routes)
 const authRouter = require('./route/auth-router.js');
-// const errorMiddleware = require('./lib/error-middleware.js');
+const errorMiddleware = require('./lib/error-middleware.js');
 
 //load environment vars
 dotenv.load();
@@ -33,7 +33,7 @@ app.use(authRouter);
 
 app.use(cors());
 app.use(morgan('dev'));
-// app.use(errorMiddleware);
+app.use(errorMiddleware);
 
 const server = module.exports = app.listen(PORT, () => {
   debug(`server up on ${PORT}`);
