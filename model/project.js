@@ -6,6 +6,7 @@ const debug = require('debug')('puptracker:project');
 const projectSchema = mongoose.Schema({
   name: {type: String, required: true, unique: true},
   lines: [{type: mongoose.Schema.Types.ObjectId, ref:'line'}],
+  userID: {type: mongoose.Schema.Types.ObjectId, require: true},
 });
 
 const Project = module.exports = mongoose.model('project', projectSchema);

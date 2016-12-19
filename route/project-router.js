@@ -18,4 +18,44 @@ const projectRouter = module.exports = Router();
 
 projectRouter.post('/api/project', bearerAuth, jsonParser, function(req, res, next) {
   debug('POST /api/project');
+  if (!req.body) return Promise.reject(createError(400, 'no body'));
+  let project = req.body;
+  //set the userID of the project to the user making the request
+  project.userId = req.user._id;
+  return new Project(project).save();
+  .then(result = res.json(result))
+  .catch(next);
+});
+
+//no bearerAuth because anyone can 'get' a project?
+projectRouter.get('/api/project/:id', function(req, res, next) {
+  debug('GET /api/project/:id');
+  //find the project by the id, and res.json it
+  Project.findById(req.params.id)
+  .catch(() => {
+    return Promise.reject(createError(404, 'project not found'));
+  })
+  .then(project => {
+    res.json(project);
+  });
+});
+
+projectRouter.delete('/api/project/:id', bearerAuth, function(req, res, next) {
+  debug('DELETE /api/project/:id');
+  //first find the project by the req.params._id
+  //if there is none return a promise with a 404 not found error
+  //if you do find the project, check to make sure the userID of the project matches the id of the user making the request
+  //if they don't match, send 401 unauthorized error
+  //if they do match, then Project.findByIdAndRemoveProject
+  Project.findById(req.params.id)
+  .catch(err => Promise.reject(createError(404, 'project not found')))
+  .then(project => {
+    if (project.userId.toString() !== req.user._id.toString()) return Promise.reject(createError(401, 'unauthorized request'));
+    Project.findByIdAndRemoveProject(project._id);
+  })
+  .catch(err => {
+    return Promise.reject(err.status ? err : createError(404, err.message));
+  })
+  .then(() => res.status(204).send()))
+  .catch(next);
 });
