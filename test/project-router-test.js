@@ -88,6 +88,65 @@ describe('testing project router', function(done) {
           done();
         });
       });
+    }); //end of describe with invalid token
+
+    describe('with duplicate project name', function() {
+      before(done => projectMock.call(this, done));
+
+      it('should return a 409 duplicate error', (done) => {
+        request.post(`${url}/api/project`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .send({
+          name: this.tempProject.name,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(409);
+          done();
+        });
+      }); //end of it should return 409
+      // before(done => userMock.call(this, done));
     });
   }); //end of describe POST
+
+  describe('testing GET /api/project/:id', function() {
+    describe('with valid project ID and token', function() {
+      before(done => projectMock.call(this, done));
+
+      it('should return a project', (done) => {
+        request.get(`${url}/api/project/${this.tempProject._id}`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.status).to.equal(200);
+          done();
+        });
+      }); //end of it should return a project
+    }); //end of describe with valid project ID and token
+
+    describe('with valid projectID and invalid token', function() {
+      before(done => projectMock.call(this, done));
+
+      it('should return a 401 unauthorized', (done) => {
+        request.get(`${url}/api/project/${this.tempProject._id}`)
+        .set({Authorization: 'Bearer badtoken'})
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      }); //end of it should return 401
+    }); //end of describe with valid id and invalid token
+
+    describe('with invalid projectID and valid token', function() {
+      before(done => projectMock.call(this, done));
+
+      it('should return a 404 not found', (done) => {
+        request.get(`${url}/api/project/1234`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          done();
+        });
+      });
+    }); //end of describe with invalid
+  }); //end of describe GET
 });
