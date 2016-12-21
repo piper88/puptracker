@@ -36,9 +36,8 @@ describe('testing project router', function(done) {
         .set({Authorization: `Bearer ${this.tempToken}`})
         .send(exampleProjectData)
         .end((err, res) => {
-          console.log('THE ERRORRRRRRR', err);
+          // console.log('THE ERRORRRRRRR', err);
           if (err) return done(err);
-          console.log('THE RESPONSEEEEEEE', res);
           expect(res.status).to.equal(200);
           done();
         });
@@ -55,8 +54,7 @@ describe('testing project router', function(done) {
         .send('INVALID')
         .set('Character-Type', 'application/json')
         .end((err, res) => {
-          console.log('THE SECOND ERRORRRRRRRRR', err);
-          console.log('THE SECOND RESPONSEEEEEE', res);
+          // console.log('THE SECOND ERRORRRRRRRRR', err);
           // if (err) return done(err);
           expect(res.status).to.equal(400);
           done();
