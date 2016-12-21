@@ -36,7 +36,6 @@ describe('testing project router', function(done) {
         .set({Authorization: `Bearer ${this.tempToken}`})
         .send(exampleProjectData)
         .end((err, res) => {
-          // console.log('THE ERRORRRRRRR', err);
           if (err) return done(err);
           expect(res.status).to.equal(200);
           done();
@@ -57,6 +56,35 @@ describe('testing project router', function(done) {
           // console.log('THE SECOND ERRORRRRRRRRR', err);
           // if (err) return done(err);
           expect(res.status).to.equal(400);
+          done();
+        });
+      });
+    }); //end of describe with invalid body
+
+    describe('with no body', function() {
+      before(done => userMock.call(this, done));
+      it('should return a 400 bad request', (done) => {
+
+        request.post(`${url}/api/project`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .send()
+        .set('Character-Type', 'application/json')
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+      });
+    }); //end of describe with no body
+
+    describe('with invalid token', function() {
+      before(done => userMock.call(this, done));
+      it('should return a 401 unauthorized', (done) => {
+
+        request.post(`${url}/api/project`)
+        .set({Authorization: `Bearer badtoken`})
+        .send(exampleProjectData)
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
           done();
         });
       });
