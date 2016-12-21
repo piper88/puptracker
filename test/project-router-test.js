@@ -163,6 +163,70 @@ describe('testing project router', function(done) {
   }); //end of describe GET
 
   describe('testing DELETE /api/project/:id', function() {
-    before(done => project)
+    describe('with valid projectID and token', function() {
+      before(done => projectMock.call(this, done));
+
+      it('should return a 204 successfully deleted', (done) => {
+        request.delete(`${url}/api/project/${this.tempProject._id}`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.status).to.equal(204);
+          done();
+        });
+      });
+    }); //end of describe with valid projectID and token
+
+    describe('with invalid projectID and valid token', function() {
+      before(done => projectMock.call(this, done));
+
+      it('should return a 404 not found', (done) => {
+        request.delete(`${url}/api/project/1234`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          done();
+        });
+      });
+    }); //end of describe with invalid ID but valid token
+
+    describe('with valid projectID and invalid token', function() {
+      before(done => projectMock.call(this, done));
+
+      it('should return a 401 unauthorized', (done) => {
+        request.delete(`${url}/api/project/${this.tempProject._id}`)
+        .set({Authorization: `Bearer badtoken`})
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
+
+    describe('with no header', function() {
+      before(done => projectMock.call(this, done));
+
+      it('should return a 401 unauthorized', (done) => {
+        request.delete(`${url}/api/project/${this.tempProject._id}`)
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
+
+    describe('with unauthorized user', function() {
+      before(done => projectMock.call(this, done));
+      before(done => userMock.call(this, done));
+
+      it('should return a 401 unauthorized', (done) => {
+        request.delete(`${url}/api/project/${this.tempProject._id}`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
   }); //end of describe DELETE
 });

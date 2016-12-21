@@ -38,7 +38,7 @@ projectRouter.get('/api/project/:id', bearerAuth, function(req, res, next) {
     return Promise.reject(createError(404, 'project not found'));
   })
   .then(project => {
-    // if (project.userId.toString() !== req.user._id.toString()) return Promise.reject(createError, 401, 'invalid userId');
+    if (project.userId.toString() !== req.user._id.toString()) return Promise.reject(createError, 401, 'invalid userId');
     res.json(project);
   })
   .catch(next);
@@ -52,10 +52,10 @@ projectRouter.delete('/api/project/:id', bearerAuth, function(req, res, next) {
   //if they don't match, send 401 unauthorized error
   //if they do match, then Project.findByIdAndRemoveProject
   Project.findById(req.params.id)
-  .catch(err => Promise.reject(createError(404, 'project not found')))
+  .catch(err => Promise.reject(createError(404, err.message)))
   .then(project => {
     if (project.userId.toString() !== req.user._id.toString()) return Promise.reject(createError(401, 'unauthorized request'));
-    Project.findByIdAndRemoveProject(project._id);
+    return Project.findByIdAndRemoveProject(project._id);
   })
   .catch(err => {
     return Promise.reject(err.status ? err : createError(404, err.message));
