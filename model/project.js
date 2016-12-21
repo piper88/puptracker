@@ -51,11 +51,11 @@ Project.findByIdAndRemoveProject = function(projectId){
         removeChildren.push(Mouse.remove({_id:lineID}));
       });
     });
-    return Promsie.all(removeChildren);
+    return Promise.all(removeChildren);
   })
   .then(() => {
     //then remove the line
-    return Line.remove({projectId:projectId});
+    // return Line.remove({projectId:projectId});
   })
   .then(() => {
     //then remove the project

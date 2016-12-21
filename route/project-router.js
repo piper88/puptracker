@@ -17,7 +17,7 @@ const projectRouter = module.exports = Router();
 //route to get project
 
 projectRouter.post('/api/project', bearerAuth, jsonParser, function(req, res, next) {
-  debug('OH BOY HERE IS THE DEBUG STATEMENT POST /api/project');
+  // debug('OH BOY HERE IS THE DEBUG STATEMENT POST /api/project');
   if (!req.body) return Promise.reject(createError(400, 'no body'));
   let project = req.body;
   //set the userID of the project to the user making the request
@@ -29,16 +29,19 @@ projectRouter.post('/api/project', bearerAuth, jsonParser, function(req, res, ne
 });
 
 //no bearerAuth because anyone can 'get' a project?
-projectRouter.get('/api/project/:id', function(req, res, next) {
+projectRouter.get('/api/project/:id', bearerAuth, function(req, res, next) {
   debug('GET /api/project/:id');
   //find the project by the id, and res.json it
   Project.findById(req.params.id)
   .catch(() => {
+    debug('ICH HOFFE DASS ICH DIESES NACHRICHT SEHEN');
     return Promise.reject(createError(404, 'project not found'));
   })
   .then(project => {
+    if (project.userId.toString() !== req.user._id.toString()) return Promise.reject(createError, 401, 'invalid userId');
     res.json(project);
-  });
+  })
+  .catch(next);
 });
 
 projectRouter.delete('/api/project/:id', bearerAuth, function(req, res, next) {
@@ -49,10 +52,10 @@ projectRouter.delete('/api/project/:id', bearerAuth, function(req, res, next) {
   //if they don't match, send 401 unauthorized error
   //if they do match, then Project.findByIdAndRemoveProject
   Project.findById(req.params.id)
-  .catch(err => Promise.reject(createError(404, 'project not found')))
+  .catch(err => Promise.reject(createError(404, err.message)))
   .then(project => {
     if (project.userId.toString() !== req.user._id.toString()) return Promise.reject(createError(401, 'unauthorized request'));
-    Project.findByIdAndRemoveProject(project._id);
+    return Project.findByIdAndRemoveProject(project._id);
   })
   .catch(err => {
     return Promise.reject(err.status ? err : createError(404, err.message));
