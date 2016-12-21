@@ -2,10 +2,10 @@
 
 const Router = require('express').Router;
 const createError = require('http-errors');
-const jsonParser = require('body-parser').json;
+const jsonParser = require('body-parser').json();
 const debug = require('debug')('puptracker:project-router');
 
-const Project = require('../model/project.j');
+const Project = require('../model/project.js');
 const bearerAuth = require('../lib/bearer-auth-middleware.js');
 
 const projectRouter = module.exports = Router();
@@ -17,13 +17,14 @@ const projectRouter = module.exports = Router();
 //route to get project
 
 projectRouter.post('/api/project', bearerAuth, jsonParser, function(req, res, next) {
-  debug('POST /api/project');
+  debug('OH BOY HERE IS THE DEBUG STATEMENT POST /api/project');
   if (!req.body) return Promise.reject(createError(400, 'no body'));
   let project = req.body;
   //set the userID of the project to the user making the request
   project.userId = req.user._id;
-  return new Project(project).save();
-  .then(result = res.json(result))
+  debug('DAS PROJECT', project);
+  return new Project(project).save()
+  .then(result => res.json(result))
   .catch(next);
 });
 
@@ -56,6 +57,6 @@ projectRouter.delete('/api/project/:id', bearerAuth, function(req, res, next) {
   .catch(err => {
     return Promise.reject(err.status ? err : createError(404, err.message));
   })
-  .then(() => res.status(204).send()))
+  .then(() => res.status(204).send())
   .catch(next);
 });

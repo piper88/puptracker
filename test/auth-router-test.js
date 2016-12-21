@@ -1,5 +1,7 @@
 'use strict';
 
+require('./lib/test-env.js');
+
 const authRouter = require('../route/auth-router.js');
 const userMock = require('./lib/user-mock.js');
 const cleanUpDB = require('./lib/clean-up-mock.js');

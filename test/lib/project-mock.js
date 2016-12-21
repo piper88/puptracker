@@ -3,7 +3,7 @@
 const Project = require('../../model/project.js');
 const debug = require('debug')('puptracker:project-mock');
 
-const userMock = require('../lib/user-mock.j');
+const userMock = require('../lib/user-mock.js');
 
 module.exports = function(done) {
   debug('project mock for testing');
@@ -18,11 +18,11 @@ module.exports = function(done) {
   //use call to gain access to the userMock methods
   userMock.call(this, err => {
     if (err) return done(err);
-    exampleProject.userId = this.tempUser._id;
+    exampleProject.userId = this.tempUser._id.toString();
     new Project(exampleProject).save()
     .then(project => {
       this.tempProject = project;
-      done()
+      done();
     })
     .catch(done);
   });
