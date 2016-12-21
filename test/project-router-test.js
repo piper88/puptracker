@@ -146,7 +146,23 @@ describe('testing project router', function(done) {
           expect(res.status).to.equal(404);
           done();
         });
-      });
+      }); //end of it should return 404 not found
     }); //end of describe with invalid
+
+    describe('with no header', function() {
+      before(done => projectMock.call(this, done));
+
+      it('should return a 401 unauthorized error', (done) => {
+        request.get(`${url}/api/project/${this.tempProject._id}`)
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    }); //end of describe with no header
   }); //end of describe GET
+
+  describe('testing DELETE /api/project/:id', function() {
+    before(done => project)
+  }); //end of describe DELETE
 });
