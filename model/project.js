@@ -14,7 +14,7 @@ const projectSchema = mongoose.Schema({
 
 const Project = module.exports = mongoose.model('project', projectSchema);
 
-Project.findByIdAndAddLine = function(id, line){
+Project.findByIdAndAddLine = function(projId, line){
   debug('Project: findByIdAndAddLine');
 
   return Project.findById(id)
