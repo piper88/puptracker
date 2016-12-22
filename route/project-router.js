@@ -10,6 +10,8 @@ const bearerAuth = require('../lib/bearer-auth-middleware.js');
 
 const projectRouter = module.exports = Router();
 
+//I BELIEVE that the router just calls the methods, and does as little of the handling of the data as possible, and instead just calls methods on the models on the req, and sends the res along afterwards.
+
 //route to add project
 
 //route to delete project
@@ -29,16 +31,34 @@ projectRouter.post('/api/project', bearerAuth, jsonParser, function(req, res, ne
 });
 
 //no bearerAuth because anyone can 'get' a project?
+// projectRouter.get('/api/project/:id', bearerAuth, function(req, res, next) {
+//   //have to also use populate to populate the project with the array of lines
+//   debug('GET /api/project/:id');
+//   //find the project by the id, and res.json it
+//   Project.findById(req.params.id)
+//   //MAYBEEE????????????????????
+//   .then((project) => {
+//     project.lines.forEach((line) => {
+//       //how do we fetch the lines of the project? or do we just have the array of lines? And then when we need access to the lines themselves, we make a Line.findById or whatever
+//     });
+//   });
+//   .populate('lines')
+//   .catch(() => {
+//     debug('ICH HOFFE DASS ICH DIESES NACHRICHT SEHEN');
+//     return Promise.reject(createError(404, 'project not found'));
+//   })
+//   .then(project => {
+//     // if (project.userId.toString() !== req.user._id.toString()) return Promise.reject(createError, 401, 'invalid userId');
+//     res.json(project);
+//   })
+//   .catch(next);
+// });
+
+//get the project, is the array of lines already populated? I'm so confused
 projectRouter.get('/api/project/:id', bearerAuth, function(req, res, next) {
-  debug('GET /api/project/:id');
-  //find the project by the id, and res.json it
+  debug('GET /api/project/:d');
   Project.findById(req.params.id)
-  .catch(() => {
-    debug('ICH HOFFE DASS ICH DIESES NACHRICHT SEHEN');
-    return Promise.reject(createError(404, 'project not found'));
-  })
-  .then(project => {
-    if (project.userId.toString() !== req.user._id.toString()) return Promise.reject(createError, 401, 'invalid userId');
+  .then((project) => {
     res.json(project);
   })
   .catch(next);
