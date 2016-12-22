@@ -7,15 +7,15 @@ const debug = require('debug')('puptracker:line');
 //the projectSchema has an array of lines, that is of type Schema, and has a ref of 'line'. So then it goes to the line schema, and makes the lines, giving them the corresponding project?
 const lineSchema = mongoose.Schema({
   name: {type: String, required: true},
-  projectId: {type: mongoose.Schema.Types.ObjectId, required: true},
-  cages: [{type: mongoose.Schema.Types.ObjectId, ref: 'cage'}]
+  projectID: {type: mongoose.Schema.Types.ObjectID, required: true},
+  cages: [{type: mongoose.Schema.Types.ObjectID, ref: 'cage'}]
 });
 
 const Line = module.exports = mongoose.model('line', lineSchema);
 
 //you're actually going to save the cage, in the cage POST route
-Line.findLineByIdAndAddCage = function(lineId, cage) {
-  return Line.findById(lineId)
+Line.findLineByIDAndAddCage = function(lineID, cage) {
+  return Line.findByID(lineID)
   .then((line) => {
     //add the cage to the line's cages array
     line.cages.push(cage._id)
@@ -27,12 +27,12 @@ Line.findLineByIdAndAddCage = function(lineId, cage) {
   });
 };
 
-Line.findLineByIdAndRemoveCage = function(lineId, cage){
+Line.findLineByIDAndRemoveCage = function(lineID, cage){
   debug('find line by id and remove cage');
 
-  return Cage.findByIdAndRemove(cage._id)
+  return Cage.findByIDAndRemove(cage._id)
   .then(() => {
-    return Line.findById(lineId)
+    return Line.findByID(lineID)
   })
   .then(line => {
     //find where the cage is in the line's cages array, and then splice it out
@@ -42,22 +42,22 @@ Line.findLineByIdAndRemoveCage = function(lineId, cage){
   });
 };
 
-Line.findLineByIdAndRemoveLine = function(lineId) {
+Line.findLineByIDAndRemoveLine = function(lineID) {
   debug('find line by id and remove line')
 
-  return Line.findById(lineId)
+  return Line.findByID(lineID)
   .then((line) => {
     let removeChildren = [];
     line.cages.forEach(cage => {
-      removeChildren.push(Cage.remove({lineId: line._id}));
+      removeChildren.push(Cage.remove({lineID: line._id}));
 
       cage.mice.forEach(mouse => {
-        removeChildren.push(Mouse.remove({cageId: cage._id}));
+        removeChildren.push(Mouse.remove({cageID: cage._id}));
       });
     });
     return Promise.all(removeChildren);
   })
   .then(() => {
-    return Line.findByIdAndRemove(lineId);
+    return Line.findByIDAndRemove(lineID);
   };
 });

@@ -18,7 +18,7 @@ module.exports = function(done) {
   //use call to gain access to the userMock methods
   userMock.call(this, err => {
     if (err) return done(err);
-    exampleProject.userId = this.tempUser._id;
+    exampleProject.userID = this.tempUser._id;
     new Project(exampleProject).save()
     .then(project => {
       this.tempProject = project;

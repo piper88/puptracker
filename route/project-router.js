@@ -23,7 +23,7 @@ projectRouter.post('/api/project', bearerAuth, jsonParser, function(req, res, ne
   if (!req.body) return Promise.reject(createError(400, 'no body'));
   let project = req.body;
   //set the userID of the project to the user making the request
-  project.userId = req.user._id;
+  project.userID = req.user._id;
   debug('DAS PROJECT', project);
   return new Project(project).save()
   .then(result => res.json(result))
@@ -35,11 +35,11 @@ projectRouter.post('/api/project', bearerAuth, jsonParser, function(req, res, ne
 //   //have to also use populate to populate the project with the array of lines
 //   debug('GET /api/project/:id');
 //   //find the project by the id, and res.json it
-//   Project.findById(req.params.id)
+//   Project.findByID(req.params.id)
 //   //MAYBEEE????????????????????
 //   .then((project) => {
 //     project.lines.forEach((line) => {
-//       //how do we fetch the lines of the project? or do we just have the array of lines? And then when we need access to the lines themselves, we make a Line.findById or whatever
+//       //how do we fetch the lines of the project? or do we just have the array of lines? And then when we need access to the lines themselves, we make a Line.findByID or whatever
 //     });
 //   });
 //   .populate('lines')
@@ -48,7 +48,7 @@ projectRouter.post('/api/project', bearerAuth, jsonParser, function(req, res, ne
 //     return Promise.reject(createError(404, 'project not found'));
 //   })
 //   .then(project => {
-//     // if (project.userId.toString() !== req.user._id.toString()) return Promise.reject(createError, 401, 'invalid userId');
+//     // if (project.userID.toString() !== req.user._id.toString()) return Promise.reject(createError, 401, 'invalid userID');
 //     res.json(project);
 //   })
 //   .catch(next);
@@ -57,7 +57,7 @@ projectRouter.post('/api/project', bearerAuth, jsonParser, function(req, res, ne
 //get the project, is the array of lines already populated? I'm so confused
 projectRouter.get('/api/project/:id', bearerAuth, function(req, res, next) {
   debug('GET /api/project/:d');
-  Project.findById(req.params.id)
+  Project.findByID(req.params.id)
   .then((project) => {
     res.json(project);
   })
@@ -70,12 +70,12 @@ projectRouter.delete('/api/project/:id', bearerAuth, function(req, res, next) {
   //if there is none return a promise with a 404 not found error
   //if you do find the project, check to make sure the userID of the project matches the id of the user making the request
   //if they don't match, send 401 unauthorized error
-  //if they do match, then Project.findByIdAndRemoveProject
-  Project.findById(req.params.id)
+  //if they do match, then Project.findByIDAndRemoveProject
+  Project.findByID(req.params.id)
   .catch(err => Promise.reject(createError(404, err.message)))
   .then(project => {
-    if (project.userId.toString() !== req.user._id.toString()) return Promise.reject(createError(401, 'unauthorized request'));
-    return Project.findByIdAndRemoveProject(project._id);
+    if (project.userID.toString() !== req.user._id.toString()) return Promise.reject(createError(401, 'unauthorized request'));
+    return Project.findByIDAndRemoveProject(project._id);
   })
   .catch(err => {
     return Promise.reject(err.status ? err : createError(404, err.message));
