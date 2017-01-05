@@ -20,6 +20,7 @@ Project.findByIdAndAddLine = function(projId, line){
   return Project.findById(projId)
   .then(project => {
     project.lines.push(line._id);
+    debug('!!!!!!!!!!!THE PROJECT WITH THE LINE HOPEFULLY ADDED', project);
     return project.save();
   });
 };
