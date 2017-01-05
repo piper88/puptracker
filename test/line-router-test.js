@@ -164,21 +164,47 @@ describe('testing line router', function(done) {
       });
     });
 
-//not sure if this test is correct....do we need a place to error handle not finding the project?
+//not sure if this test is correct....do we need a place to error handle not finding the project? I put it in the line-router, but somehow it doesn't look right...
     describe('with invalid project id and valid line id', function() {
       before(done => lineMock.call(this, done));
 
       it('should return a 404 not found', (done) => {
         request.get(`${url}/api/project/4747/line/${this.tempLine._id}`)
         .end((err, res) => {
-          Project.findById(4747)
-          .catch((err) => {
             expect(err).to.not.be.null;
             expect(res.status).to.equal(404);
-          });
+          done();
+        });
+      });
+    });
+
+    describe('with invalid project id and invalid line id', function() {
+      before(done => lineMock.call(this, done));
+
+      it('should return a 404 not found', (done) => {
+        request.get(`${url}/api/project/1234/line/5678`)
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
           done();
         });
       });
     });
   }); //end of describe testing GET
+
+  describe('testing DELETE /api/project/:projId/line/:lineId', function() {
+    describe('with valid lineId', function() {
+      before(done => lineMock.call(this, done));
+
+      it('should delete the line and the line from the lines array of the project, and all dependencies (cages and mice)', (done) => {
+        request.delete(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.status).to.equal(204);
+          expect(parseInt(`${this.tempProject.lines.length}`)).to.equal(0);
+          done();
+        })
+      });
+    });
+  });
 });
