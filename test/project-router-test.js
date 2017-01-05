@@ -50,7 +50,7 @@ describe('testing project router', function(done) {
       it('should return a 400 bad request', (done) => {
         request.post(`${url}/api/project`)
         .set({Authorization: `Bearer ${this.tempToken}`})
-        .send('INVALID')
+        .send('INVALId')
         .set('Character-Type', 'application/json')
         .end((err, res) => {
           // console.log('THE SECOND ERRORRRRRRRRR', err);
@@ -109,7 +109,7 @@ describe('testing project router', function(done) {
   }); //end of describe POST
 
   describe('testing GET /api/project/:id', function() {
-    describe('with valid project ID and token', function() {
+    describe('with valid project Id and token', function() {
       before(done => projectMock.call(this, done));
 
       it('should return a project', (done) => {
@@ -121,9 +121,9 @@ describe('testing project router', function(done) {
           done();
         });
       }); //end of it should return a project
-    }); //end of describe with valid project ID and token
+    }); //end of describe with valid project Id and token
 
-    describe('with valid projectID and invalid token', function() {
+    describe('with valid projectId and invalid token', function() {
       before(done => projectMock.call(this, done));
 
       it('should return a 401 unauthorized', (done) => {
@@ -136,7 +136,7 @@ describe('testing project router', function(done) {
       }); //end of it should return 401
     }); //end of describe with valid id and invalid token
 
-    describe('with invalid projectID and valid token', function() {
+    describe('with invalid projectId and valid token', function() {
       before(done => projectMock.call(this, done));
 
       it('should return a 404 not found', (done) => {
@@ -163,7 +163,7 @@ describe('testing project router', function(done) {
   }); //end of describe GET
 
   describe('testing DELETE /api/project/:id', function() {
-    describe('with valid projectID and token', function() {
+    describe('with valid projectId and token', function() {
       before(done => projectMock.call(this, done));
 
       it('should return a 204 successfully deleted', (done) => {
@@ -175,9 +175,9 @@ describe('testing project router', function(done) {
           done();
         });
       });
-    }); //end of describe with valid projectID and token
+    }); //end of describe with valid projectId and token
 
-    describe('with invalid projectID and valid token', function() {
+    describe('with invalid projectId and valid token', function() {
       before(done => projectMock.call(this, done));
 
       it('should return a 404 not found', (done) => {
@@ -188,9 +188,9 @@ describe('testing project router', function(done) {
           done();
         });
       });
-    }); //end of describe with invalid ID but valid token
+    }); //end of describe with invalid Id but valid token
 
-    describe('with valid projectID and invalid token', function() {
+    describe('with valid projectId and invalid token', function() {
       before(done => projectMock.call(this, done));
 
       it('should return a 401 unauthorized', (done) => {

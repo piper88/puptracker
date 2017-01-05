@@ -8,7 +8,7 @@ const userMock = require('../lib/user-mock.js');
 module.exports = function(done) {
   debug('project mock for testing');
 
-  //what do you want to do here? create a fake project that has a fake user ID, that comes from the userMock
+  //what do you want to do here? create a fake project that has a fake user Id, that comes from the userMock
 
   //create an example project with all the properties from the project model
   let exampleProject = {

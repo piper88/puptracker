@@ -13,6 +13,7 @@ const debug = require('debug')('puptracker:server');
 
 //app modules (aka routes)
 const authRouter = require('./route/auth-router.js');
+const lineRouter = require('./route/line-router.js');
 const projectRouter = require('./route/project-router.js');
 const errorMiddleware = require('./lib/error-middleware.js');
 
@@ -30,6 +31,7 @@ const app = express();
 //app routes
 app.use(authRouter);
 app.use(projectRouter);
+app.use(lineRouter);
 //will need following line with frontend
 // app.use(express.static(`${__dirname}/build`));
 
