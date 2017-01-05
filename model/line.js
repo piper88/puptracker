@@ -7,8 +7,8 @@ const debug = require('debug')('puptracker:line');
 //the projectSchema has an array of lines, that is of type Schema, and has a ref of 'line'. So then it goes to the line schema, and makes the lines, giving them the corresponding project?
 const lineSchema = mongoose.Schema({
   name: {type: String, required: true},
-  projectID: {type: mongoose.Schema.Types.ObjectID, required: true},
-  cages: [{type: mongoose.Schema.Types.ObjectID, ref: 'cage'}]
+  projectID: {type: mongoose.Schema.Types.ObjectId, required: true},
+  cages: [{type: mongoose.Schema.Types.ObjectId, ref: 'cage'}]
 });
 
 const Line = module.exports = mongoose.model('line', lineSchema);
@@ -59,5 +59,5 @@ Line.findLineByIDAndRemoveLine = function(lineID) {
   })
   .then(() => {
     return Line.findByIDAndRemove(lineID);
-  };
-});
+  });
+};

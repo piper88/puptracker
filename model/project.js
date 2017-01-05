@@ -3,21 +3,21 @@
 const mongoose = require('mongoose');
 const debug = require('debug')('puptracker:project');
 
-// const Line = require('./model/line.js');
+const Line = require('./line.js');
 
 const projectSchema = mongoose.Schema({
   name: {type: String, required: true, unique: true},
-  lines: [{type: mongoose.Schema.Types.ObjectID, ref:'line'}],
+  lines: [{type: mongoose.Schema.Types.ObjectId, ref: 'line'}],
   //probably won't be a userID? will just have get routes not use bearer auth middleware, so anyone can GET
-  userID: {type: mongoose.Schema.Types.ObjectID, required: true},
+  userID: {type: mongoose.Schema.Types.ObjectId, required: true},
 });
 
 const Project = module.exports = mongoose.model('project', projectSchema);
 
-Project.findByIDAndAddLine = function(projID, line){
+Project.findByIdAndAddLine = function(projID, line){
   debug('Project: findByIDAndAddLine');
 
-  return Project.findByID(id)
+  return Project.findById(id)
   .then(project => {
     project.lines.push(line._id);
     return project.save();
@@ -27,10 +27,10 @@ Project.findByIDAndAddLine = function(projID, line){
 //find a project by the projectID, and add a line to that project
 //add line to lines array, and then save that project
 //save that line
-// Project.findByIDAndAddLine = function(id, line){
+// Project.findByIdAndAddLine = function(id, line){
 //   debug('Project: findByIDAndAddLine');
 //   //Find the Project
-//   return Project.findByID(id)
+//   return Project.findById(id)
 //   //if you find a project, then create the line
 //   .then(project => {
 //     //the projectID of the line is set to the id give to the line by mongoose
@@ -55,10 +55,10 @@ Project.findByIDAndAddLine = function(projID, line){
 //have to do more in this method????? or not?
 //have to remove the line from the lines array on the project
 //have to save the updated project, without the just-removed line
-Project.findByIDAndRemoveLine = function(projectID,lineID) {
+Project.findByIdAndRemoveLine = function(projectID,lineID) {
   debug('Project: findbyIDAndRemoveLine');
   //find the project
-  return Project.findByID(projectID)
+  return Project.findById(projectID)
   //if you find a project
   .then(project => {
     //delete the line from the project.lines array
@@ -77,7 +77,7 @@ Project.findByIDAndRemoveLine = function(projectID,lineID) {
 };
 
 //in this, you just have to recursively delete all cages from the line, and maybe even all mice from the cages
-Project.findByIDAndRemoveProject = function(projectID){
+Project.findByIdAndRemoveProject = function(projectID){
   debug('Project: findByIDAndRemoveProject');
   //find the project
   //remove the project
@@ -85,7 +85,7 @@ Project.findByIDAndRemoveProject = function(projectID){
   //remvove all cages from lines
   //remove all mice from cages
 
-  return Project.findByID(projectID)
+  return Project.findById(projectID)
   .then(project => {
     //first remove all the children of the project: includes the cages and mice, and later you will actually delete the line. Have to start at the end and move backwards: delete the actual line and then project very last
     let removeChildren = [];
@@ -105,6 +105,6 @@ Project.findByIDAndRemoveProject = function(projectID){
   })
   .then(() => {
     //then remove the project
-    return Project.findByIDAndRemove(projectID);
+    return Project.findByIdAndRemove(projectID);
   });
 };
