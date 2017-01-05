@@ -135,4 +135,50 @@ describe('testing line router', function(done) {
       });
     });
   }); //end of describe testing POST
+
+  describe('testing GET /api/project/projId/line/lineId', (done) => {
+
+    describe('with valid project id and valid line id', function() {
+      before(done => lineMock.call(this, done));
+
+      it('should return a line', (done) => {
+        request.get(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}`)
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.status).to.equal(200);
+          expect(res.body.projectId).to.equal(`${this.tempProject._id}`);
+          done();
+        });
+      });
+    });
+
+    describe('with valid project id and invalid line id', function() {
+      before(done => lineMock.call(this, done));
+
+      it('should return a 404 not found', (done) => {
+        request.get(`${url}/api/project/${this.tempProject._id}/line/1234`)
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          done();
+        });
+      });
+    });
+
+//not sure if this test is correct....do we need a place to error handle not finding the project?
+    describe('with invalid project id and valid line id', function() {
+      before(done => lineMock.call(this, done));
+
+      it('should return a 404 not found', (done) => {
+        request.get(`${url}/api/project/4747/line/${this.tempLine._id}`)
+        .end((err, res) => {
+          Project.findById(4747)
+          .catch((err) => {
+            expect(err).to.not.be.null;
+            expect(res.status).to.equal(404);
+          });
+          done();
+        });
+      });
+    });
+  }); //end of describe testing GET
 });

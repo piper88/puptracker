@@ -40,11 +40,16 @@ debug('POST /api/project/:id/line');
 lineRouter.get('/api/project/:projId/line/:lineId', function(req, res, next){
   debug('GET /api/project/:id/line/:id');
 
-  Line.findById(req.params.lineId)
-  .then(line => {
-    res.json(line);
+//not sure if we need this error handling, but how else do we catch the error if the project isn't found?
+  Project.findById(req.params.projId)
+  .then(() => {
+    Line.findById(req.params.lineId)
+    .then(line => {
+      res.json(line);
+    })
+    .catch(err => next(createError(404, err.message)))
   })
-  .catch(err => next(createError(404, err. message)));
+  .catch(err => next(createError(404, err.message)));
 });
 
 lineRouter.delete('/api/project/:projId/line/:lineId', bearerAuth, function(req, res, next){
