@@ -15,7 +15,7 @@ module.exports = function(done){
 
   projectMock.call(this, err => {
     if (err) return done(err);
-    exampleLine.userId = this.tempUser._id;
+    exampleLine.projectId = this.tempProject._id;
     new Line(exampleLine).save()
     .then(line => {
       this.tempLine = line;
