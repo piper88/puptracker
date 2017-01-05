@@ -93,5 +93,46 @@ describe('testing line router', function(done) {
         });
       });
     });
+
+    describe('with no token', function() {
+      before(done => projectMock.call(this, done));
+
+      it('should return a 401 unauthorized', (done) => {
+        request.post(`${url}/api/project/${this.tempProject._id}/line`)
+        .send(exampleLineData)
+        .set({Authorization: `Bearer `})
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
+
+    describe('with no auth header', function() {
+      before(done => projectMock.call(this, done));
+
+      it('should return a 401 unauthorized', (done) => {
+        request.post(`${url}/api/project/${this.tempProject._id}/line`)
+        .send(exampleLineData)
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
+
+    describe('with invalid project id', function() {
+      before(done => projectMock.call(this, done));
+
+      it('should return a 404 not found', (done) => {
+        request.post(`${url}/api/project/98765/line`)
+        .send(exampleLineData)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          done();
+        });
+      });
+    });
   }); //end of describe testing POST
 });
