@@ -55,16 +55,43 @@ lineRouter.get('/api/project/:projId/line/:lineId', function(req, res, next){
 lineRouter.delete('/api/project/:projId/line/:lineId', bearerAuth, function(req, res, next){
   debug('DELETE /api/project/:projId/line/:lineId');
 
-  Line.findById(req.params.lineId)
-  .catch(err => {
-    return err.status ? Promise.reject(err) : Promise.reject(createError(404, err.message))
-  })
-  .then(line => {
-    Line.findByIdAndRemoveLine(line._id)
-  })
-  .then(() => {
-    Project.findByIdAndRemoveLine(req.params.projId, req.params.lineId);
-  })
-  .catch(() => res.status(204).send())
-  .catch(next);
+  Project.findById(req.params.projId)
+    .then(() => {
+      Line.findById(req.params.lineId)
+      .catch(err => next(createError(404, err.message)))
+      .then(line => {
+        Line.findLineByIdAndRemoveLine(line._id);
+      })
+      .then(() => {
+        Project.findByIdAndRemoveLine(req.params.projId, req.params.lineId);
+      })
+      .then(() => res.status(204).send())
+      .catch(next);
+    })
+    .catch(err => next(createError(404, err.message)))
   });
+
+  // lineRouter.delete('/api/project/:projId/line/:lineId', bearerAuth, function(req, res, next){
+  //   debug('DELETE /api/project/:projId/line/:lineId');
+  //
+  //   Project.findById(req.params.projId)
+  //   //if you don't find project, throw 404 error
+  //   // .catch(err => next(createError(404, err.message)))
+  //   //if you do find the project:
+  //   .then(() => {
+  //     Line.findById(req.params.lineId)
+  //     //if you don't find the line, throw 404 error
+  //     .catch(err => next(createError(404, err.message)))
+  //     //if you do find the line:
+  //     .then((line) => {
+  //       debug('HERES THE LINE THAT WAS FOUND IN THE DELETE ROUTE', line);
+  //       Line.findLineByIdAndRemoveLine(req.params.lineId)
+  //     })
+  //     .then(() => {
+  //       Project.findByIdAndRemoveLine(req.params.projId, req.params.lineId)
+  //     })
+  //     .then(() => res.status(204).send());
+  //   })
+  //   .catch(err => next(createError(404, err.message)))
+  //   .catch(next);
+  // });

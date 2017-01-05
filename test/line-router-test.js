@@ -8,6 +8,7 @@ const lineMock = require('./lib/line-mock.js');
 const cleanUpDB = require('./lib/clean-up-mock.js');
 
 const Project = require('../model/project.js');
+// const Cage = require('../model/cage.js');
 
 const expect = require('chai').expect;
 const request = require('superagent');
@@ -192,7 +193,7 @@ describe('testing line router', function(done) {
   }); //end of describe testing GET
 
   describe('testing DELETE /api/project/:projId/line/:lineId', function() {
-    describe('with valid lineId', function() {
+    describe('with valid projectId and valid lineId', function() {
       before(done => lineMock.call(this, done));
 
       it('should delete the line and the line from the lines array of the project, and all dependencies (cages and mice)', (done) => {
@@ -200,10 +201,79 @@ describe('testing line router', function(done) {
         .set({Authorization: `Bearer ${this.tempToken}`})
         .end((err, res) => {
           if (err) return done(err);
-          expect(res.status).to.equal(204);
-          expect(parseInt(`${this.tempProject.lines.length}`)).to.equal(0);
-          done();
+          //add the following lines back in as soon as you make the cage model
+          // Cage.findById({lineId: `${this.tempLine._id}`})
+          // .catch(err => {
+            // expect(err.name).to.equal('CastError');
+            expect(res.status).to.equal(204);
+            expect(parseInt(`${this.tempProject.lines.length}`)).to.equal(0);
+            done();
+          // });
         })
+      });
+    });
+
+    describe('with valid projectId and invalid lineId', function() {
+      before(done => lineMock.call(this, done));
+
+      it('should return a 404 not found', (done) => {
+        request.delete(`${url}/api/project/${this.tempProject._id}/line/1234`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          done();
+        });
+      });
+    });
+
+    describe('with invalid projectId and valid lineId', function() {
+      before(done => lineMock.call(this, done));
+
+      it('should return a 404 not found', (done) => {
+        request.delete(`${url}/api/project/1234/line/${this.tempLine._id}`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          done();
+        });
+      });
+    });
+
+    describe('with invalid token', function() {
+      before(done => lineMock.call(this, done));
+
+      it('should return a 401 unauthorized', (done) => {
+        request.delete(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}`)
+        .set({Authorization: `Bearer nope`})
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
+
+    describe('with no auth header', function() {
+      before(done => lineMock.call(this, done));
+
+      it('should return a 401 unauthorized', (done) => {
+        request.delete(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}`)
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
+
+    describe('with invalid auth header', function() {
+      before(done => lineMock.call(this, done));
+
+      it('should return a 401 unauthorized', (done) => {
+        request.delete(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}`)
+        .set({Authorization: 'try again'})
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
       });
     });
   });
