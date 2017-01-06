@@ -29,9 +29,9 @@ Line.findLineByIdAndAddCage = function(lineId, cage) {
     //but don't actually save the cage here, just add it to the line
     return line.save();
   })
-  .then(line => {
-    return line;
-  });
+  // .then(line => {
+  //   return line;
+  // });
 };
 
 Line.findLineByIdAndRemoveCage = function(lineId, cage){
