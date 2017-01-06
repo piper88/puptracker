@@ -22,9 +22,10 @@ debug('POST /api/project/:id/line');
   line.projectId = req.params.projId;
   Project.findById(req.params.projId)
   .then((project) => {
-    debug('this is the project that youre adding the line to', project);
+    // debug('this is the project that youre adding the line to', project);
     new Line(req.body).save()
     .then(line => {
+      debug('DAS LINEEEEEEEEEEEEEE', line);
       Project.findByIdAndAddLine(req.params.projId, line)
       .then(project => {
         //what's the purpose of this line?
