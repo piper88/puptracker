@@ -11,6 +11,7 @@ module.exports = function(done){
 
   let exampleLine = {
     name: 'piper',
+    genes: ['47', 'piper', 'poop8'],
   };
 
   projectMock.call(this, err => {

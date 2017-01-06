@@ -23,6 +23,7 @@ mongoose.Promise = Promise;
 
 const exampleLineData = {
   name: 'cree',
+  genes: ['piper', 'bowles', 'isadog'],
 };
 
 describe('testing line router', function(done) {
@@ -65,6 +66,34 @@ describe('testing line router', function(done) {
         });
       }); //end of it should return a 400 bad request
     }); //end of describe with invalid body
+
+    describe('with no name', function() {
+      before(done => projectMock.call(this, done));
+
+      it('should return a 400 bad request', (done) => {
+        request.post(`${url}/api/project/${this.tempProject._id}/line`)
+        .send({genes: ['well', 'hello', 'there']})
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+      });
+    });
+
+    describe('with no array of genes', function() {
+      before(done => projectMock.call(this, done));
+
+      it('should return a 400 bad request', (done) => {
+        request.post(`${url}/api/project/${this.tempProject._id}/line`)
+        .send({name: 'prungs'})
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+      });
+    });
 
     describe('with no body', function() {
       before(done => projectMock.call(this, done));

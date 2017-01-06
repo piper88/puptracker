@@ -8,7 +8,13 @@ const debug = require('debug')('puptracker:line');
 const lineSchema = mongoose.Schema({
   name: {type: String, required: true},
   projectId: {type: mongoose.Schema.Types.ObjectId, required: true},
-  cages: [{type: mongoose.Schema.Types.ObjectId, ref: 'cage'}]
+  cages: [{type: mongoose.Schema.Types.ObjectId, ref: 'cage'}],
+  genes: {type: [String], required: true},
+  //calculate these on the client side? or add a static method that calculates it? IDK really....will think on it
+  expectedTotalPups: {type: Number},
+  actualTotalPups: {type: Number},
+  expectedUsablePups: {type: Number},
+  actualUsablePups: {type: Number},
 });
 
 const Line = module.exports = mongoose.model('line', lineSchema);
