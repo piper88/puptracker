@@ -11,6 +11,7 @@ const lineSchema = mongoose.Schema({
   cages: [{type: mongoose.Schema.Types.ObjectId, ref: 'cage'}],
   genes: {type: [String], required: true},
   //calculate these on the client side? or add a static method that calculates it? IDK really....will think on it
+  //I think have static method on cage to calculate the pups, and then set the corresponding line's pups to that value
   expectedTotalPups: {type: Number},
   actualTotalPups: {type: Number},
   expectedUsablePups: {type: Number},
