@@ -13,9 +13,9 @@ const cageSchema = mongoose.Schema({
   breedingStartDate: {type: Date, required: true},
   //end date will be calculated as when youngest mouse breeder is 200 days old
   breedingEndDate: {type: Date, required: true},
-  expectedDOB: {type: Date, required, true},
+  expectedDOB: {type: Date, required: true},
   actualDOB: {type: Date},
-  numberLittersMonthly: {type: Number},
+  numberLittersMonthly: {type: Number, required: true},
   expectedTotalPups: {type: Number, required: true},
   actualTotalPups: {type: Number},
   //calculated from the ratio of genes of parents (from genes array)

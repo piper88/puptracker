@@ -1,6 +1,6 @@
 'use strict';
 
-const Cage = require('../model/cage.js');
+const Cage = require('../../model/cage.js');
 const debug = require('debug')('puptracker:cage-mock');
 
 const lineMock = require('./line-mock.js');

@@ -18,7 +18,7 @@ cageRouter.post('/api/project/:projId/line/:lineId/cage', bearerAuth, jsonParser
   let cage = req.body;
   //set the lineId of the cage to the req.params.lineId
   cage.lineId = req.params.lineId;
-  cage.projId = req.params.projId;
+  cage.projectId = req.params.projId;
   Line.findById(req.params.lineId)
   .then((line) => {
     new Cage(req.body).save()
@@ -28,9 +28,9 @@ cageRouter.post('/api/project/:projId/line/:lineId/cage', bearerAuth, jsonParser
         //don't know if we need this line?
         req.line = line;
         res.json(cage);
-      })
-      .catch(err => next(err));
-    });
+      });
+    })
+    .catch(err => next(err));
   })
   .catch(err => next(createError(404, err.message)));
 });
