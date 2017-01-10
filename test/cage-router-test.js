@@ -269,6 +269,49 @@ describe('testing cage router', function(done) {
         });
       });
     });
+
+    describe('with invalid projectId', function() {
+      before(done => lineMock.call(this, done));
+
+      it('should return a 404 not found', (done) => {
+        request.post(`${url}/api/project/1234/line/${this.tempLine._id}/cage`)
+        .send(exampleCageData)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          done();
+        });
+      });
+    });
+
+    describe('with invalid lineId', function() {
+      before(done => lineMock.call(this, done));
+
+      it('should return a 404 not found', (done) => {
+        request.post(`${url}/api/project/${this.tempProject._id}/line/4747/cage`)
+        .send(exampleCageData)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          done();
+        });
+      });
+    });
+
+    describe('with no body', function() {
+      before(done => lineMock.call(this, done));
+
+      it('should return a 404 bad request', (done) => {
+        request.post(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage`)
+        .send({})
+        .set('Character-Type', 'application/json')
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+      });
+    });
   }); //end of POST tests
 
 });
