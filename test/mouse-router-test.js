@@ -192,5 +192,33 @@ describe('testing mouse router', function() {
         });
       });
     });
+
+    describe('with invalid mouse id', function() {
+      before(done => mouseMock.call(this, done));
+
+      it('should return a 404 not found', (done) => {
+        request.get(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}/mouse/wrongid`)
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          done();
+        })
+      });
+    });
+  }); //end of GET tests
+
+  describe('testing DELETE /api/project/:projId/line/:lineId/cage/:cageId/mouse/:mouseId', function() {
+    describe('with valid mouse id', function() {
+      before(done => mouseMock.call(this, done));
+
+      it('should delete the mouse and the mouse from the cages mice array', (done) => {
+        request.delete(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}/mouse/${this.tempMouse._id}`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.status).to.equal(204);
+          done();
+        });
+      });
+    });
   });
 });

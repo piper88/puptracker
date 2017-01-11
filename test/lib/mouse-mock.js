@@ -17,7 +17,6 @@ module.exports = function(done) {
   };
 
   cageMock.call(this, err => {
-    // debug('WHAT THE HECK IS GOING ONNNNNNNNNNNNNNNNNNN', this);
     if (err) return done(err);
 
     exampleMouse.cageId = this.tempCage._id;

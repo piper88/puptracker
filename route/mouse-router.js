@@ -42,3 +42,17 @@ mouseRouter.get('/api/project/:projId/line/:lineId/cage/:cageId/mouse/:mouseId',
   })
   .catch(err => next(createError(404, err.message)));
 });
+
+mouseRouter.delete('/api/project/:projId/line/:lineId/cage/:cageId/mouse/:mouseId', bearerAuth, function(req, res, next) {
+  debug('mouse router DELETE mouse');
+
+  Mouse.findById(req.params.mouseId)
+  .then(mouse => {
+    Cage.findCageByIdAndRemoveMouse(req.params.cageId, mouse)
+    .then(() => {
+      res.status(204).send();
+    })
+    .catch(next);
+  })
+  .catch(err => next(createError(404, err.message)));
+});
