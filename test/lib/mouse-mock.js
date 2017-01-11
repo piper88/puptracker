@@ -14,7 +14,6 @@ module.exports = function(done) {
     geneticMakeup: ['het', 'homo', 'wild'],
     DOB: new Date(2017, 0, 15).toDateString(),
     sex: 'female',
-    breeder: true,
   };
 
   cageMock.call(this, err => {

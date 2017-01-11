@@ -6,6 +6,7 @@ const User = require('../../model/user.js');
 const Project = require('../../model/project.js');
 const Line = require('../../model/line.js');
 const Cage = require('../../model/cage.js');
+const Mouse = require('../../model/mouse.js');
 
 
 module.exports = function(done){
@@ -16,6 +17,7 @@ module.exports = function(done){
     Project.remove({}),
     Line.remove({}),
     Cage.remove({}),
+    Mouse.remove({}),
   ])
   .then(() => done())
   .catch(done);

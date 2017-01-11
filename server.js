@@ -16,6 +16,7 @@ const authRouter = require('./route/auth-router.js');
 const lineRouter = require('./route/line-router.js');
 const projectRouter = require('./route/project-router.js');
 const cageRouter = require('./route/cage-router.js');
+const mouseRouter = require('./route/mouse-router.js');
 const errorMiddleware = require('./lib/error-middleware.js');
 
 //load environment vars
@@ -34,6 +35,7 @@ app.use(authRouter);
 app.use(projectRouter);
 app.use(lineRouter);
 app.use(cageRouter);
+app.use(mouseRouter);
 //will need following line with frontend
 // app.use(express.static(`${__dirname}/build`));
 

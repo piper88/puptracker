@@ -8,7 +8,6 @@ const mouseSchema = mongoose.Schema({
   geneticMakeup: {type: [String], required: true},
   DOB: {type: Date, required: true},
   sex: {type: String, required: true},
-  breeder: {type: Boolean, required: true},
   cageId: {type: mongoose.Schema.Types.ObjectId, required: true},
   lineId: {type: mongoose.Schema.Types.ObjectId, required: true},
   projectId: {type: mongoose.Schema.Types.ObjectId, required: true},
