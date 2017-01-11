@@ -216,9 +216,65 @@ describe('testing mouse router', function() {
         .end((err, res) => {
           if (err) return done(err);
           expect(res.status).to.equal(204);
+          Cage.findById(this.tempCage._id)
+          .then((cage) => {
+            expect(cage.mice.length).to.equal(0);
+          })
+          .catch(done);
           done();
         });
       });
     });
-  });
+
+    describe('with invalid mouse id', function() {
+      before(done => mouseMock.call(this, done));
+
+      it('should delete the mouse and the mouse from the cages mice array', (done) => {
+        request.delete(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}/mouse/mousepoop`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          done();
+        });
+      });
+    });
+
+    describe('with no token', function() {
+      before(done => mouseMock.call(this, done));
+
+      it('should return a 401 unauthorized', (done) => {
+        request.delete(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}/mouse/${this.tempMouse._id}`)
+        .set({Authorization: `Bearer `})
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
+
+    describe('with invalid token', function() {
+      before(done => mouseMock.call(this, done));
+
+      it('should return a 401 unauthorized', (done) => {
+        request.delete(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}/mouse/${this.tempMouse._id}`)
+        .set({Authorization: `Bearer 12345677 `})
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
+
+    describe('with no auth header', function() {
+      before(done => mouseMock.call(this, done));
+
+      it('should return a 401 unauthorized', (done) => {
+        request.delete(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}/mouse/${this.tempMouse._id}`)
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
+  }); //end of DELETE tests
 });

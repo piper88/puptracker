@@ -428,12 +428,12 @@ describe('testing cage router', function() {
       before(done => cageMock.call(this, done));
 
       it('should return a 404 not found', (done) => {
-          request.delete(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/wrongid`)
-          .set({Authorization: `Bearer ${this.tempToken}`})
-          .end((err, res) => {
-            expect(res.status).to.equal(404);
-            done();
-          });
+        request.delete(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/wrongid`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          done();
+        });
       });
     });
 
