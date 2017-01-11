@@ -1,6 +1,6 @@
 'use strict';
 
-const Mouse = require('../../model/cage.js');
+const Mouse = require('../../model/mouse.js');
 const debug = require('debug')('puptracker:mouse-mock');
 
 const cageMock = require('./cage-mock.js');
@@ -17,21 +17,17 @@ module.exports = function(done) {
   };
 
   cageMock.call(this, err => {
+    // debug('WHAT THE HECK IS GOING ONNNNNNNNNNNNNNNNNNN', this);
     if (err) return done(err);
 
     exampleMouse.cageId = this.tempCage._id;
     exampleMouse.lineId = this.tempLine._id;
     exampleMouse.projectId = this.tempProject._id;
     new Mouse(exampleMouse).save()
-    .then((mouse) => {
+    .then(mouse => {
       this.tempMouse = mouse;
       done();
     })
     .catch(done);
   });
 };
-//example mouse
-
-//cageMock.call(this, err => {
-  //set the project id, line id, and cage id of the mouse, then save the mouse, then set tempMouse = mouse
-//});
