@@ -37,7 +37,7 @@ Cage.findCageByIdAndAddMouse = function(cageId, mouse) {
 
   return Cage.findById(cageId)
   .then((cage) => {
-    cage.mice.push(mouse._id)
+    cage.mice.push(mouse._id);
     return cage.save();
   });
   // .then(cage => {
@@ -71,5 +71,5 @@ Cage.findCageByIdAndRemoveCage = function(cageId) {
   .then(() => {
     //then delete the cage itself
     return Cage.findByIdAndRemove(cageId);
-  })
+  });
 };

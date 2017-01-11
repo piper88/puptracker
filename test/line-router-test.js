@@ -166,7 +166,7 @@ describe('testing line router', function(done) {
     });
   }); //end of describe testing POST
 
-  describe('testing GET /api/project/projId/line/lineId', (done) => {
+  describe('testing GET /api/project/projId/line/lineId', function() {
 
     describe('with valid project id and valid line id', function() {
       before(done => lineMock.call(this, done));
@@ -201,8 +201,8 @@ describe('testing line router', function(done) {
       it('should return a 404 not found', (done) => {
         request.get(`${url}/api/project/4747/line/${this.tempLine._id}`)
         .end((err, res) => {
-            expect(err).to.not.be.null;
-            expect(res.status).to.equal(404);
+          expect(err).to.not.be.null;
+          expect(res.status).to.equal(404);
           done();
         });
       });
@@ -234,11 +234,11 @@ describe('testing line router', function(done) {
           // Cage.findById({lineId: `${this.tempLine._id}`})
           // .catch(err => {
             // expect(err.name).to.equal('CastError');
-            expect(res.status).to.equal(204);
-            expect(parseInt(`${this.tempProject.lines.length}`)).to.equal(0);
-            done();
+          expect(res.status).to.equal(204);
+          expect(parseInt(`${this.tempProject.lines.length}`)).to.equal(0);
+          done();
           // });
-        })
+        });
       });
     });
 

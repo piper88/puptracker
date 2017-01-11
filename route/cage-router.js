@@ -13,6 +13,7 @@ const bearerAuth = require('../lib/bearer-auth-middleware.js');
 const cageRouter = module.exports = Router();
 
 cageRouter.post('/api/project/:projId/line/:lineId/cage', bearerAuth, jsonParser, function(req, res, next) {
+  debug('cage router POST');
   if (!req.body) return Promise.reject(createError(400, 'no body'));
 
   let cage = req.body;
@@ -21,7 +22,7 @@ cageRouter.post('/api/project/:projId/line/:lineId/cage', bearerAuth, jsonParser
   .then(() => {
     cage.projectId = req.params.projId;
     Line.findById(req.params.lineId)
-    .then((line => {
+    .then(() => {
       cage.lineId = req.params.lineId;
       new Cage(req.body).save()
       .then((cage) => {
@@ -33,8 +34,47 @@ cageRouter.post('/api/project/:projId/line/:lineId/cage', bearerAuth, jsonParser
         // .catch(err => next(err));
       })
         .catch(err => next(err));
-      }))
+    })
+      .catch(err => next(createError(404, err.message)));
+  })
+  .catch(err => next(createError(404, err.message)));
+});
+
+cageRouter.get('/api/project/:projId/line/:lineId/cage/:cageId', function(req, res, next) {
+  debug('cage router GET');
+  Project.findById(req.params.projId)
+  .then(() => {
+    Line.findById(req.params.lineId)
+    .then(() => {
+      Cage.findById(req.params.cageId)
+      .then((cage) => {
+        res.json(cage);
+      })
+      //are all of these necessary? or do we assume the project and line ids are correct?
       .catch(err => next(createError(404, err.message)));
     })
+    .catch(err => next(createError(404, err.message)));
+  })
+  .catch(err => next(createError(404, err.message)));
+});
+
+cageRouter.delete('/api/project/:projId/line/:lineId/cage/:cageId', bearerAuth, function(req, res, next) {
+  debug('cage router DELETE');
+  Cage.findById(req.params.cageId)
+  //if you find the cage
+  .then((cage) => {
+    Cage.findCageByIdAndRemoveCage(cage._id)
+    .then(() => {
+      console.log('DAS CAGEEEEEEEEEEE', cage);
+      //remove the cage from the lines cage array
+      Line.findLineByIdAndRemoveCage(req.params.lineId, cage)
+      .then(() => res.status(204).send())
+      .catch(next);
+    })
+    // .then(() => res.status(204).send())
+    //if youre unable to findcagebyid and remove cage
+    .catch(next);
+  })
+  //if you dont find the cage
   .catch(err => next(createError(404, err.message)));
 });

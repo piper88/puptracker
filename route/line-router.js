@@ -69,8 +69,8 @@ lineRouter.delete('/api/project/:projId/line/:lineId', bearerAuth, function(req,
       .then(() => res.status(204).send())
       .catch(next);
     })
-    .catch(err => next(createError(404, err.message)))
-  });
+  .catch(err => next(createError(404, err.message)));
+});
 
   // lineRouter.delete('/api/project/:projId/line/:lineId', bearerAuth, function(req, res, next){
   //   debug('DELETE /api/project/:projId/line/:lineId');

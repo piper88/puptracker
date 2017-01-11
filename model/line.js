@@ -4,6 +4,8 @@
 const mongoose = require('mongoose');
 const debug = require('debug')('puptracker:line');
 
+const Cage = require('./cage.js');
+
 //the projectSchema has an array of lines, that is of type Schema, and has a ref of 'line'. So then it goes to the line schema, and makes the lines, giving them the corresponding project?
 const lineSchema = mongoose.Schema({
   name: {type: String, required: true},
