@@ -51,5 +51,146 @@ describe('testing mouse router', function() {
         });
       });
     });
+
+    describe('with no body', function() {
+      before(done => cageMock.call(this, done));
+
+      it('should return a 400 bad request', (done) => {
+        request.post(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}/mouse`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+      });
+    });
+
+    describe('with no name', function() {
+      before(done => cageMock.call(this, done));
+
+      it('should return a 400 bad request', (done) => {
+        request.post(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}/mouse`)
+        .send({
+          geneticMakeup: ['het', 'het', 'wild'],
+          DOB: new Date(2017, 1, 22).toDateString(),
+          sex: 'male',
+        })
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+      });
+    });
+
+    describe('with no genetic makeup', function() {
+      before(done => cageMock.call(this, done));
+
+      it('should return a 400 bad request', (done) => {
+        request.post(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}/mouse`)
+        .send({
+          name: 'emx1-ires-cree;camk2a-tta;ai93-478847',
+          DOB: new Date(2017, 1, 22).toDateString(),
+          sex: 'male',
+        })
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+      });
+    });
+
+    describe('with no DOB', function() {
+      before(done => cageMock.call(this, done));
+
+      it('should return a 400 bad request', (done) => {
+        request.post(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}/mouse`)
+        .send({
+          name: 'emx1-ires-cree;camk2a-tta;ai93-478847',
+          geneticMakeup: ['het', 'het', 'wild'],
+          sex: 'male',
+        })
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+      });
+    });
+
+    describe('with no sex', function() {
+      before(done => cageMock.call(this, done));
+
+      it('should return a 400 bad request', (done) => {
+        request.post(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}/mouse`)
+        .send({
+          name: 'emx1-ires-cree;camk2a-tta;ai93-478847',
+          geneticMakeup: ['het', 'het', 'wild'],
+          DOB: new Date(2017, 1, 22).toDateString(),
+        })
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+      });
+    });
+
+    describe('with no token', function() {
+      before(done => cageMock.call(this, done));
+
+      it('should return a 401 unauthorized', (done) => {
+          request.post(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}/mouse`)
+          .send(exampleMouseData)
+          .set({Authorization: `Bearer `})
+          .end((err, res) => {
+            expect(res.status).to.equal(401);
+            done();
+          });
+      });
+    });
+
+    describe('with bad token', function() {
+      before(done => cageMock.call(this, done));
+
+      it('should return a 401 unauthorized', (done) => {
+          request.post(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}/mouse`)
+          .send(exampleMouseData)
+          .set({Authorization: `Bearer 7483939`})
+          .end((err, res) => {
+            expect(res.status).to.equal(401);
+            done();
+          });
+      });
+    });
+
+    describe('with no auth header', function() {
+      before(done => cageMock.call(this, done));
+
+      it('should return a 401 unauthorized', (done) => {
+        request.post(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}/mouse`)
+        .send(exampleMouseData)
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
+  }); //end of POST tests
+
+  describe('testing GET /api/project/:projId/line/:lineId/cage/:cageId/mouse/:mouseId', function() {
+    describe('with valid mouse id', function() {
+      before(done => mouseMock.call(this, done));
+
+      it('should return a mouse', (done) => {
+        request.get(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}/mouse/${this.tempMouse._id}`)
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.status).to.equal(200);
+          done();
+        });
+      });
+    });
   });
 });

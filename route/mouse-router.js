@@ -32,3 +32,13 @@ mouseRouter.post('/api/project/:projId/line/:lineId/cage/:cageId/mouse', bearerA
   })
   .catch(err => next(err));
 });
+
+mouseRouter.get('/api/project/:projId/line/:lineId/cage/:cageId/mouse/:mouseId', function(req, res, next){
+  debug('mouse router GET mouse');
+
+  Mouse.findById(req.params.mouseId)
+  .then((mouse) => {
+    res.json(mouse);
+  })
+  .catch(err => next(createError(404, err.message)));
+});
