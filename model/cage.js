@@ -53,7 +53,7 @@ Cage.findCageByIdAndRemoveMouse = function(cageId, mouse) {
     let index = cage.mice.indexOf(mouse._id);
     cage.mice.splice(index, 1);
     return cage.save();
-  })
+  });
 };
 
 Cage.findCageByIdAndRemoveCage = function(cageId) {
@@ -64,7 +64,8 @@ Cage.findCageByIdAndRemoveCage = function(cageId) {
     //remove all the mice from that cage
     let removeChildren = [];
     cage.mice.forEach(mouse => {
-      removeChildren.push(Mouse.remove({cageId: cage._id}));
+      //Mouse or mouse?
+      removeChildren.push(mouse.remove({cageId: cage._id}));
     });
     return Promise.all(removeChildren);
   })
