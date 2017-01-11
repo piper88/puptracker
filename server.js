@@ -15,6 +15,7 @@ const debug = require('debug')('puptracker:server');
 const authRouter = require('./route/auth-router.js');
 const lineRouter = require('./route/line-router.js');
 const projectRouter = require('./route/project-router.js');
+const cageRouter = require('./route/cage-router.js');
 const errorMiddleware = require('./lib/error-middleware.js');
 
 //load environment vars
@@ -32,6 +33,7 @@ const app = express();
 app.use(authRouter);
 app.use(projectRouter);
 app.use(lineRouter);
+app.use(cageRouter);
 //will need following line with frontend
 // app.use(express.static(`${__dirname}/build`));
 
