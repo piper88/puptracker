@@ -141,13 +141,13 @@ describe('testing mouse router', function() {
       before(done => cageMock.call(this, done));
 
       it('should return a 401 unauthorized', (done) => {
-          request.post(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}/mouse`)
-          .send(exampleMouseData)
-          .set({Authorization: `Bearer `})
-          .end((err, res) => {
-            expect(res.status).to.equal(401);
-            done();
-          });
+        request.post(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}/mouse`)
+        .send(exampleMouseData)
+        .set({Authorization: `Bearer `})
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
       });
     });
 
@@ -155,13 +155,13 @@ describe('testing mouse router', function() {
       before(done => cageMock.call(this, done));
 
       it('should return a 401 unauthorized', (done) => {
-          request.post(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}/mouse`)
-          .send(exampleMouseData)
-          .set({Authorization: `Bearer 7483939`})
-          .end((err, res) => {
-            expect(res.status).to.equal(401);
-            done();
-          });
+        request.post(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}/mouse`)
+        .send(exampleMouseData)
+        .set({Authorization: `Bearer 7483939`})
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
       });
     });
 
@@ -201,7 +201,7 @@ describe('testing mouse router', function() {
         .end((err, res) => {
           expect(res.status).to.equal(404);
           done();
-        })
+        });
       });
     });
   }); //end of GET tests
