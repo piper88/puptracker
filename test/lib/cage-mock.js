@@ -14,7 +14,7 @@ module.exports = function(done) {
     var result = new Date(date);
     result.setDate(result.getDate() + days);
     return result;
-  };
+  }
 
   let exampleCage = {
     name: 'cage1',
@@ -26,12 +26,12 @@ module.exports = function(done) {
     numberLittersMonthly: 2,
     expectedTotalPups: 6,
     expectedUsablePups: 3,
-  }
+  };
 
   lineMock.call(this, err => {
     if (err) return done(err);
     exampleCage.lineId = this.tempLine._id;
-    exampleCage.projectId = this.tempProject._id
+    exampleCage.projectId = this.tempProject._id;
     new Cage(exampleCage).save()
     .then(cage => {
       this.tempCage = cage;

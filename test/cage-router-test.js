@@ -6,12 +6,12 @@ require('./lib/test-env.js');
 //clean up DB
 const cageMock = require('./lib/cage-mock.js');
 const lineMock = require('./lib/line-mock.js');
-const projectMock = require('./lib/project-mock.js');
+//const projectMock = require('./lib/project-mock.js');
 const cleanUpDB = require('./lib/clean-up-mock.js');
 
 //Line and project models
 const Line = require('../model/line.js');
-const Project = require('../model/project.js');
+//const Project = require('../model/project.js');
 
 const expect = require('chai').expect;
 const request = require('superagent');
@@ -64,7 +64,8 @@ describe('testing cage router', function() {
           Line.findById(this.tempLine._id)
           .then(line => {
             expect(line.cages.length).to.equal(1);
-          });
+          })
+            .catch(err => done(err));
           done();
         });
       });
@@ -427,12 +428,12 @@ describe('testing cage router', function() {
       before(done => cageMock.call(this, done));
 
       it('should return a 404 not found', (done) => {
-          request.delete(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/wrongid`)
-          .set({Authorization: `Bearer ${this.tempToken}`})
-          .end((err, res) => {
-            expect(res.status).to.equal(404);
-            done();
-          });
+        request.delete(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/wrongid`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          done();
+        });
       });
     });
 
