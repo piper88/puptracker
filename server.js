@@ -32,9 +32,9 @@ const app = express();
 
 //app routes
 app.use(authRouter);
-app.use(projectRouter);
 app.use(lineRouter);
 app.use(cageRouter);
+app.use(projectRouter);
 app.use(mouseRouter);
 //will need following line with frontend
 // app.use(express.static(`${__dirname}/build`));

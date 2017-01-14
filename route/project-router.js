@@ -55,13 +55,61 @@ projectRouter.post('/api/project', bearerAuth, jsonParser, function(req, res, ne
 // });
 
 //get the project, is the array of lines already populated? I'm so confused
-projectRouter.get('/api/project/:id', bearerAuth, function(req, res, next) {
+projectRouter.get('/api/project/:id', function(req, res, next) {
   debug('GET /api/project/:id');
   Project.findById(req.params.id)
   .then((project) => {
     res.json(project);
   })
   .catch(err => next(createError(404, err.message)));
+});
+
+// projectRouter.put('/api/project/:id', bearerAuth, jsonParser, function(req, res, next) {
+//   debug('PUT /api/project/:id');
+//   Project.findById(req.params.id)
+//   .then((project) => {
+//     return Project.findByIdAndUpdate(project._id, req.body, {new: true});
+//     .catch(err => next(createError(404, 'not found')))
+//   })
+//   .then((updatedProject) => {
+//     res.json(updatedProject);
+//   })
+//   .catch(err => {
+//     debug('THE ERRORRRRRRRRRRRRRRRR', err);
+//     // if(err.name === 'validationError') return next(err);
+//     if(err.status) return next(err);
+//     next(createError(404, 'not found'));
+//   });
+// });
+
+// galleryRouter.put('/api/gallery/:id', bearerAuth, jsonParser, function(req, res, next){
+//   debug('PUT /api/gallery/:id')
+//   Gallery.findById(req.params.id)
+//   .catch(err => Promise.reject(createError(404, err.message)))
+//   .then(gallery => {
+//     if (gallery.userID.toString() !== req.user._id.toString())
+//       return Promise.reject(createError(401, 'not users gallery'))
+//     let options = { runValidators: true, new: true}
+//     return Gallery.findByIdAndUpdate(req.params.id, req.body, options)
+//   })
+//   .then(gallery => res.json(gallery))
+//   .catch(next)
+// })
+
+projectRouter.put('/api/project/:id', bearerAuth, jsonParser, function(req, res, next){
+  debug('PUT /api/project/:id');
+
+  Project.findById(req.params.id)
+  .then((project) => {
+    let options = {runValidators: true, new: true};
+    return Project.findByIdAndUpdate(project._id, req.body, options);
+  })
+  .then(project => res.json(project))
+  .catch(err => {
+    if (err.name === 'ValidationError') return next(err);
+    if (err.status) return next(err);
+    next(createError(404, 'not found'));
+  });
 });
 
 projectRouter.delete('/api/project/:id', bearerAuth, function(req, res, next) {

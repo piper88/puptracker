@@ -77,7 +77,7 @@ describe('testing cage router', function() {
       it('should return a 404 bad request', (done) => {
         request.post(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage`)
         .send({})
-        .set('Character-Type', 'application/json')
+        .set('Content-Type', 'application/json')
         .set({Authorization: `Bearer ${this.tempToken}`})
         .end((err, res) => {
           expect(res.status).to.equal(400);
@@ -103,7 +103,7 @@ describe('testing cage router', function() {
           expectedUsablePups: 3,
         })
         .set({Authorization: `Bearer ${this.tempToken}`})
-        .set('Character-Type', 'application/json')
+        .set('Content-Type', 'application/json')
         .end((err, res) => {
           expect(res.status).to.equal(400);
           done();
@@ -128,7 +128,7 @@ describe('testing cage router', function() {
           expectedUsablePups: 3,
         })
         .set({Authorization: `Bearer ${this.tempToken}`})
-        .set('Character-Type', 'application/json')
+        .set('Content-Type', 'application/json')
         .end((err, res) => {
           expect(res.status).to.equal(400);
           done();
@@ -153,7 +153,7 @@ describe('testing cage router', function() {
           expectedUsablePups: 3,
         })
         .set({Authorization: `Bearer ${this.tempToken}`})
-        .set('Character-Type', 'application/json')
+        .set('Content-Type', 'application/json')
         .end((err, res) => {
           expect(res.status).to.equal(400);
           done();
@@ -178,7 +178,7 @@ describe('testing cage router', function() {
           expectedUsablePups: 3,
         })
         .set({Authorization: `Bearer ${this.tempToken}`})
-        .set('Character-Type', 'application/json')
+        .set('Content-Type', 'application/json')
         .end((err, res) => {
           expect(res.status).to.equal(400);
           done();
@@ -203,7 +203,7 @@ describe('testing cage router', function() {
           expectedUsablePups: 3,
         })
         .set({Authorization: `Bearer ${this.tempToken}`})
-        .set('Character-Type', 'application/json')
+        .set('Content-Type', 'application/json')
         .end((err, res) => {
           expect(res.status).to.equal(400);
           done();
@@ -228,7 +228,7 @@ describe('testing cage router', function() {
           expectedUsablePups: 3,
         })
         .set({Authorization: `Bearer ${this.tempToken}`})
-        .set('Character-Type', 'application/json')
+        .set('Content-Type', 'application/json')
         .end((err, res) => {
           expect(res.status).to.equal(400);
           done();
@@ -253,7 +253,7 @@ describe('testing cage router', function() {
           expectedUsablePups: 3,
         })
         .set({Authorization: `Bearer ${this.tempToken}`})
-        .set('Character-Type', 'application/json')
+        .set('Content-Type', 'application/json')
         .end((err, res) => {
           expect(res.status).to.equal(400);
           done();
@@ -278,7 +278,7 @@ describe('testing cage router', function() {
           expectedUsablePups: 3,
         })
         .set({Authorization: `Bearer ${this.tempToken}`})
-        .set('Character-Type', 'application/json')
+        .set('Content-Type', 'application/json')
         .end((err, res) => {
           expect(res.status).to.equal(400);
           done();

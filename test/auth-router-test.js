@@ -57,7 +57,7 @@ describe('testing auth router', function(done) {
         it('should return a 400 bad request', (done) => {
           request.post(`${url}/api/signup`)
           .send()
-          .set('Character-Type', 'application/json')
+          .set('Content-Type', 'application/json')
           .end((err, res) => {
             expect(res.status).to.equal(400);
             done();
