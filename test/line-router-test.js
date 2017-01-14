@@ -59,7 +59,7 @@ describe('testing line router', function(done) {
         request.post(`${url}/api/project/${this.tempProject._id}/line`)
         .send({poop: 'ypants'})
         .set({Authorization: `Bearer ${this.tempToken}`})
-        .set('Character-Type', 'application/json')
+        .set('Content-Type', 'application/json')
         .end((err, res) => {
           expect(res.status).to.equal(400);
           done();
@@ -101,7 +101,7 @@ describe('testing line router', function(done) {
       it('should return a 400 bad request', (done) => {
         request.post(`${url}/api/project/${this.tempProject._id}/line`)
         .send({})
-        .set('Character-Type', 'application/json')
+        .set('Content-Type', 'application/json')
         .set({Authorization: `Bearer ${this.tempToken}`})
         .end((err, res) => {
           expect(res.status).to.equal(400);

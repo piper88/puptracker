@@ -22,7 +22,7 @@ const exampleProjectData = {
   name: 'IVSCC',
 };
 
-describe('testing project router', function(done) {
+describe('testing project router', function() {
   before(done => serverControl.serverUp(server, done));
   after(done => serverControl.serverDown(server, done));
   afterEach(done => cleanUpDB(done));
@@ -51,7 +51,7 @@ describe('testing project router', function(done) {
         request.post(`${url}/api/project`)
         .set({Authorization: `Bearer ${this.tempToken}`})
         .send('INVALId')
-        .set('Character-Type', 'application/json')
+        .set('Content-Type', 'application/json')
         .end((err, res) => {
           // console.log('THE SECOND ERRORRRRRRRRR', err);
           // if (err) return done(err);
@@ -68,7 +68,7 @@ describe('testing project router', function(done) {
         request.post(`${url}/api/project`)
         .set({Authorization: `Bearer ${this.tempToken}`})
         .send()
-        .set('Character-Type', 'application/json')
+        .set('Content-Type', 'application/json')
         .end((err, res) => {
           expect(res.status).to.equal(400);
           done();
@@ -109,12 +109,11 @@ describe('testing project router', function(done) {
   }); //end of describe POST
 
   describe('testing GET /api/project/:id', function() {
-    describe('with valid project Id and token', function() {
+    describe('with valid project Id', function() {
       before(done => projectMock.call(this, done));
 
       it('should return a project', (done) => {
         request.get(`${url}/api/project/${this.tempProject._id}`)
-        .set({Authorization: `Bearer ${this.tempToken}`})
         .end((err, res) => {
           if (err) return done(err);
           expect(res.status).to.equal(200);
@@ -123,44 +122,96 @@ describe('testing project router', function(done) {
       }); //end of it should return a project
     }); //end of describe with valid project Id and token
 
-    describe('with valid projectId and invalid token', function() {
-      before(done => projectMock.call(this, done));
-
-      it('should return a 401 unauthorized', (done) => {
-        request.get(`${url}/api/project/${this.tempProject._id}`)
-        .set({Authorization: 'Bearer badtoken'})
-        .end((err, res) => {
-          expect(res.status).to.equal(401);
-          done();
-        });
-      }); //end of it should return 401
-    }); //end of describe with valid id and invalid token
-
-    describe('with invalid projectId and valid token', function() {
+    describe('with invalid projectId', function() {
       before(done => projectMock.call(this, done));
 
       it('should return a 404 not found', (done) => {
         request.get(`${url}/api/project/1234`)
-        .set({Authorization: `Bearer ${this.tempToken}`})
         .end((err, res) => {
           expect(res.status).to.equal(404);
           done();
         });
       }); //end of it should return 404 not found
     }); //end of describe with invalid
+  }); //end of describe GET
 
-    describe('with no header', function() {
+  describe('testing PUT /api/project/:id', function() {
+    describe('with valid projectId, valid body, and valid token', function() {
       before(done => projectMock.call(this, done));
 
-      it('should return a 401 unauthorized error', (done) => {
-        request.get(`${url}/api/project/${this.tempProject._id}`)
+      it('should return an updated project', (done) => {
+        request.put(`${url}/api/project/${this.tempProject._id}`)
+        .send(exampleProjectData)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.status).to.equal(200);
+          expect(res.body.name).to.equal('IVSCC');
+          done();
+        });
+      });
+    });
+
+    describe('with valid projectId, invalid body, and valid token', function() {
+      before(done => projectMock.call(this, done));
+
+      it('should return a 400 bad request', (done) => {
+        request.put(`${url}/api/project/${this.tempProject._id}`)
+        .set('Content-Type', 'application/json')
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .send('/')
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(`${this.tempProject.name}`).to.equal('CAM');
+          done();
+        });
+      });
+    });
+
+    describe('with invalid token', function() {
+      before(done => projectMock.call(this, done));
+
+      it('should return a 401 unauthorized', (done) => {
+        request.put(`${url}/api/project/${this.tempProject._id}`)
+        .set('Content-Type', 'application/json')
+        .set({Authorization: 'Bearer 87655'})
+        .send(exampleProjectData)
         .end((err, res) => {
           expect(res.status).to.equal(401);
           done();
         });
       });
-    }); //end of describe with no header
-  }); //end of describe GET
+    });
+
+    describe('with missing token', function() {
+      before(done => projectMock.call(this, done));
+
+      it('should return a 401 unauthorized', (done) => {
+        request.put(`${url}/api/project/${this.tempProject._id}`)
+        .set('Content-Type', 'application/json')
+        .set({Authorization: 'Bearer '})
+        .send(exampleProjectData)
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
+
+    describe('with no auth header', function() {
+      before(done => projectMock.call(this, done));
+
+      it('should return a 401 unauthorized', (done) => {
+        request.put(`${url}/api/project/${this.tempProject._id}`)
+        .set('Content-Type', 'application/json')
+        .send(exampleProjectData)
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
+  }); //end of PUT tests
 
   describe('testing DELETE /api/project/:id', function() {
     describe('with valid projectId and token', function() {
