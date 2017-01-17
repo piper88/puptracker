@@ -66,7 +66,7 @@ Project.findByIdAndRemoveLine = function(projectId,lineId) {
     let index = project.lines.indexOf(lineId);
     project.lines.splice(index, 1);
     return project.save();
-  })
+  });
   //you will do this stuff in the line.delete route
   // .then(() => {
   //   //a built in mongoose method, not one of the ones I created
