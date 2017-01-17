@@ -14,14 +14,14 @@ const bearerAuth = require('../lib/bearer-auth-middleware.js');
 const lineRouter = module.exports = Router();
 
 lineRouter.post('/api/project/:projId/line', bearerAuth, jsonParser, function(req, res, next){
-debug('POST /api/project/:id/line');
+  debug('POST /api/project/:id/line');
 
   if (!req.body) return Promise.reject(createError(400, 'no body'));
-  let line = req.body
+  let line = req.body;
   //set the project id of the line, to the req.params.id
   line.projectId = req.params.projId;
   Project.findById(req.params.projId)
-  .then((project) => {
+  .then(() => {
     // debug('this is the project that youre adding the line to', project);
     new Line(req.body).save()
     .then(line => {
@@ -48,7 +48,7 @@ lineRouter.get('/api/project/:projId/line/:lineId', function(req, res, next){
     .then(line => {
       res.json(line);
     })
-    .catch(err => next(createError(404, err.message)))
+    .catch(err => next(createError(404, err.message)));
   })
   .catch(err => next(createError(404, err.message)));
 });
@@ -70,6 +70,27 @@ lineRouter.delete('/api/project/:projId/line/:lineId', bearerAuth, function(req,
       .catch(next);
     })
   .catch(err => next(createError(404, err.message)));
+});
+
+//for putting, will also have to update the project's line array
+lineRouter.put('/api/project/:projId/line/:lineId', bearerAuth, jsonParser, function(req, res, next) {
+  debug('PUT /api/project/:projId/line/:lineId');
+
+  Line.findById(req.params.lineId)
+  .then((line) => {
+    console.log('THE OLD LINES ID', line._id);
+    let options = {runValidators: true, new: true};
+    return Line.findByIdAndUpdate(line._id, req.body, options);
+  })
+  .then(line => {
+    console.log('THE NEW LINES ID', line._id);
+    res.json(line);
+  })
+  .catch(err => {
+    if (err.name === 'ValidationError') return next(err);
+    if (err.status) return next(err);
+    next(createError(404, err.message));
+  });
 });
 
   // lineRouter.delete('/api/project/:projId/line/:lineId', bearerAuth, function(req, res, next){

@@ -305,5 +305,128 @@ describe('testing line router', function(done) {
         });
       });
     });
-  });
+  }); //end of DELETE tests
+
+  describe('testing PUT /api/project/:projId/line/:lineId', function() {
+    describe('with valid line id, updated name', function() {
+      before(done => lineMock.call(this, done));
+
+      it('should return an updated line with updated name', (done) => {
+        request.put(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .send({name: 'newLine'})
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.status).to.equal(200);
+          expect(res.body.name).to.equal('newLine');
+          done();
+        });
+      });
+    });
+
+    describe('with valid line id, updated genes', function() {
+      before(done => lineMock.call(this, done));
+
+      it('should return an updated line with updated genes', (done) => {
+        request.put(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .send({genes: ['new', 'array', 'ofgenes']})
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.status).to.equal(200);
+          expect(res.body.name).to.equal('piper');
+          expect(res.body.genes[0]).to.equal('new');
+          expect(res.body.genes[1]).to.equal('array');
+          expect(res.body.genes[2]).to.equal('ofgenes');
+          done();
+        });
+      });
+    });
+
+    describe('with valid line id, invald body', function() {
+      before(done => lineMock.call(this, done));
+
+      it('should return a 400 bad request', (done) => {
+        request.put(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .set('Content-Type', 'application/json')
+        .send('wrong')
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+      });
+    });
+
+    describe('with invalid line id', function() {
+      before(done => lineMock.call(this, done));
+
+      it('should return a 400 bad request', (done) => {
+        request.put(`${url}/api/project/${this.tempProject._id}/line/prungsters`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .set('Content-Type', 'application/json')
+        .send({
+          name: 'hi',
+          lines: ['oh', 'hai'],
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          done();
+        });
+      });
+    });
+
+    describe('with no token', function() {
+      before(done => lineMock.call(this, done));
+
+      it('should return a 401 unauthorized', (done) => {
+        request.put(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}`)
+        .set({Authorization: 'Bearer '})
+        .set('Content-Type', 'application/json')
+        .send({
+          name: 'hi',
+          lines: ['oh', 'hai'],
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
+
+    describe('with invalid token', function() {
+      before(done => lineMock.call(this, done));
+
+      it('should return a 401 unauthorized', (done) => {
+        request.put(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}`)
+        .set({Authorization: 'Bearer 8888'})
+        .set('Content-Type', 'application/json')
+        .send({
+          name: 'hi',
+          lines: ['oh', 'hai'],
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
+
+    describe('with no auth header', function() {
+      before(done => lineMock.call(this, done));
+
+      it('should return a 401 unauthorized', (done) => {
+        request.put(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}`)
+        .set('Content-Type', 'application/json')
+        .send({
+          name: 'hi',
+          lines: ['oh', 'hai'],
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
+  }); //end of PUT
 });
