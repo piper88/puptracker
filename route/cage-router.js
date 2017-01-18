@@ -78,3 +78,21 @@ cageRouter.delete('/api/project/:projId/line/:lineId/cage/:cageId', bearerAuth, 
   //if you dont find the cage
   .catch(err => next(createError(404, err.message)));
 });
+
+cageRouter.put('/api/project/:projId/line/:lineId/cage/:cageId', bearerAuth, jsonParser, function(req, res, next) {
+  debug('cage router PUT');
+
+  Cage.findById(req.params.cageId)
+  .then(cage => {
+    let options = {runValidators: true, new: true};
+    return Cage.findByIdAndUpdate(cage._id, req.body, options);
+  })
+  .then((cage) => {
+    res.json(cage);
+  })
+  .catch(err => {
+    if (err.name === 'ValidationError') return next(err);
+    if (err.status) return next(err);
+    next(createError(404, err.message));
+  });
+});

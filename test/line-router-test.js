@@ -26,7 +26,7 @@ const exampleLineData = {
   genes: ['piper', 'bowles', 'isadog'],
 };
 
-describe('testing line router', function(done) {
+describe('testing line router', function() {
   before(done => serverControl.serverUp(server, done));
   after(done => serverControl.serverDown(server, done));
   afterEach(done => cleanUpDB(done));
@@ -116,7 +116,7 @@ describe('testing line router', function(done) {
       it('should return a 401 unauthorized', (done) => {
         request.post(`${url}/api/project/${this.tempProject._id}/line`)
         .send(exampleLineData)
-        .set({Authorization: `Bearer 1234`})
+        .set({Authorization: 'Bearer 1234'})
         .end((err, res) => {
           expect(res.status).to.equal(401);
           done();
@@ -130,7 +130,7 @@ describe('testing line router', function(done) {
       it('should return a 401 unauthorized', (done) => {
         request.post(`${url}/api/project/${this.tempProject._id}/line`)
         .send(exampleLineData)
-        .set({Authorization: `Bearer `})
+        .set({Authorization: 'Bearer '})
         .end((err, res) => {
           expect(res.status).to.equal(401);
           done();
@@ -273,7 +273,7 @@ describe('testing line router', function(done) {
 
       it('should return a 401 unauthorized', (done) => {
         request.delete(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}`)
-        .set({Authorization: `Bearer nope`})
+        .set({Authorization: 'Bearer nope'})
         .end((err, res) => {
           expect(res.status).to.equal(401);
           done();

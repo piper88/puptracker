@@ -334,7 +334,7 @@ describe('testing cage router', function() {
       it('should return a 401 unauthorized', (done) => {
         request.post(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage`)
         .send(exampleCageData)
-        .set({Authorization: `Bearer `})
+        .set({Authorization: 'Bearer '})
         .end((err, res) => {
           expect(res.status).to.equal(401);
           done();
@@ -455,7 +455,7 @@ describe('testing cage router', function() {
 
       it('should return a 401 unauthorized', (done) => {
           request.delete(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}`)
-          .set({Authorization: `Bearer `})
+          .set({Authorization: 'Bearer '})
           .end((err, res) => {
             expect(res.status).to.equal(401);
             done();
@@ -474,5 +474,158 @@ describe('testing cage router', function() {
           });
       });
     });
-  });
+  }); //end of DELETE tests
+
+  describe('testing PUT /api/project/:projId/line/:lineId/cage/:cageId', function() {
+    describe('with valid cageId and updated number of males', function() {
+      before(done => cageMock.call(this, done));
+
+      it('should return an updated cage', (done) => {
+        request.put(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .send({
+          numberOfMales: 100,
+        })
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.status).to.equal(200);
+          expect(res.body.numberOfMales).to.equal(100);
+          done();
+        });
+      });
+    });
+
+    describe('with valid cageId and updated number of females', function() {
+      before(done => cageMock.call(this, done));
+
+      it('should return an updated cage', (done) => {
+        request.put(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .send({
+          numberOfFemales: 47,
+        })
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.status).to.equal(200);
+          expect(res.body.numberOfFemales).to.equal(47);
+          done();
+        });
+      });
+
+    });
+
+    describe('with valid cageId and updated breeding start date', function() {
+      before(done => cageMock.call(this, done));
+
+      it('should return an updated cage', (done) => {
+        request.put(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .send({
+          breedingStartDate: new Date(2017, 8, 9),
+        })
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.status).to.equal(200);
+          expect(res.body.breedingStartDate).to.equal('2017-09-09T07:00:00.000Z');
+          done();
+        });
+      });
+
+    });
+
+    describe('with valid cageId and updated breeding end date', function() {
+      before(done => cageMock.call(this, done));
+
+      it('should return an updated cage', (done) => {
+        request.put(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .send({
+          breedingEndDate: new Date(2019, 7, 22),
+        })
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.status).to.equal(200);
+          expect(res.body.breedingEndDate).to.equal('2019-08-22T07:00:00.000Z');
+          done();
+        });
+      });
+
+    });
+
+    describe('with valid cageId and updated expected DOB', function() {
+      before(done => cageMock.call(this, done));
+
+      it('should return an updated cage', (done) => {
+        request.put(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .send({
+          expectedDOB: new Date(2009, 1, 2),
+        })
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.status).to.equal(200);
+          expect(res.body.expectedDOB).to.equal('2009-02-02T08:00:00.000Z');
+          done();
+        });
+      });
+
+    });
+
+    describe('with valid cageId and updated number of litters monthly', function() {
+      before(done => cageMock.call(this, done));
+
+      it('should return an updated cage', (done) => {
+        request.put(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .send({
+          numberLittersMonthly: 1000,
+        })
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.status).to.equal(200);
+          expect(res.body.numberLittersMonthly).to.equal(1000);
+          done();
+        });
+      });
+
+    });
+
+    describe('with valid cageId and updated expected total pups', function() {
+      before(done => cageMock.call(this, done));
+
+      it('should return an updated cage', (done) => {
+        request.put(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .send({
+          expectedTotalPups: 1000000,
+        })
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.status).to.equal(200);
+          expect(res.body.expectedTotalPups).to.equal(1000000);
+          done();
+        });
+      });
+
+    });
+
+    describe('with valid cageId and updated expected usable pups', function() {
+      before(done => cageMock.call(this, done));
+
+      it('should return an updated cage', (done) => {
+        request.put(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .send({
+          expectedUsablePups: 1,
+        })
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.status).to.equal(200);
+          expect(res.body.expectedUsablePups).to.equal(1);
+          done();
+        });
+      });
+
+    });
+  }); //end of PUT tests
 });
