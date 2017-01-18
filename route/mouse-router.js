@@ -56,3 +56,21 @@ mouseRouter.delete('/api/project/:projId/line/:lineId/cage/:cageId/mouse/:mouseI
   })
   .catch(err => next(createError(404, err.message)));
 });
+
+mouseRouter.put('/api/project/:projId/line/:lineId/cage/:cageId/mouse/:mouseId', bearerAuth, jsonParser, function(req, res, next) {
+  debug('mouse router PUT mouse');
+
+  Mouse.findById(req.params.mouseId)
+  .then(mouse => {
+    let options = {runValidators: true, new: true};
+    return Mouse.findByIdAndUpdate(mouse._id, req.body, options);
+  })
+  .then(mouse => {
+    res.json(mouse);
+  })
+  .catch(err => {
+    if (err.name === 'ValidationError') return next(err);
+    if (err.status) return next(err);
+    next(createError(404, 'not found'));
+  });
+});
