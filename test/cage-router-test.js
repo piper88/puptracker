@@ -454,12 +454,12 @@ describe('testing cage router', function() {
       before(done => cageMock.call(this, done));
 
       it('should return a 401 unauthorized', (done) => {
-          request.delete(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}`)
-          .set({Authorization: 'Bearer '})
-          .end((err, res) => {
-            expect(res.status).to.equal(401);
-            done();
-          });
+        request.delete(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}`)
+        .set({Authorization: 'Bearer '})
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
       });
     });
 
@@ -467,11 +467,11 @@ describe('testing cage router', function() {
       before(done => cageMock.call(this, done));
 
       it('should return a 401 unauthorized', (done) => {
-          request.delete(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}`)
-          .end((err, res) => {
-            expect(res.status).to.equal(401);
-            done();
-          });
+        request.delete(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}`)
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
       });
     });
   }); //end of DELETE tests
@@ -625,7 +625,69 @@ describe('testing cage router', function() {
           done();
         });
       });
+    });
 
+    describe('with invalid cageId', function() {
+      before(done => cageMock.call(this, done));
+
+      it('should return a 404 not found', (done) => {
+        request.put(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/12`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .send({
+          numberofMales: 17,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          done();
+        });
+      });
+    });
+
+    describe('with invalid token', function() {
+      before(done => cageMock.call(this, done));
+
+      it('should return a 401 unauthorized', (done) => {
+        request.put(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}`)
+        .set({Authorization: 'Bearer 233332323'})
+        .send({
+          numberOfMales: 29,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
+
+    describe('with no token', function() {
+      before(done => cageMock.call(this, done));
+
+      it('should return a 401 unauthorized', (done) => {
+        request.put(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}`)
+        .set({Authorization: 'Bearer '})
+        .send({
+          numberOfMales: 29,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
+
+    describe('with no auth header', function() {
+      before(done => cageMock.call(this, done));
+
+      it('should return a 401 unauthorized', (done) => {
+        request.put(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}`)
+        .send({
+          numberOfMales: 29,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
     });
   }); //end of PUT tests
 });

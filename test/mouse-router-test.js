@@ -143,7 +143,7 @@ describe('testing mouse router', function() {
       it('should return a 401 unauthorized', (done) => {
         request.post(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}/mouse`)
         .send(exampleMouseData)
-        .set({Authorization: `Bearer `})
+        .set({Authorization: 'Bearer '})
         .end((err, res) => {
           expect(res.status).to.equal(401);
           done();
@@ -157,7 +157,7 @@ describe('testing mouse router', function() {
       it('should return a 401 unauthorized', (done) => {
         request.post(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}/mouse`)
         .send(exampleMouseData)
-        .set({Authorization: `Bearer 7483939`})
+        .set({Authorization: 'Bearer 7483939'})
         .end((err, res) => {
           expect(res.status).to.equal(401);
           done();
@@ -244,7 +244,7 @@ describe('testing mouse router', function() {
 
       it('should return a 401 unauthorized', (done) => {
         request.delete(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}/mouse/${this.tempMouse._id}`)
-        .set({Authorization: `Bearer `})
+        .set({Authorization: 'Bearer '})
         .end((err, res) => {
           expect(res.status).to.equal(401);
           done();
@@ -257,7 +257,7 @@ describe('testing mouse router', function() {
 
       it('should return a 401 unauthorized', (done) => {
         request.delete(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}/mouse/${this.tempMouse._id}`)
-        .set({Authorization: `Bearer 12345677 `})
+        .set({Authorization: 'Bearer 12345677 '})
         .end((err, res) => {
           expect(res.status).to.equal(401);
           done();
@@ -277,4 +277,145 @@ describe('testing mouse router', function() {
       });
     });
   }); //end of DELETE tests
+
+  describe('testing PUT /api/project/:projId/line/:lineId/cage/:cageId/mouse/:mouseId', function() {
+    describe('with valid mouse id and updated name', function() {
+      before(done => mouseMock.call(this, done));
+
+      it('should return an updated mouse', (done) => {
+        request.put(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}/mouse/${this.tempMouse._id}`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .send({
+          name: 'poop',
+        })
+        .end((err, res) => {
+          if(err) return done(err);
+          expect(res.status).to.equal(200);
+          expect(res.body.name).to.equal('poop');
+          done();
+        });
+      });
+    });
+
+    describe('with valid mouse id and updated genetic makeup', function() {
+      before(done => mouseMock.call(this, done));
+
+      it('should return an updated mouse', (done) => {
+        request.put(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}/mouse/${this.tempMouse._id}`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .send({
+          geneticMakeup: ['homo', 'wild', 'homo'],
+        })
+        .end((err, res) => {
+          if(err) return done(err);
+          expect(res.status).to.equal(200);
+          expect(res.body.geneticMakeup[0]).to.equal('homo');
+          done();
+        });
+      });
+    });
+
+    describe('with valid mouse id and updated DOB', function() {
+      before(done => mouseMock.call(this, done));
+
+      it('should return an updated mouse', (done) => {
+        request.put(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}/mouse/${this.tempMouse._id}`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .send({
+          DOB: new Date(2010, 1, 8).toDateString(),
+        })
+        .end((err, res) => {
+          if(err) return done(err);
+          expect(res.status).to.equal(200);
+          expect(res.body.DOB).to.equal('2010-02-08T08:00:00.000Z');
+          done();
+        });
+      });
+    });
+
+    describe('with valid mouse id and updated sex', function() {
+      before(done => mouseMock.call(this, done));
+
+      it('should return an updated mouse', (done) => {
+        request.put(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}/mouse/${this.tempMouse._id}`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .send({
+          sex: 'preferNotToSay',
+        })
+        .end((err, res) => {
+          if(err) return done(err);
+          expect(res.status).to.equal(200);
+          expect(res.body.sex).to.equal('preferNotToSay');
+          done();
+        });
+      });
+    });
+
+    describe('with invalid mouse id', function() {
+      before(done => mouseMock.call(this, done));
+
+      it('should return a 404 not found', (done) => {
+        request.put(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}/mouse/idk`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .send({
+          sex: 'male',
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          expect(`${this.tempMouse.sex}`).to.equal('female');
+          done();
+        });
+      });
+    });
+
+    describe('with invalid token', function() {
+      before(done => mouseMock.call(this, done));
+
+      it('should return a 401 unauthorized', (done) => {
+        request.put(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}/mouse/${this.tempMouse._id}`)
+        .set({Authorization: 'Bearer falsch'})
+        .send({
+          sex: 'male',
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          expect(`${this.tempMouse.sex}`).to.equal('female');
+          done();
+        });
+      });
+    });
+
+    describe('with no token', function() {
+      before(done => mouseMock.call(this, done));
+
+      it('should return a 401 unauthorized', (done) => {
+        request.put(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}/mouse/${this.tempMouse._id}`)
+        .set({Authorization: 'Bearer '})
+        .send({
+          sex: 'male',
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          expect(`${this.tempMouse.sex}`).to.equal('female');
+          done();
+        });
+      });
+    });
+
+    describe('with no auth header', function() {
+      before(done => mouseMock.call(this, done));
+
+      it('should return a 401 unauthorized', (done) => {
+        request.put(`${url}/api/project/${this.tempProject._id}/line/${this.tempLine._id}/cage/${this.tempCage._id}/mouse/${this.tempMouse._id}`)
+        .send({
+          sex: 'male',
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          expect(`${this.tempMouse.sex}`).to.equal('female');
+          done();
+        });
+      });
+    });
+  }); //end of PUT tests
 });

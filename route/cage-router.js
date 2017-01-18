@@ -3,7 +3,7 @@
 const Router = require('express').Router;
 const createError = require('http-errors');
 const jsonParser = require('body-parser').json();
-const debug = require('debug')('puptracker:cage-router')
+const debug = require('debug')('puptracker:cage-router');
 
 const Line = require('../model/line.js');
 const Project = require('../model/project.js');
