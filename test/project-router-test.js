@@ -5,7 +5,12 @@ require('./lib/test-env.js');
 // const projectRouter = require('../route/project-router.js');
 const projectMock = require('./lib/project-mock.js');
 const userMock = require('./lib/user-mock.js');
+const mouseMock = require('./lib/mouse-mock.js');
 const cleanUpDB = require('./lib/clean-up-mock.js');
+
+const Line = require('../model/line.js');
+const Cage = require('../model/cage.js');
+const Mouse = require('../model/mouse.js');
 
 const expect = require('chai').expect;
 const request = require('superagent');
@@ -81,7 +86,7 @@ describe('testing project router', function() {
       it('should return a 401 unauthorized', (done) => {
 
         request.post(`${url}/api/project`)
-        .set({Authorization: `Bearer badtoken`})
+        .set({Authorization: 'Bearer badtoken'})
         .send(exampleProjectData)
         .end((err, res) => {
           expect(res.status).to.equal(401);
@@ -228,8 +233,35 @@ describe('testing project router', function() {
       });
     }); //end of describe with valid projectId and token
 
+    describe('with valid projectId and token', function() {
+      before(done => mouseMock.call(this, done));
+
+      it('should remove all dependencies', (done) => {
+        request.delete(`${url}/api/project/${this.tempProject._id}`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .end((err, res) => {
+          if (err) return done(err);
+          Mouse.findById({projId: `${this.tempProject._id}`})
+          .catch(err => {
+            expect(err.name).to.equal('CastError');
+            expect(res.status).to.equal(204);
+            // done();
+          });
+          Cage.findById({projId: `${this.tempProject._id}`})
+          .catch(err => {
+            expect(err.name).to.equal('CastError');
+          });
+          Line.findById({projId: `${this.tempProject._id}`})
+          .catch(err => {
+            expect(err.name).to.equal('CastError');
+          });
+          done();
+        });
+      });
+    });
+
     describe('with invalid projectId and valid token', function() {
-      before(done => projectMock.call(this, done));
+      before(done => mouseMock.call(this, done));
 
       it('should return a 404 not found', (done) => {
         request.delete(`${url}/api/project/1234`)
@@ -246,7 +278,7 @@ describe('testing project router', function() {
 
       it('should return a 401 unauthorized', (done) => {
         request.delete(`${url}/api/project/${this.tempProject._id}`)
-        .set({Authorization: `Bearer badtoken`})
+        .set({Authorization: 'Bearer badtoken'})
         .end((err, res) => {
           expect(res.status).to.equal(401);
           done();

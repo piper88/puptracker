@@ -41,14 +41,9 @@ lineRouter.post('/api/project/:projId/line', bearerAuth, jsonParser, function(re
 lineRouter.get('/api/project/:projId/line/:lineId', function(req, res, next){
   debug('GET /api/project/:id/line/:id');
 
-//not sure if we need this error handling, but how else do we catch the error if the project isn't found?
-  Project.findById(req.params.projId)
-  .then(() => {
-    Line.findById(req.params.lineId)
-    .then(line => {
-      res.json(line);
-    })
-    .catch(err => next(createError(404, err.message)));
+  Line.findById(req.params.lineId)
+  .then(line => {
+    res.json(line);
   })
   .catch(err => next(createError(404, err.message)));
 });
@@ -92,28 +87,3 @@ lineRouter.put('/api/project/:projId/line/:lineId', bearerAuth, jsonParser, func
     next(createError(404, err.message));
   });
 });
-
-  // lineRouter.delete('/api/project/:projId/line/:lineId', bearerAuth, function(req, res, next){
-  //   debug('DELETE /api/project/:projId/line/:lineId');
-  //
-  //   Project.findById(req.params.projId)
-  //   //if you don't find project, throw 404 error
-  //   // .catch(err => next(createError(404, err.message)))
-  //   //if you do find the project:
-  //   .then(() => {
-  //     Line.findById(req.params.lineId)
-  //     //if you don't find the line, throw 404 error
-  //     .catch(err => next(createError(404, err.message)))
-  //     //if you do find the line:
-  //     .then((line) => {
-  //       debug('HERES THE LINE THAT WAS FOUND IN THE DELETE ROUTE', line);
-  //       Line.findLineByIdAndRemoveLine(req.params.lineId)
-  //     })
-  //     .then(() => {
-  //       Project.findByIdAndRemoveLine(req.params.projId, req.params.lineId)
-  //     })
-  //     .then(() => res.status(204).send());
-  //   })
-  //   .catch(err => next(createError(404, err.message)))
-  //   .catch(next);
-  // });

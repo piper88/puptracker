@@ -8,7 +8,7 @@ const lineMock = require('./lib/line-mock.js');
 const cleanUpDB = require('./lib/clean-up-mock.js');
 
 const Project = require('../model/project.js');
-// const Cage = require('../model/cage.js');
+const Cage = require('../model/cage.js');
 
 const expect = require('chai').expect;
 const request = require('superagent');
@@ -168,7 +168,7 @@ describe('testing line router', function() {
 
   describe('testing GET /api/project/projId/line/lineId', function() {
 
-    describe('with valid project id and valid line id', function() {
+    describe('with valid line id', function() {
       before(done => lineMock.call(this, done));
 
       it('should return a line', (done) => {
@@ -182,37 +182,11 @@ describe('testing line router', function() {
       });
     });
 
-    describe('with valid project id and invalid line id', function() {
+    describe('with invalid line id', function() {
       before(done => lineMock.call(this, done));
 
       it('should return a 404 not found', (done) => {
         request.get(`${url}/api/project/${this.tempProject._id}/line/1234`)
-        .end((err, res) => {
-          expect(res.status).to.equal(404);
-          done();
-        });
-      });
-    });
-
-//not sure if this test is correct....do we need a place to error handle not finding the project? I put it in the line-router, but somehow it doesn't look right...
-    describe('with invalid project id and valid line id', function() {
-      before(done => lineMock.call(this, done));
-
-      it('should return a 404 not found', (done) => {
-        request.get(`${url}/api/project/4747/line/${this.tempLine._id}`)
-        .end((err, res) => {
-          expect(err).to.not.be.null;
-          expect(res.status).to.equal(404);
-          done();
-        });
-      });
-    });
-
-    describe('with invalid project id and invalid line id', function() {
-      before(done => lineMock.call(this, done));
-
-      it('should return a 404 not found', (done) => {
-        request.get(`${url}/api/project/1234/line/5678`)
         .end((err, res) => {
           expect(res.status).to.equal(404);
           done();
@@ -230,14 +204,14 @@ describe('testing line router', function() {
         .set({Authorization: `Bearer ${this.tempToken}`})
         .end((err, res) => {
           if (err) return done(err);
-          //add the following lines back in as soon as you make the cage model
-          // Cage.findById({lineId: `${this.tempLine._id}`})
-          // .catch(err => {
-            // expect(err.name).to.equal('CastError');
-          expect(res.status).to.equal(204);
-          expect(parseInt(`${this.tempProject.lines.length}`)).to.equal(0);
-          done();
-          // });
+          // add the following lines back in as soon as you make the cage model
+          Cage.findById({lineId: `${this.tempLine._id}`})
+            .catch(err => {
+              expect(err.name).to.equal('CastError');
+              expect(res.status).to.equal(204);
+              expect(parseInt(`${this.tempProject.lines.length}`)).to.equal(0);
+              done();
+            });
         });
       });
     });

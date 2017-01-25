@@ -3,6 +3,8 @@
 const mongoose = require('mongoose');
 const debug = require('debug')('puptracker:cage');
 
+const Mouse = require('./mouse.js');
+
 const cageSchema = mongoose.Schema({
   name: {type: String, required: true},
   numberOfMales: {type: Number, required: true},
@@ -40,9 +42,6 @@ Cage.findCageByIdAndAddMouse = function(cageId, mouse) {
     cage.mice.push(mouse._id);
     return cage.save();
   });
-  // .then(cage => {
-  //   return cage;
-  // });
 };
 
 Cage.findCageByIdAndRemoveMouse = function(cageId, mouse) {
@@ -60,17 +59,6 @@ Cage.findCageByIdAndRemoveCage = function(cageId) {
   debug('find cage by id and remove cage');
 
   return Cage.findById(cageId)
-  .then((cage) => {
-    //remove all the mice from that cage
-    let removeChildren = [];
-    cage.mice.forEach(mouse => {
-      //Mouse or mouse?
-      removeChildren.push(mouse.remove({cageId: cage._id}));
-    });
-    return Promise.all(removeChildren);
-  })
-  .then(() => {
-    //then delete the cage itself
-    return Cage.findByIdAndRemove(cageId);
-  });
+    .then(() => Mouse.remove({cageId:cageId}))
+    .then(() => Cage.findByIdAndRemove(cageId));
 };
