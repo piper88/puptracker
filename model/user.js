@@ -25,7 +25,7 @@ userSchema.methods.generatePasswordHash = function(password){
       resolve(this);
     });
   });
-}
+};
 
 userSchema.methods.comparePasswordHash = function(password){
   debug('comparePasswordHash');
@@ -38,7 +38,7 @@ userSchema.methods.comparePasswordHash = function(password){
       resolve(this);
     });
   });
-}
+};
 
 userSchema.methods.generateToken = function() {
   debug('generateToken');
@@ -47,7 +47,7 @@ userSchema.methods.generateToken = function() {
     .then(findHash => resolve(jwt.sign({token: findHash}, process.env.APP_SECRET)))
     .catch(err => reject(err));
   });
-}
+};
 
 userSchema.methods.generateFindHash = function() {
   debug('generateFindHash');
@@ -63,8 +63,8 @@ userSchema.methods.generateFindHash = function() {
         if (tries > 3) return reject(err);
         tries++;
         _generateFindHash.call(this);
-      })
-    };
+      });
+    }
   });
 };
 
