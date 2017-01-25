@@ -11,6 +11,7 @@ const User = require('../model/user.js');
 
 const authRouter = module.exports = Router();
 
+//dont need this route, no signup option
 authRouter.post('/api/signup', jsonParser, function(req, res, next){
   debug('POST /api/signup');
 
@@ -27,6 +28,7 @@ authRouter.post('/api/signup', jsonParser, function(req, res, next){
   .catch(next);
 });
 
+//just have login option, one username and password
 authRouter.get('/api/login', basicAuth, function(req, res, next){
   debug('GET /api/login');
 

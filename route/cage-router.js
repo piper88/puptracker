@@ -71,8 +71,6 @@ cageRouter.delete('/api/project/:projId/line/:lineId/cage/:cageId', bearerAuth, 
       .then(() => res.status(204).send())
       .catch(next);
     })
-    // .then(() => res.status(204).send())
-    //if youre unable to findcagebyid and remove cage
     .catch(next);
   })
   //if you dont find the cage
