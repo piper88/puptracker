@@ -8,12 +8,11 @@ function LineService($q, $log, $http, authService){
 
   service.lines = [];
 
-//do you need this if you're only going to fetch one line??
-//or only if you want to fetch multiple lines?
+//do you also need a method to fetch just one line? or is that done in controllers?
   service.fetchLines = function(projectId){
-    $log.debug('LineService.fetchLine()');
+    $log.debug('LineService.fetchLines()');
 
-    let url = `${__API_URL__}/api/project/${projectId}/`;
+    let url = `${__API_URL__}/api/project/${projectId}/lines`;
     let config = {
       headers: {
         Accept: 'application/json',
@@ -121,9 +120,11 @@ function LineService($q, $log, $http, authService){
           break;
         }
       }
-      return $q.resolve('updated');
-      //orr...........?? guess it depends on what you want to send to the frontend
-      // return line;
+      //art-c did this way
+      // return $q.resolve('updated');
+      //abba did this way
+      return line;
+
     })
     .catch(err => {
       $log.error(err.message);
