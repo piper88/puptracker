@@ -13,38 +13,20 @@ if (!process.env.API_URL || !process.env.NODE_ENV || !process.env.TITLE){
   process.exit(1);
 }
 
-const webpack = require('webpack');
+//const webpack = require('webpack');
 const HTMLPlugin = require('html-webpack-plugin');
-const CleanPlugin = require('clean-webpack-plugin');
+//const CleanPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const production = process.env.NODE_ENV === 'production';
 
 let plugins = [
   new ExtractTextPlugin('bundle.css'),
   new HTMLPlugin({template: `${__dirname}/app/index.html`}),
-  new webpack.DefinePlugin({
-    __API_URL__: JSON.stringify(process.env.API_URL),
-    __TITLE__: JSON.stringify(process.env.TITLE),
-    __DEBUG__: JSON.stringify(!production),
-  }),
 ];
 
-if (production){
-  plugins = plugins.concat([
-    new webpack.optimize.UglifyJsPlugin({
-      mangle: true,
-      compress: {
-        warnings: false,
-      },
-    }),
-    new CleanPlugin(),
-  ]);
-}
 
 module.exports = {
   entry: `${__dirname}/app/entry.js`,
-  devtool: production ? false : 'eval',
   plugins,
   output: {
     path: 'build',
