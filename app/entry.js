@@ -34,13 +34,13 @@ context.keys().forEach( key => {
   app.controller(name, module);
 });
 
-// Load services
-// context = require.context('./service/', true, /.js$/);
-// context.keys().forEach( key => {
-//   let name = camelcase(path.basename(key, '.js'));
-//   let module = context(key);
-//   app.service(name, module);
-// });
+//Load services
+context = require.context('./service/', true, /.js$/);
+context.keys().forEach( key => {
+  let name = camelcase(path.basename(key, '.js'));
+  let module = context(key);
+  app.service(name, module);
+});
 
 //Load components
 context = require.context('./component/', true, /.js$/);
