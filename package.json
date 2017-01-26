@@ -4,6 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "watch": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot",
+    "build": "./node_modules/webpack/bin/webpack.js",
+    "build-watch": "./node_modules/webpack/bin/webpack.js -w",
     "test": "",
     "start": "node server.js"
   },
@@ -11,7 +14,7 @@
     "type": "git",
     "url": "git+https://github.com/prungy88/puptracker.git"
   },
-  "author": "sarah.debey@gmail.com",
+  "author": "sarah.debey@gmail.com, claudia.cedfeldt@gmail.com",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/prungy88/puptracker/issues"
@@ -20,21 +23,39 @@
   "dependencies": {
     "angular": "^1.6.1",
     "angular-animate": "^1.6.1",
+    "angular-route": "^1.6.1",
     "angular-touch": "^1.6.1",
     "angular-ui-bootstrap": "^2.4.0",
     "angular-ui-calendar": "^1.0.2",
     "angular-ui-router": "^0.4.2",
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.10",
+    "babel-preset-es2015": "^6.22.0",
     "bluebird": "^3.4.6",
     "body-parser": "^1.15.2",
+    "bootstrap-sass": "^3.3.7",
     "camelcase": "^4.0.0",
+    "clean-webpack-plugin": "^0.1.15",
     "crypto": "0.0.3",
+    "css-loader": "^0.26.1",
     "dotenv": "^2.0.0",
     "eslint": "^3.11.1",
     "express": "^4.14.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "html-loader": "^0.4.4",
+    "html-webpack-plugin": "^2.26.0",
+    "istanbul": "^0.4.5",
     "jsonwebtoken": "^7.2.0",
     "lorem-ipsum": "^1.0.3",
     "morgan": "^1.7.0",
-    "pascalcase": "^0.1.1"
+    "node-sass": "^4.3.0",
+    "pascalcase": "^0.1.1",
+    "resolve-url-loader": "^1.6.1",
+    "sass-loader": "^4.1.1",
+    "style-loader": "^0.13.1",
+    "ui-router": "^1.0.0-alpha.3",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.14.0"
   },
   "devDependencies": {
     "bcrypt": "^1.0.0",
@@ -44,6 +65,8 @@
     "http-errors": "^1.5.1",
     "mocha": "^3.2.0",
     "mongoose": "^4.7.4",
-    "superagent": "^2.3.0"
+    "ng-file-upload": "^12.2.13",
+    "superagent": "^2.3.0",
+    "webpack-dev-server": "^1.16.2"
   }
 }

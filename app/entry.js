@@ -35,20 +35,20 @@ context.keys().forEach( key => {
 });
 
 // Load services
-context = require.context('./service/', true, /.js$/);
-context.keys().forEach( key => {
-  let name = camelcase(path.basename(key, '.js'));
-  let module = context(key);
-  app.service(name, module);
-});
+// context = require.context('./service/', true, /.js$/);
+// context.keys().forEach( key => {
+//   let name = camelcase(path.basename(key, '.js'));
+//   let module = context(key);
+//   app.service(name, module);
+// });
 
 // Load components
-context = require.context('./component/', true, /.js$/);
-context.keys().forEach( key => {
-  let name = camelcase(path.basename(key, '.js'));
-  let module = context(key);
-  app.component(name, module);
-});
+// context = require.context('./component/', true, /.js$/);
+// context.keys().forEach( key => {
+//   let name = camelcase(path.basename(key, '.js'));
+//   let module = context(key);
+//   app.component(name, module);
+// });
 
 // Load filters
 // context = require.context('./filter/', true, /.js$/);
