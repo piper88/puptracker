@@ -48,6 +48,17 @@ lineRouter.get('/api/project/:projId/line/:lineId', function(req, res, next){
   .catch(err => next(createError(404, err.message)));
 });
 
+//not yet tested
+lineRouter.get('/api/project/:projId/lines', function(req, res, next){
+  debug('GET /api/project/:id/lines');
+
+  Line.find({projectId: req.params.projId})
+  .then(lines => {
+    res.json(lines);
+  })
+  .catch(err => err.status ? next(err) : next(createError(404, 'no lines for this project')));
+});
+
 lineRouter.delete('/api/project/:projId/line/:lineId', bearerAuth, function(req, res, next){
   debug('DELETE /api/project/:projId/line/:lineId');
 

@@ -58,6 +58,17 @@ cageRouter.get('/api/project/:projId/line/:lineId/cage/:cageId', function(req, r
   .catch(err => next(createError(404, err.message)));
 });
 
+//not yet tested
+cageRouter.get('/api/project/:projId/line/:lineId/cages', function(req, res, next) {
+  debug('GET /api/project/:projId/lines/:lineId/cages');
+
+  Cage.find({lineId: req.params.lineId})
+  .then(cages => {
+    res.json(cages);
+  })
+  .catch(err => err.status ? next(err) : next(createError(404, 'no cages for that line')));
+});
+
 cageRouter.delete('/api/project/:projId/line/:lineId/cage/:cageId', bearerAuth, function(req, res, next) {
   debug('cage router DELETE');
   Cage.findById(req.params.cageId)

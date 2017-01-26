@@ -43,6 +43,17 @@ mouseRouter.get('/api/project/:projId/line/:lineId/cage/:cageId/mouse/:mouseId',
   .catch(err => next(createError(404, err.message)));
 });
 
+//not yet tested
+mouseRouter.get('/api/project/:projId/line/:lineId/cage/:cageId/mice', function(req, res, next) {
+  debug('GET /api/project/:projId/lines/:lineId/cage/:cageId/mice');
+
+  Mouse.find({cageId: req.params.cageId})
+  .then(mice => {
+    res.json(mice);
+  })
+  .catch(err => err.status ? next(err) : next(createError(404, 'no mice for that cage')));
+});
+
 mouseRouter.delete('/api/project/:projId/line/:lineId/cage/:cageId/mouse/:mouseId', bearerAuth, function(req, res, next) {
   debug('mouse router DELETE mouse');
 

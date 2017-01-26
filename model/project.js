@@ -27,9 +27,6 @@ Project.findByIdAndAddLine = function(projId, line){
   });
 };
 
-//also have to remove the cages and mice??????????
-
-
 //this method just needs to handle removing the line in relation to the project. You actually remove all the children of the line in the Line.findLineByIdAndRemoveLine method
 Project.findByIdAndRemoveLine = function(projectId,lineId) {
   debug('Project: findbyIdAndRemoveLine');
