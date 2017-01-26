@@ -13,7 +13,7 @@ if (!process.env.API_URL || !process.env.NODE_ENV || !process.env.TITLE){
   process.exit(1);
 }
 
-//const webpack = require('webpack');
+const webpack = require('webpack');
 const HTMLPlugin = require('html-webpack-plugin');
 //const CleanPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -22,6 +22,10 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 let plugins = [
   new ExtractTextPlugin('bundle.css'),
   new HTMLPlugin({template: `${__dirname}/app/index.html`}),
+  new webpack.DefinePlugin({
+    __API_URL__: JSON.stringify(process.env.API_URL),
+    __TITLE__: JSON.stringify(process.env.TITLE),
+  }),
 ];
 
 
