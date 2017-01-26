@@ -8,7 +8,7 @@ function routerConfig($stateProvider, $urlRouterProvider){
 
   let states = [
     {
-      name: 'Welcome',
+      name: 'welcome',
       url: '/landing',
       controllerAs: 'landingCtrl',
       controller: 'LandingController',
