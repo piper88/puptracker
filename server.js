@@ -20,8 +20,8 @@ const mouseRouter = require('./route/mouse-router.js');
 const errorMiddleware = require('./lib/error-middleware.js');
 
 //load environment vars
-//dotenv.load();
-dotenv.load({path: `${__dirname}/.env`});
+dotenv.load();
+//dotenv.load({path: `${__dirname}/.env`});
 
 
 //setup DB and configure mongoose for promises

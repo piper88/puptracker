@@ -14,12 +14,11 @@ const pascalcase = require('pascalcase');
 const ngTouch = require('angular-touch');
 const ngAnimate = require('angular-animate');
 const uiRouter = require('angular-ui-router');
-const ngRoute = require('angular-route');
 const uiBootstrap = require('angular-ui-bootstrap');
-const uiCalendar = require('angular-ui-calendar');
+//const uiCalendar = require('angular-ui-calendar');
 const ngFileUpload = require('ng-file-upload');
 // Create angular module
-const app = angular.module('app', [ngRoute, ngTouch, uiBootstrap, ngAnimate, ngFileUpload, uiRouter, uiCalendar]);
+const app = angular.module('app', [ngTouch, uiBootstrap, ngAnimate, ngFileUpload, uiRouter]);
 
 // LOAD CONFIG
 let context = require.context('./config/', true, /.js$/);
@@ -35,7 +34,7 @@ context.keys().forEach( key => {
   app.controller(name, module);
 });
 
-// // Load services
+// Load services
 // context = require.context('./service/', true, /.js$/);
 // context.keys().forEach( key => {
 //   let name = camelcase(path.basename(key, '.js'));
@@ -50,11 +49,3 @@ context.keys().forEach( key => {
   let module = context(key);
   app.component(name, module);
 });
-
-// // Load filters
-// context = require.context('./filter/', true, /.js$/);
-// context.keys().forEach( key => {
-//   let name = camelcase(path.basename(key, '.js'));
-//   let module = context(key);
-//   app.filter(name, module);
-// });

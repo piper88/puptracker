@@ -1,16 +1,15 @@
 'use strict';
 
-require('./_line.scss');
+//require('./_line.scss');
 
 module.exports = {
   template: require('./line.html'),
   controller: ['$log', LineController],
   controllerAs: 'LineCtrl',
-  bindings: {
-    listing: '<',
-    deleteListingCheck: '&',
-    gallery: '<',
-  },
+  // bindings: {
+  //   line: '<',
+  //   project: '<',
+  // },
 };
 
 function LineController($log){
