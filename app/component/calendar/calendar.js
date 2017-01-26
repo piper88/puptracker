@@ -4,12 +4,11 @@
 
 module.exports = {
   template: require('./calendar.html'),
-  controller: ['$log', '$uiCalendarConfig', CalendarController],
+  controller: ['$log', CalendarController],
   controllerAs: 'CalendarCtrl',
 };
 
-function CalendarController($log, $uiCalendarConfig){
+function CalendarController($log){
   $log.debug('init CalendarCtrl');
 
-  console.log($uiCalendarConfig);
 }

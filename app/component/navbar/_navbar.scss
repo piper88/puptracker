@@ -1,0 +1,63 @@
+@import "theme";
+
+.navbar {
+  background: transparent;
+  height: 60px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  border-bottom: 1px solid $app-disabled;
+  .logo{
+    height: 50px;
+  }
+
+  .nav-container{
+    padding: 0 10px;
+
+    // login and signup buttons
+    .btn-nav {
+      float: right;
+      -webkit-border-radius: 16px;
+      border-radius: 16px;
+      font-size: 16px;
+      padding: 8px 20px;
+      margin: 10px 15px;
+      color: $app-white;
+      background-color: $app-primary;
+    }
+
+    .btn-nav:hover {
+      background-color: $app-primary-hover;
+    }
+
+    //logo
+    .navbar-brand {
+      float: left;
+      margin: 2px 0px 2px 15px;
+      font-size: 38px;
+      vertical-align: center;
+      display:inline-block;
+      text-decoration: none;
+      color: $app-secondary;
+    }
+    .navbar-brand:hover {
+      color: $app-secondary;
+    }
+
+  }
+}
+
+@media only screen and (max-width: 500px) {
+
+  .navbar {
+    .nav-container {
+        .btn-nav {
+        font-size: 12px;
+        margin-left: 0;
+        margin-right: 5px;
+        margin-top: 17px;
+      }
+    }
+}
+}

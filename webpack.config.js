@@ -26,6 +26,11 @@ let plugins = [
     __API_URL__: JSON.stringify(process.env.API_URL),
     __TITLE__: JSON.stringify(process.env.TITLE),
   }),
+  new webpack.ProvidePlugin({
+    $: 'jquery',
+    'window.jQuery': 'jquery',
+    'moment': 'moment',
+  }),
 ];
 
 

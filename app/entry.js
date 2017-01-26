@@ -14,9 +14,11 @@ const pascalcase = require('pascalcase');
 const ngTouch = require('angular-touch');
 const ngAnimate = require('angular-animate');
 const uiRouter = require('angular-ui-router');
+// const uiCalendar = require('angular-ui-calendar');
+// const fullcalendar = require('fullcalendar');
 const uiBootstrap = require('angular-ui-bootstrap');
-//const uiCalendar = require('angular-ui-calendar');
 const ngFileUpload = require('ng-file-upload');
+
 // Create angular module
 const app = angular.module('app', [ngTouch, uiBootstrap, ngAnimate, ngFileUpload, uiRouter]);
 

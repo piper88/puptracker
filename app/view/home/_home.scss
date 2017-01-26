@@ -7,5 +7,14 @@
     padding: 0 3%;
     color: $app-black;
   }
+  .home-btn {
+    background-color: $app-secondary;
+    color: $app-white;
+  }
+  .home-btn:hover {
+    background-color: $app-white;
+    border: 2px solid $app-secondary;
+    color: $app-secondary;
+  }
 
 }
