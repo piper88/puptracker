@@ -21,6 +21,8 @@ const errorMiddleware = require('./lib/error-middleware.js');
 
 //load environment vars
 dotenv.load();
+//dotenv.load({path: `${__dirname}/.env`});
+
 
 //setup DB and configure mongoose for promises
 mongoose.Promise = Promise;
@@ -36,8 +38,8 @@ app.use(lineRouter);
 app.use(cageRouter);
 app.use(projectRouter);
 app.use(mouseRouter);
-//will need following line with frontend
-// app.use(express.static(`${__dirname}/build`));
+
+app.use(express.static(`${__dirname}/build`));
 
 app.use(cors());
 app.use(morgan('dev'));
