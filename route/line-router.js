@@ -48,7 +48,7 @@ lineRouter.get('/api/project/:projId/line/:lineId', function(req, res, next){
   .catch(err => next(createError(404, err.message)));
 });
 
-//this route currently has no tests
+//not yet tested
 lineRouter.get('/api/project/:projId/lines', function(req, res, next){
   debug('GET /api/project/:id/lines');
 

@@ -93,12 +93,12 @@ function LineService($q, $log, $http, authService){
     });
   };
 
-  service.updateLine = function(line, projectId){
+  service.updateLine = function(line){
     $log.debug('LineService.updateLine()');
 
     return authService.getToken()
     .then(token => {
-      let url = `${__API_URL__}/api/project/${projectId}/line/${line._id}`;
+      let url = `${__API_URL__}/api/project/${line.projectId}/line/${line._id}`;
       let config = {
         headers: {
           Accept: 'application/json',
