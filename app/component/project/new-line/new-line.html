@@ -1,0 +1,17 @@
+<div>
+  <form novalidate ng-submit="newLineCtrl.createNewLine(newLineCtrl.line)">
+    <label>Name</label>
+      <input name="name" type="text" ng-model="newLineCtrl.line.name" required>
+    <label>Gene One</label>
+      <input name="gene1" type="text" ng-model="newLineCtrl.line.genes[0]" required>
+    <label>Gene Two</label>
+      <input name="gene2" type="text" ng-model="newLineCtrl.line.genes[1]" required>
+    <label>Gene Three</label>
+      <input name="gene3" type="text" ng-model="newLineCtrl.line.genes[2]" required>
+    <label>Expected Number of total pups per month</label>
+      <input name="expectedTotalPups" type="number" ng-model="newLineCtrl.line.expectedTotalPups" required>
+    <label>Expected Number of usable pups per month</label>
+      <input name="expectedUsablePups" type="number" ng-model="newLineCtrl.line.expectedUsablePups" required>
+  </form>
+
+</div>

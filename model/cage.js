@@ -7,13 +7,13 @@ const Mouse = require('./mouse.js');
 
 const cageSchema = mongoose.Schema({
   name: {type: String, required: true},
-  numberOfMales: {type: Number, required: true},
   numberOfFemales: {type: Number, required: true},
+  numberOfMales: {type: Number, required: true},
   lineId: {type: mongoose.Schema.Types.ObjectId, required: true},
   projectId: {type: mongoose.Schema.Types.ObjectId, required: true},
   mice: [{type: mongoose.Schema.Types.ObjectId, ref: 'mouse'}],
 
-  
+
   breedingStartDate: {type: Date, required: true},
   //end date will be calculated as when youngest mouse breeder is 200 days old
   breedingEndDate: {type: Date, required: true},
