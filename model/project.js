@@ -8,7 +8,7 @@ const Cage = require('./cage.js');
 const Mouse = require('./mouse.js');
 
 const projectSchema = mongoose.Schema({
-  name: {type: String},
+  name: {type: String, required:true},
   lines: [{type: mongoose.Schema.Types.ObjectId, ref: 'line'}],
   userId: {type: mongoose.Schema.Types.ObjectId, required: true},
 });

@@ -1,8 +1,8 @@
 'use strict';
 
-module.exports = ['$q', '$log', '$http', 'authService', MouseService];
+module.exports = ['$q', '$log', '$http', 'authService', mouseService];
 
-function MouseService($q, $log, $http, authService){
+function mouseService($q, $log, $http, authService){
   $log.debug('init MouseService');
   let service = {};
 

@@ -14,14 +14,11 @@ module.exports = {
 function NewLineController($log, $http, lineService){
   $log.debug('init newLineCtrl');
 
-  this.line = {};
-
   this.createNewLine = function() {
     $log.debug('init createNewLine()');
-    lineService.createLine(this.line)
-    .then(line => {
+    lineService.createLine(this.project, this.line)
+    .then(()=> {
       $log.debug('created a new line');
-      this.line = line;
     });
   };
 

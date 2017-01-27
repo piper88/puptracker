@@ -12,13 +12,27 @@ const bearerAuth = require('../lib/bearer-auth-middleware.js');
 const projectRouter = module.exports = Router();
 
 projectRouter.post('/api/project', bearerAuth, jsonParser, function(req, res, next) {
-  debug('POST /api/artist');
-  req.body.userID = req.user._id;
+  debug('POST /api/project');
+  req.body.userId = req.user._id;
   User.findById(req.user._id)
-    .then( project => res.json(project))
-    .catch(next);
+  .then( user => {
+    req.body.username = user.username;
+    return new Project(req.body).save();
+  })
+  .then( project => res.json(project))
+  .catch(next);
 });
 
+// Return all projects
+projectRouter.get('/api/projects', bearerAuth, function(req, res, next){
+  debug('GET /api/projects');
+  Project.find()
+  .populate('lines')
+  .then(projects => res.json(projects))
+  .catch(next);
+});
+
+// Return a specific project
 projectRouter.get('/api/project/:projectID', function(req, res, next) {
   debug('GET /api/project/:projectID');
   Project.findById(req.params.projectID)

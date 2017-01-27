@@ -1,14 +1,36 @@
 'use strict';
 
-module.exports = ['$q', '$log', '$http', 'authService', ProjectService];
+module.exports = ['$q', '$log', '$http', 'authService', projectService];
 
-function ProjectService($q, $log, $http, authService){
+function projectService($q, $log, $http, authService){
   $log.debug('init ProjectService');
   let service = {};
 
   service.projects = [];
 
-//no method for fetch all projects, don't think you'll ever need that ability?
+  service.fetchProjects = function(){
+    $log.debug('projectService.fetchProjects()');
+    return authService.getToken()
+    .then( token => {
+      let url = `${__API_URL__}/api/projects`;
+      let config = {
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      return $http.get(url, config);
+    })
+    .then( res => {
+      $log.debug('Succesfully fetched projects');
+      service.projects = res.data;
+      return service.projects;
+    })
+    .catch(err => {
+      $log.error(err.message);
+      return $q.reject(err);
+    });
+  };
 
   service.createProject = function(project) {
     $log.debug('ProjectService.createProject()');
@@ -28,6 +50,7 @@ function ProjectService($q, $log, $http, authService){
     .then(res => {
       $log.debug('successfully created project');
       let project = res.data;
+
       service.projects.unshift(project);
       return project;
     })
