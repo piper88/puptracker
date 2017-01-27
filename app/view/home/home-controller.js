@@ -7,6 +7,7 @@ module.exports = ['$log', '$rootScope', 'projectService', 'lineService', HomeCon
 function HomeController($log, $rootScope, projectService){
   $log.debug('init homeCtrl');
 
+  this.project;
   this.currentProject;
   this.projects = [];
 
