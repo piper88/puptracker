@@ -5,41 +5,31 @@ const createError = require('http-errors');
 const jsonParser = require('body-parser').json();
 const debug = require('debug')('puptracker:project-router');
 
+const User = require('../model/user.js');
 const Project = require('../model/project.js');
-const Line = require('../model/line.js');
 const bearerAuth = require('../lib/bearer-auth-middleware.js');
 
 const projectRouter = module.exports = Router();
 
-//I BELIEVE that the router just calls the methods, and does as little of the handling of the data as possible, and instead just calls methods on the models on the req, and sends the res along afterwards.
-
-//route to add project
-
-//route to delete project
-
-//route to get project
-
 projectRouter.post('/api/project', bearerAuth, jsonParser, function(req, res, next) {
-  // debug('OH BOY HERE IS THE DEBUG STATEMENT POST /api/project');
-  if (!req.body) return Promise.reject(createError(400, 'no body'));
-  let project = req.body;
-  //set the userId of the project to the user making the request
-  project.userId = req.user._id;
-  debug('DAS PROJECT', project);
-  return new Project(project).save()
-  .then(result => res.json(result))
-  .catch(next);
+  debug('POST /api/artist');
+  req.body.userID = req.user._id;
+  User.findById(req.user._id)
+    .then( project => res.json(project))
+    .catch(next);
 });
 
-
-//get the project, is the array of lines already populated? I'm so confused
-projectRouter.get('/api/project/:id', function(req, res, next) {
-  debug('GET /api/project/:id');
-  Project.findById(req.params.id)
-  .then((project) => {
+projectRouter.get('/api/project/:projectID', function(req, res, next) {
+  debug('GET /api/project/:projectID');
+  Project.findById(req.params.projectID)
+  .populate({path: 'lines'})
+  .then( project => {
     res.json(project);
   })
-  .catch(err => next(createError(404, err.message)));
+  .catch( err => {
+    if (err.name === 'ValidationError') return next(err);
+    next(createError(404, err.message));
+  });
 });
 
 projectRouter.put('/api/project/:id', bearerAuth, jsonParser, function(req, res, next){

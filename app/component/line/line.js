@@ -4,16 +4,22 @@
 
 module.exports = {
   template: require('./line.html'),
-  controller: ['$log', LineController],
-  controllerAs: 'LineCtrl',
-  // bindings: {
-  //   line: '<',
-  //   project: '<',
-  // },
+  controller: ['$log', 'lineService', LineController],
+  controllerAs: 'lineCtrl',
+  bindings: {
+    line: '<',
+  },
 };
 
-function LineController($log){
-  $log.debug('init LineCtrl');
+function LineController($log, lineService){
+  $log.debug('init lineCtrl');
 
+  this.updateLine = function() {
+    lineService.updateLine(this.line, this.line._id);
+  };
+
+  this.deleteLine = function() {
+    lineService.deleteLine(this.line, this.line._id, this.project._id);
+  };
 
 }

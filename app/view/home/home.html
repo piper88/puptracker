@@ -1,11 +1,26 @@
 <navbar></navbar>
 <main class="home">
-  <h2> Project Name: Project 1 </h2>
-  <button class="btn home-btn">Add Line</button>
-  <button class="btn home-btn">Delete Line</button>
-  <button class="btn home-btn">Add Cage</button>
-  <button class="btn home-btn">Delete Cage</button>
-<new-cage></new-cage>
-<!-- <new-line></new-line> -->
+  <div class="row">
+    <h3> Project {{homeCtrl.project.name}} </h3>
+    <div class = "btn-container">
+      <button class="btn home-btn">Add New Line</button>
+      <button class="btn home-btn">Select Line</button>
+    </div>
+  </div>
+
+<div class="row">
+  <h3>Create a New Project</h3>
+  <new-project></new-project>
+</div>
+
+<div class="row">
+  <h3>Create a New Line</h3>
+  <new-line></new-line>
+ </div>
+<line line="homeCtrl.line"> </line>
+<!-- <new-cage ng-show="homeCtrl.show"></new-cage> -->
+
+
+
 </main>
 <!-- <footer class="footer"><p>Allen Institute 2017</p></footer> -->

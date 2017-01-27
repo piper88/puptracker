@@ -28,7 +28,7 @@ function ProjectService($q, $log, $http, authService){
     .then(res => {
       $log.debug('successfully created project');
       let project = res.data;
-      service.projects.push(project);
+      service.projects.unshift(project);
       return project;
     })
     .catch(err => {
