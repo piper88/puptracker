@@ -8,8 +8,10 @@
     "build": "./node_modules/webpack/bin/webpack.js",
     "build-watch": "./node_modules/webpack/bin/webpack.js -w",
     "test": "",
-    "start": "node server.js"
+    "start": "node server.js",
+    "start-watch": "DEBUG='puptracker*' ./node_modules/nodemon/bin/nodemon.js server.js"
   },
+  
   "repository": {
     "type": "git",
     "url": "git+https://github.com/prungy88/puptracker.git"

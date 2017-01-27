@@ -8,9 +8,8 @@ const Cage = require('./cage.js');
 const Mouse = require('./mouse.js');
 
 const projectSchema = mongoose.Schema({
-  name: {type: String, required: true, unique: true},
+  name: {type: String, required:true},
   lines: [{type: mongoose.Schema.Types.ObjectId, ref: 'line'}],
-  //probably won't be a userId? will just have get routes not use bearer auth middleware, so anyone can GET
   userId: {type: mongoose.Schema.Types.ObjectId, required: true},
 });
 

@@ -10,11 +10,14 @@
   .home-btn {
     background-color: $app-secondary;
     color: $app-white;
+    border: 2px solid $app-secondary;
   }
   .home-btn:hover {
     background-color: $app-white;
     border: 2px solid $app-secondary;
     color: $app-secondary;
   }
+
+
 
 }

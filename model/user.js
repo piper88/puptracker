@@ -21,7 +21,6 @@ userSchema.methods.generatePasswordHash = function(password){
     bcrypt.hash(password, 10, (err, hash) => {
       if (err) reject(createError(400, 'Invalid user information'));
       this.password = hash;
-      //this is the user
       resolve(this);
     });
   });

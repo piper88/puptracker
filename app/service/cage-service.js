@@ -1,8 +1,8 @@
 'use strict';
 
-module.exports = ['$q', '$log', '$http', 'authService', CageService];
+module.exports = ['$q', '$log', '$http', 'authService', cageService];
 
-function CageService($q, $log, $http, authService){
+function cageService($q, $log, $http, authService){
   $log.debug('init CageService');
   let service = {};
 

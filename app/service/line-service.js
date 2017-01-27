@@ -1,8 +1,8 @@
 'use strict';
 
-module.exports = ['$q', '$log', '$http', 'authService', LineService];
+module.exports = ['$q', '$log', '$http', 'authService', lineService];
 
-function LineService($q, $log, $http, authService){
+function lineService($q, $log, $http, authService){
   $log.debug('init LineService');
   let service = {};
 
@@ -31,12 +31,12 @@ function LineService($q, $log, $http, authService){
     });
   };
 
-  service.createLine = function(line, projectId){
+  service.createLine = function(project, line){
     $log.debug('LineService.createLine()');
 
     return authService.getToken()
     .then(token => {
-      let url = `${__API_URL__}/api/project/${projectId}/line`;
+      let url = `${__API_URL__}/api/project/${project._id}/line`;
       let config = {
         headers: {
           //what you're going to get back from  backend
@@ -52,8 +52,7 @@ function LineService($q, $log, $http, authService){
     .then(res => {
       $log.debug('Successfully created line');
       let line = res.data;
-      //may want to use unshift to add to beginning of array
-      service.lines.push(line);
+      service.lines.unshift(line);
       return line;
     })
 

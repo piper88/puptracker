@@ -7,14 +7,11 @@ const debug = require('debug')('puptracker:line');
 const Cage = require('./cage.js');
 const Mouse = require('./mouse.js');
 
-//the projectSchema has an array of lines, that is of type Schema, and has a ref of 'line'. So then it goes to the line schema, and makes the lines, giving them the corresponding project?
 const lineSchema = mongoose.Schema({
   name: {type: String, required: true},
   projectId: {type: mongoose.Schema.Types.ObjectId, required: true},
   cages: [{type: mongoose.Schema.Types.ObjectId, ref: 'cage'}],
   genes: {type: [String], required: true},
-  //calculate these on the client side? or add a static method that calculates it? IDK really....will think on it
-  //I think have static method on cage to calculate the pups, and then set the corresponding line's pups to that value
   expectedTotalPups: {type: Number},
   actualTotalPups: {type: Number},
   expectedUsablePups: {type: Number},
