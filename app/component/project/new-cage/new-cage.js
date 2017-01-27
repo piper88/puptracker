@@ -4,7 +4,7 @@ require('./_new-cage.scss');
 
 module.exports = {
   template: require('./new-cage.html'),
-  controller: ['$log', '$http', 'cageService', NewCageController],
+  controller: ['$log', '$http', 'cageService',  NewCageController],
   controllerAs: 'newCageCtrl',
   bindings: {
     projectData: '<',
@@ -14,6 +14,11 @@ module.exports = {
 
 function NewCageController($log, $http, cageService){
   $log.debug('init newCageCtrl');
+
+  this.pickDate = function() {
+    $log.debug('init pickDate');
+    this.datetimepicker();
+  };
 
   this.createNewCage = function(cage){
     $log.debug('init createNewCage()');
