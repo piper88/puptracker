@@ -1,102 +1,58 @@
 <div>
-  <form novalidate ng-submit="newCageCtrl.createNewCage(newCageCtrl.cage)">
-    <label>Name</label>
-      <input name="name" type="text" ng-model="newCageCtrl.cage.name" required>
-    <label>Number of Female Breeders</label>
-      <input name="numberOfFemales" type="number" ng-model="newCageCtrl.cage.numberOfFemales" required>
-    <label>Number of Male Breeders</label>
-      <input name="numberOfMales" type="number" ng-model="newCageCtrl.cage.numberOfMales" required>
-    <label>Breeding Start Date</label>
-      <div class="container">
-        <div class="row">
-          <div class='col-sm-6'>
-            <div class="form-group">
-              <div class='input-group date' id='datetimepicker1'>
-                <input type='text' class="form-control" ng-model="newCageCtrl.cage.breedingStartDate" required/>
-                <span class="input-group-addon">
-                  <span class="glyphicon glyphicon-calendar"></span>
-                </span>
-              </div>
-            </div>
-          </div>
-          <script type="text/javascript">
-          $(function () {
-            $('#datetimepicker1').datetimepicker();
-          });
-          </script>
-        </div>
-      </div>
+  <form novalidate
+  class = "homeForm"
+  ng-submit="newCageCtrl.createNewCage(newCageCtrl.cage)">
 
-      <label>Breeding End Date</label>
-        <div class="container">
-          <div class="row">
-            <div class='col-sm-6'>
-              <div class="form-group">
-                <div class='input-group date' id='datetimepicker1'>
-                  <input type='text' class="form-control" ng-model="newCageCtrl.cage.breedingEndDate" required/>
-                  <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                  </span>
-                </div>
-              </div>
-            </div>
-            <script type="text/javascript">
-            $(function () {
-              $('#datetimepicker1').datetimepicker();
-            });
-            </script>
-          </div>
-        </div>
+  <div class="row"><label>Name</label></div>
+  <div class="row"><input name="name" type="text" ng-model="newCageCtrl.cage.name" required/></div>
 
-        <label>Expected Date of Birth of Litter</label>
-          <div class="container">
-            <div class="row">
-              <div class='col-sm-6'>
-                <div class="form-group">
-                  <div class='input-group date' id='datetimepicker1'>
-                    <input type='text' class="form-control" ng-model="newCageCtrl.cage.expectedDOB" required/>
-                    <span class="input-group-addon">
-                      <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <script type="text/javascript">
-              $(function () {
-                $('#datetimepicker1').datetimepicker();
-              });
-              </script>
-            </div>
-          </div>
+  <div class="row"><label>Number of Female Breeders</label></div>
+  <div class="row"><input name="numberOfFemales" type="number" ng-model="newCageCtrl.cage.numberOfFemales" required/></div>
 
-          <label>Actual Date of Birth of Litter</label>
-            <div class="container">
-              <div class="row">
-                <div class='col-sm-6'>
-                  <div class="form-group">
-                    <div class='input-group date' id='datetimepicker1'>
-                      <input type='text' class="form-control" ng-model="newCageCtrl.cage.actualDOB"/>
-                      <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <script type="text/javascript">
-                $(function () {
-                  $('#datetimepicker1').datetimepicker();
-                });
-                </script>
-              </div>
-            </div>
+  <div class="row"><label>Number of Male Breeders</label></div>
+  <div class="row"><input name="numberOfMales" type="number" ng-model="newCageCtrl.cage.numberOfMales" required/></div>
 
-        <label>Number of Litters Monthly</label>
-          <input name="numberLittersMonthly" type="number" ng-model="newCageCtrl.cage.numberLittersMonthly" required />
+  <div class="row"><label>Breeding Start Date</label></div>
+    <div class="row">
+      <div ng-click="newCageCtrl.pickDate()" class='input-group date' id='datetimepicker1'>
+      <input type='text' class="form-control" ng-model="newCageCtrl.cage.breedingStartDate" required/>
+      <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+  </div></div>
 
-        <label>Expected Number of Total Pups</label>
-          <input name="expectedTotalPups" type="number" ng-model="newCageCtrl.cage.expectedTotalPups" required />
+  <div class="row"><label>Breeding End Date</label></div>
+    <div class="row">
+      <div class='input-group date' id='datetimepicker1'>
+      <input type='text' class="form-control" ng-model="newCageCtrl.cage.breedingEndDate" required/>
+      <span class="input-group-addon"><span ng-click="newCageCtrl.pickDate()" class="glyphicon glyphicon-calendar"></span></span>
+  </div></div>
 
-        <label>Actualy Number of Total Pups</label>
-          <input name="expectedTotalPups" type="number" ng-model="newCageCtrl.cage.actualTotalPups"/>
+  <div class="row"><label>Expected Date of Birth of Litter</label></div>
+    <div class="row">
+      <div ng-click="newCageCtrl.pickDate()" class='input-group date' id='datetimepicker1'>
+      <input type='text' class="form-control" ng-model="newCageCtrl.cage.expectedDOB" required/>
+      <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+  </div></div>
+
+  <div class="row"><label>Actual Date of Birth of Litter</label></div>
+    <div class="row">
+      <div ng-click="newCageCtrl.pickDate()" class='input-group date' id='datetimepicker1'>
+      <input type='text' class="form-control" ng-model="newCageCtrl.cage.actualDOB" required/>
+      <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+  </div></div>
+
+  <div class="row"><label>Number of Litters Monthly</label></div>
+  <div class="row">
+    <input name="numberLittersMonthly" type="number" ng-model="newCageCtrl.cage.numberLittersMonthly" required />
+  </div>
+
+  <div class="row"><label>Expected Number of Total Pups</label></div>
+  <div class="row">
+    <input name="expectedTotalPups" type="number" ng-model="newCageCtrl.cage.expectedTotalPups" required />
+  </div>
+
+  <div class="row"><label>Actualy Number of Total Pups</label></div>
+  <div class="row"><input name="expectedTotalPups" type="number" ng-model="newCageCtrl.cage.actualTotalPups"/>
+  </div>
+
   </form>
 </div>
