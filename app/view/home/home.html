@@ -1,25 +1,20 @@
-<navbar></navbar>
+  <navbar project="homeCtrl.currentProject"></navbar>
 <main class="home">
 
-  <new-project submission="homeCtrl.homeFormSubmission(projectData)"></new-project>
+<h3>Current Project Title: {{homeCtrl.currentProject.name}}</h3>
 
-  <project-li ng-repeat="item in homeCtrl.projects"
-    project="item"
-    ng-click="homeCtrl.currentProject=item">
-  </project-li>
-
-<!-- <div class="row">
+<div class="row">
   <h3>Create a New Line</h3>
-  <new-line project="newLineCtrl.project"> </new-line>
- </div> -->
+  <new-line project="homeCtrl.project"> </new-line>
+ </div>
 
 
- <!-- <div class="row">
+ <div class="row">
    <div class = "btn-container">
      <button class="btn home-btn">Add New Line</button>
      <button class="btn home-btn">Select Line</button>
    </div>
- </div> -->
+ </div>
 
 
 </main>

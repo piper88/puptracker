@@ -2,13 +2,12 @@
 
 require('./_home.scss');
 
-module.exports = ['$log', '$rootScope', 'projectService', 'lineService', HomeController];
+module.exports = ['$log', '$rootScope','projectService', HomeController];
 
 function HomeController($log, $rootScope, projectService){
   $log.debug('init homeCtrl');
 
   this.currentProject;
-  this.projects = [];
 
   this.fetchProjects = function(){
     projectService.fetchProjects()
@@ -19,7 +18,6 @@ function HomeController($log, $rootScope, projectService){
     });
   };
   this.fetchProjects();
-
 
   $rootScope.$on('$locationChangeSuccess', () => {
     this.fetchProjects();

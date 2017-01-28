@@ -66,7 +66,7 @@ lineRouter.get('/api/line/:lineId', function(req, res, next){
 });
 
 // Return all the lines - TODO: test
-lineRouter.get('/api/project/:projId/line', function(req, res, next){
+lineRouter.get('/api/project/:projId/lines', function(req, res, next){
   debug('GET /api/project/:id/lines');
   // Find a line by its project ID
   Line.find({projectId: req.params.projId})
