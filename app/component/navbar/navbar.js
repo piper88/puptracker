@@ -4,17 +4,29 @@ require('./_navbar.scss');
 
 module.exports = {
   template: require('./navbar.html'),
-  controller: ['$log', '$location', '$rootScope', '$window', '$uibModal', 'authService', 'projectService', NavbarController],
+  controller: ['$log', '$location', '$rootScope', 'authService', 'lineService', 'projectService', NavbarController],
   controllerAs: 'navbarCtrl',
   bindings: {
-    projects: '<',
+    project: '<',
   },
 };
 
-function NavbarController($log, $location, $rootScope, $window, $uibModal, authService, projectService) {
+function NavbarController($log, $location, $rootScope, authService, lineService, projectService) {
   $log.debug('init navbarCtrl');
 
   this.projects = [];
+  this.currentProject;
+
+  this.test = function(item) {
+    this.currentProject = item;
+    console.log(item);
+  };
+
+  this.returnLines = function(item){
+    $log.debug('Successful Click');
+    this.currentProject = item;
+    // lineService.fetchLines(this.project._id);
+  };
 
   this.fetchProjects = function(){
     projectService.fetchProjects()

@@ -5,8 +5,13 @@
     <div uib-dropdown is-open="status.isopen" auto-close="outsideClick">
       <button class="btn btn-nav" type="button" uib-dropdown-toggle >Select Project</button>
         <ul class="dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-          <project-li ng-repeat="item in navbarCtrl.projects" project="item" role="menuitem">{{navbarCtrl.project.name}}</project-li>
-          <li><new-project role="menuitem" submission="homeCtrl.homeFormSubmission(projectData)"></new-project></li>
+
+          <project-li ng-repeat="item in navbarCtrl.projects"
+                      project="item" role="menuitem"
+                      ng-click="navbarCtrl.returnLines(item._id)">
+                      {{navbarCtrl.project.name}}</project-li>
+
+          <li><new-project role="menuitem"></new-project></li>
         </ul>
       </button>
 
