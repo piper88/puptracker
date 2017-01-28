@@ -19,6 +19,7 @@ function NewLineController($log, $http, lineService){
     lineService.createLine(this.project, this.line)
     .then(()=> {
       $log.debug('created a new line');
+      console.log(this.project);
     });
   };
 

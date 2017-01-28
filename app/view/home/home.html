@@ -1,21 +1,10 @@
-  <navbar project="homeCtrl.currentProject"></navbar>
+<navbar project="homeCtrl.project"></navbar>
 <main class="home">
 
-<h3>Current Project Title: {{homeCtrl.currentProject.name}}</h3>
-
-<div class="row">
-  <h3>Create a New Line</h3>
-  <new-line project="homeCtrl.project"> </new-line>
- </div>
+  <!-- Contains all lines associated with current project -->
+  <line-container ng-if="homeCtrl.currentProject" project="homeCtrl.currentProject"></line-container>
 
 
- <div class="row">
-   <div class = "btn-container">
-     <button class="btn home-btn">Add New Line</button>
-     <button class="btn home-btn">Select Line</button>
-   </div>
- </div>
-
+  <cage-container ng-if="homeCtrl.currentLine" line="homeCtrl.currentLine"></cage-container>
 
 </main>
-<!-- <footer class="footer"><p>Allen Institute 2017</p></footer> -->

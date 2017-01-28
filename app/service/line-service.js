@@ -52,7 +52,7 @@ function lineService($q, $log, $http, authService){
     .then(res => {
       $log.debug('Successfully created line');
       let line = res.data;
-      service.lines.unshift(line);
+      project.lines.unshift(line);
       return line;
     })
 
