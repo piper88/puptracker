@@ -2,9 +2,8 @@
 .home {
   padding: 3% 5%;
   h2 {
-    text-align: center;
     text-transform: uppercase;
-    padding: 0 3%;
+    padding: 3% 0;
     color: $app-black;
   }
   .home-btn {
@@ -17,7 +16,35 @@
     border: 2px solid $app-secondary;
     color: $app-secondary;
   }
+  .generalForm {
+    button {
+      margin-top: 10px;
+    }
+    .group {
+      position:relative;
+      margin-top:25px;
+    }
+    input{
+      font-size:12px;
+      padding:6px;
+      display:block;
+      border-radius: 4px;
+      width: 50%;
+      margin-bottom: 3px;
+      }
+    input:focus{ outline:none; }
 
+    label{
+      color:$app-black;
+      pointer-events:none;
+      font-size:14px;
+    }
 
+    //Changes Placeholder Color
+    input::-webkit-input-placeholder,
+    textarea::-webkit-input-placeholder {
+      color: $app-black;
+    }
+  }
 
 }

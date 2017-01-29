@@ -11,7 +11,7 @@ const lineSchema = mongoose.Schema({
   name: {type: String, required: true},
   projectId: {type: mongoose.Schema.Types.ObjectId, required: true},
   cages: [{type: mongoose.Schema.Types.ObjectId, ref: 'cage'}],
-  genes: {type: [String], required: true},
+  //genes: {type: [String], required: true},
   expectedTotalPups: {type: Number},
   actualTotalPups: {type: Number},
   expectedUsablePups: {type: Number},

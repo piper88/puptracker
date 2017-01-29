@@ -3,16 +3,16 @@
 //require('./_line.scss');
 
 module.exports = {
-  template: require('./line.html'),
-  controller: ['$log', 'lineService', LineController],
-  controllerAs: 'lineCtrl',
+  template: require('./line-info.html'),
+  controller: ['$log', 'lineService', LineInfoController],
+  controllerAs: 'lineInfoCtrl',
   bindings: {
     line: '<',
   },
 };
 
-function LineController($log, lineService){
-  $log.debug('init lineCtrl');
+function LineInfoController($log, lineService){
+  $log.debug('init lineInfoCtrl');
 
   this.updateLine = function() {
     lineService.updateLine(this.line, this.line._id);

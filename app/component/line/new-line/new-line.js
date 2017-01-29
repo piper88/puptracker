@@ -22,12 +22,4 @@ function NewLineController($log, $http, lineService){
     });
   };
 
-  // this.deleteLine = function(line) {
-  //   $log.debug('init deleteLine()');
-  //   lineService.deleteLine(line)
-  //   .then(() => {
-  //     $log.debug('deleted line');
-  //   });
-  // };
-
 }

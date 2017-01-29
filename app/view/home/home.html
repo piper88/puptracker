@@ -1,21 +1,34 @@
-  <navbar project="homeCtrl.currentProject"></navbar>
+<!-- Navbar with logout -->
+<navbar></navbar>
+
+<!-- Main -->
 <main class="home">
+  <h2>Project Name: {{homeCtrl.currentProject.name}} </h2>
 
-<h3>Current Project Title: {{homeCtrl.currentProject.name}}</h3>
+  <!-- Select Project Dropdown -->
+  <div uib-dropdown is-open="status.isopen" auto-close="outsideClick">
+    <button class="btn btn-nav" type="button" uib-dropdown-toggle >Select Project</button>
+      <ul class="dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="single-button">
 
-<div class="row">
-  <h3>Create a New Line</h3>
-  <new-line project="homeCtrl.project"> </new-line>
- </div>
+        <project-li ng-repeat="item in homeCtrl.projects"
+            project="item" role="menuitem"
+            ng-click="homeCtrl.currentProject = item">
+            {{homeCtrl.project.name}}
+        </project-li>
 
+        <li><new-project role="menuitem"></new-project></li>
+      </ul>
+  </div>
 
- <div class="row">
-   <div class = "btn-container">
-     <button class="btn home-btn">Add New Line</button>
-     <button class="btn home-btn">Select Line</button>
-   </div>
- </div>
+  <!-- Create a New Line -->
+  <new-line project="homeCtrl.currentProject"> </new-line>
 
+  <line-li class="line"
+    delete-line-check="homeCtrl.currentLineCheck()"
+    ng-repeat="line in homeCtrl.currentProject.lines"
+    line="line"
+    project="homeCtrl.currentProject"
+    ng-click="homeCtrl.currentLine = line"> </line-li>
 
+<line-info project="homeCtrl.currentProject"></line-info>
 </main>
-<!-- <footer class="footer"><p>Allen Institute 2017</p></footer> -->
