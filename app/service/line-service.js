@@ -8,11 +8,10 @@ function lineService($q, $log, $http, authService){
 
   service.lines = [];
 
-//do you also need a method to fetch just one line? or is that done in controllers?
-  service.fetchLines = function(projectId){
+  service.fetchLines = function(project){
     $log.debug('LineService.fetchLines()');
 
-    let url = `${__API_URL__}/api/project/${projectId}/lines`;
+    let url = `${__API_URL__}/api/project/${project._id}/lines`;
     let config = {
       headers: {
         Accept: 'application/json',

@@ -19,16 +19,7 @@ function NewLineController($log, $http, lineService){
     lineService.createLine(this.project, this.line)
     .then(()=> {
       $log.debug('created a new line');
-      console.log(this.project);
     });
   };
-
-  // this.deleteLine = function(line) {
-  //   $log.debug('init deleteLine()');
-  //   lineService.deleteLine(line)
-  //   .then(() => {
-  //     $log.debug('deleted line');
-  //   });
-  // };
 
 }

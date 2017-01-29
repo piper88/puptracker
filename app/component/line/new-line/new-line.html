@@ -1,5 +1,6 @@
-<div>
-  <form novalidate ng-submit="newLineCtrl.createNewLine(createLineCtrl.line)">
+<section class="new-line-container">
+  <h3>Create a New Line</h3>
+  <form class="generalForm" novalidate ng-submit="newLineCtrl.createNewLine(createLineCtrl.line)">
     <label>Name</label>
       <input name="name" type="text" ng-model="newLineCtrl.line.name" required>
     <label>Gene One</label>
@@ -17,4 +18,4 @@
 
   </form>
 
-</div>
+</sections>

@@ -2,12 +2,22 @@
 
 require('./_home.scss');
 
-module.exports = ['$log', '$rootScope','projectService', HomeController];
+module.exports = ['$log', '$location', '$rootScope','projectService', 'lineService', 'authService', HomeController];
 
-function HomeController($log, $rootScope, projectService){
+function HomeController($log, $location, $rootScope, projectService, lineService){
   $log.debug('init homeCtrl');
 
+  this.lines = [];
+  this.projects = [];
   this.currentProject;
+
+  this.currentLineCheck = function(){
+    lineService.fetchLines(this.project._id);
+  };
+
+  this.setCurrent = function(item) {
+    this.currentProject = item;
+  };
 
   this.fetchProjects = function(){
     projectService.fetchProjects()
@@ -17,9 +27,14 @@ function HomeController($log, $rootScope, projectService){
       $log.debug('Succesfully found project');
     });
   };
+
   this.fetchProjects();
+
 
   $rootScope.$on('$locationChangeSuccess', () => {
     this.fetchProjects();
   });
+
+
+
 }
