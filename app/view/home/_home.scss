@@ -1,6 +1,6 @@
 @import "theme";
 .home {
-  padding: 3% 5%;
+  padding: 1% 2%;
   h2 {
     text-transform: uppercase;
     padding: 3% 0;
@@ -9,6 +9,7 @@
   .home-btn {
     background-color: $app-secondary;
     color: $app-white;
+    font-size: 18px;
     border: 2px solid $app-secondary;
   }
   .home-btn:hover {
@@ -16,6 +17,29 @@
     border: 2px solid $app-secondary;
     color: $app-secondary;
   }
+
+  .home-nav {
+    margin-top: 0;
+    padding:0;
+    width: 100%;
+  }
+
+  .home-nav-btn {
+    float: left;
+    margin-right: 50px;
+    padding: 1% 2%;
+  }
+
+  .home-nav-title {
+    background: $app-white;
+    text-transform: uppercase;
+    // padding: 2% 1%;
+    margin: 2% 0;
+    // display: inline-block;
+    color: $app-black;
+  }
+
+
   .generalForm {
     button {
       margin-top: 10px;

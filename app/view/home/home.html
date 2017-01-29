@@ -3,32 +3,37 @@
 
 <!-- Main -->
 <main class="home">
-  <h2>Project Name: {{homeCtrl.currentProject.name}} </h2>
 
-  <!-- Select Project Dropdown -->
-  <div uib-dropdown is-open="status.isopen" auto-close="outsideClick">
-    <button class="btn btn-nav" type="button" uib-dropdown-toggle >Select Project</button>
-      <ul class="dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-
-        <project-li ng-repeat="item in homeCtrl.projects"
-            project="item" role="menuitem"
-            ng-click="homeCtrl.currentProject = item">
-            {{homeCtrl.project.name}}
-        </project-li>
-
-        <li><new-project role="menuitem"></new-project></li>
-      </ul>
+  <!-- Home Navbar -->
+  <div class="home-nav row">
+    <h3 class="home-nav-title home-nav">Project Name: {{homeCtrl.currentProject.name}} </h3>
+    <!-- Select Project Dropdown -->
+    <div uib-dropdown is-open="status.isopen" auto-close="outsideClick">
+      <button class="btn home-btn home-nav-btn" type="button" uib-dropdown-toggle >Select Project</button>
+        <ul class="dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+          <project-li ng-repeat="item in homeCtrl.projects"
+              project="item" role="menuitem"
+              ng-click="homeCtrl.currentProject = item">
+              {{homeCtrl.project.name}}
+          </project-li>
+          <li><new-project role="menuitem"></new-project></li>
+        </ul>
+    </div>
+    <!-- Create a New Line Button-->
+    <button class="btn home-btn home-nav-btn">Create a New Line</button>
+  </div>
+  <!-- Create a New Line -->
+  <div class="row">
+    <new-line project="homeCtrl.currentProject"> </new-line>
   </div>
 
-  <!-- Create a New Line -->
-  <new-line project="homeCtrl.currentProject"> </new-line>
+  <div class="row">
+    <line-li class="line"
+      delete-line-check="homeCtrl.currentLineCheck()"
+      ng-repeat="line in homeCtrl.currentProject.lines"
+      line="line"
+      project="homeCtrl.currentProject"
+      ng-click="homeCtrl.currentLine = line"> </line-li>
+  </div>
 
-  <line-li class="line"
-    delete-line-check="homeCtrl.currentLineCheck()"
-    ng-repeat="line in homeCtrl.currentProject.lines"
-    line="line"
-    project="homeCtrl.currentProject"
-    ng-click="homeCtrl.currentLine = line"> </line-li>
-
-<line-info project="homeCtrl.currentProject"></line-info>
 </main>
