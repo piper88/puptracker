@@ -1,14 +1,17 @@
 @import "theme";
 .home {
-  padding: 3% 5%;
+  padding: 1% 2%;
   h2 {
     text-transform: uppercase;
     padding: 3% 0;
     color: $app-black;
   }
+
+  // Main buttons for navigation on home
   .home-btn {
     background-color: $app-secondary;
     color: $app-white;
+    font-size: 18px;
     border: 2px solid $app-secondary;
   }
   .home-btn:hover {
@@ -16,35 +19,46 @@
     border: 2px solid $app-secondary;
     color: $app-secondary;
   }
-  .generalForm {
-    button {
-      margin-top: 10px;
-    }
-    .group {
-      position:relative;
-      margin-top:25px;
-    }
-    input{
-      font-size:12px;
-      padding:6px;
-      display:block;
-      border-radius: 4px;
-      width: 50%;
-      margin-bottom: 3px;
-      }
-    input:focus{ outline:none; }
+  // Container for header title and buttons
+  .home-nav {
+    margin-top: 0;
+    padding:0;
+    width: 100%;
+  }
 
-    label{
-      color:$app-black;
-      pointer-events:none;
-      font-size:14px;
-    }
-
-    //Changes Placeholder Color
-    input::-webkit-input-placeholder,
-    textarea::-webkit-input-placeholder {
-      color: $app-black;
+ // Float/format the main buttons right
+  .home-nav-btn {
+    float: left;
+    margin-right: 50px;
+    padding: 1% 2%;
+  }
+  // Project title
+  .home-nav-title {
+    background: $app-white;
+    text-transform: uppercase;
+    // padding: 2% 1%;
+    margin: 2% 0;
+    // display: inline-block;
+    color: $app-black;
+  }
+  .dropdown-menu {
+    width: 25%;
+  }
+  .project-li {
+    width: 100%;
+    padding: 3px;
+    color: $app-black;
+    text-transform: uppercase;
+    p {
+      font-size: 160%;
+      margin-left: 1%;
     }
   }
+
+  .new-project-container{
+    width: 100%;
+    padding: 2%;
+  }
+
 
 }

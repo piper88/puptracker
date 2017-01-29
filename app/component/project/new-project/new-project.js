@@ -13,6 +13,7 @@ function NewProjectController($log, $http, projectService){
   $log.debug('init newProjectCtrl');
 
   this.project = {};
+
   this.createNewProject = function() {
     $log.debug('init createNewproject()');
     projectService.createProject(this.project)
@@ -23,6 +24,9 @@ function NewProjectController($log, $http, projectService){
         projectData: this.project,
       });
     });
+  };
+  this.fetchProjectData = function(){
+    projectService.fetchProject(this.project._id);
   };
 
 }

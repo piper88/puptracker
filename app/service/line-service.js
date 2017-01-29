@@ -8,10 +8,10 @@ function lineService($q, $log, $http, authService){
 
   service.lines = [];
 
-  service.fetchLines = function(project){
+  service.fetchLines = function(projectId){
     $log.debug('LineService.fetchLines()');
 
-    let url = `${__API_URL__}/api/project/${project._id}/lines`;
+    let url = `${__API_URL__}/api/project/${projectId}/lines`;
     let config = {
       headers: {
         Accept: 'application/json',
@@ -30,12 +30,12 @@ function lineService($q, $log, $http, authService){
     });
   };
 
-  service.createLine = function(project, line){
+  service.createLine = function(projectId, line){
     $log.debug('LineService.createLine()');
 
     return authService.getToken()
     .then(token => {
-      let url = `${__API_URL__}/api/project/${project._id}/line`;
+      let url = `${__API_URL__}/api/project/${projectId}/line`;
       let config = {
         headers: {
           //what you're going to get back from  backend
@@ -51,7 +51,7 @@ function lineService($q, $log, $http, authService){
     .then(res => {
       $log.debug('Successfully created line');
       let line = res.data;
-      project.lines.unshift(line);
+      service.lines.unshift(line);
       return line;
     })
 

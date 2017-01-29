@@ -33,10 +33,10 @@ projectRouter.get('/api/projects', bearerAuth, function(req, res, next){
 });
 
 // Return a specific project
-projectRouter.get('/api/project/:projectID', function(req, res, next) {
-  debug('GET /api/project/:projectID');
-  Project.findById(req.params.projectID)
-  .populate({path: 'lines'})
+projectRouter.get('/api/project/:projectId', function(req, res, next) {
+  debug('GET /api/project/:projectId');
+  Project.findById(req.params.projectId)
+  .populate('lines')
   .then( project => {
     res.json(project);
   })
@@ -46,10 +46,10 @@ projectRouter.get('/api/project/:projectID', function(req, res, next) {
   });
 });
 
-projectRouter.put('/api/project/:id', bearerAuth, jsonParser, function(req, res, next){
-  debug('PUT /api/project/:id');
+projectRouter.put('/api/project/:projectId', bearerAuth, jsonParser, function(req, res, next){
+  debug('PUT /api/project/:projectId');
 
-  Project.findById(req.params.id)
+  Project.findById(req.params.projectId)
   .then((project) => {
     let options = {runValidators: true, new: true};
     return Project.findByIdAndUpdate(project._id, req.body, options);
@@ -62,9 +62,9 @@ projectRouter.put('/api/project/:id', bearerAuth, jsonParser, function(req, res,
   });
 });
 
-projectRouter.delete('/api/project/:id', bearerAuth, function(req, res, next) {
-  debug('DELETE /api/project/:id');
-  Project.findById(req.params.id)
+projectRouter.delete('/api/project/projectId', bearerAuth, function(req, res, next) {
+  debug('DELETE /api/project/projectId');
+  Project.findById(req.params.projectId)
   .catch(err => Promise.reject(createError(404, err.message)))
   .then(project => {
     if (project.userId.toString() !== req.user._id.toString()) return Promise.reject(createError(401, 'unauthorized request'));

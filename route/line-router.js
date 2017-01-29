@@ -66,20 +66,20 @@ lineRouter.get('/api/line/:lineId', function(req, res, next){
 });
 
 // Return all the lines - TODO: test
-lineRouter.get('/api/project/:projId/lines', function(req, res, next){
-  debug('GET /api/project/:id/lines');
+lineRouter.get('/api/project/:projectId/lines', function(req, res, next){
+  debug('GET /api/project/:projectId/lines');
   // Find a line by its project ID
-  Line.find({projectId: req.params.projId})
+  Line.find({projectId: req.params.projectId})
   // populate cages from the array on the model
   .populate('cages')
   .then(lines => res.json(lines))
   .catch(err => err.status ? next(err) : next(createError(404, 'no lines for this project')));
 });
 
-lineRouter.delete('/api/project/:projId/line/:lineId', bearerAuth, function(req, res, next){
-  debug('DELETE /api/project/:projId/line/:lineId');
+lineRouter.delete('/api/project/:projectId/line/:lineId', bearerAuth, function(req, res, next){
+  debug('DELETE /api/project/:projectId/line/:lineId');
 
-  Project.findById(req.params.projId)
+  Project.findById(req.params.projectId)
     .then(() => {
       Line.findById(req.params.lineId)
       .catch(err => next(createError(404, err.message)))
@@ -87,7 +87,7 @@ lineRouter.delete('/api/project/:projId/line/:lineId', bearerAuth, function(req,
         Line.findLineByIdAndRemoveLine(line._id);
       })
       .then(() => {
-        Project.findByIdAndRemoveLine(req.params.projId, req.params.lineId);
+        Project.findByIdAndRemoveLine(req.params.projectId, req.params.lineId);
       })
       .then(() => res.status(204).send())
       .catch(next);

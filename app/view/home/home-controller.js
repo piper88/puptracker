@@ -15,9 +15,6 @@ function HomeController($log, $location, $rootScope, projectService, lineService
     lineService.fetchLines(this.project._id);
   };
 
-  this.setCurrent = function(item) {
-    this.currentProject = item;
-  };
 
   this.fetchProjects = function(){
     projectService.fetchProjects()
@@ -25,16 +22,21 @@ function HomeController($log, $location, $rootScope, projectService, lineService
       this.projects = projects;
       this.currentProject = projects[0];
       $log.debug('Succesfully found project');
+      console.log(this.currentProject);
+    });
+  };
+
+  this.fetchLines = function(){
+    lineService.fetchLines(this.project._id)
+    .then( lines => {
+      this.lines = lines;
+      this.project.lines = lines;
+      $log.debug('Succesfully found lines');
     });
   };
 
   this.fetchProjects();
-
-
-  $rootScope.$on('$locationChangeSuccess', () => {
-    this.fetchProjects();
-  });
-
+  //this.fetchLines();
 
 
 }
