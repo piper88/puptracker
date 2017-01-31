@@ -16,6 +16,10 @@ function HomeController($log, $location, $rootScope, projectService, lineService
     isopen2: false,
   };
 
+  // Only show line information and create line when clicked on
+  this.showCreateLine = false;
+  this.showLineInfo = false;
+
   console.log('current project', this.currentProject);
   console.log('the projects array', this.projects);
   $log.debug('THE LINES', this.lines);

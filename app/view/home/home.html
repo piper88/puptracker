@@ -23,7 +23,7 @@
     </div>
     <!-- Create a New Line Button-->
     <div class="container">
-      <button class="btn home-btn home-nav-btn">Create a New Line</button>
+      <button class="btn home-btn home-nav-btn" ng-click="homeCtrl.showCreateLine = !homeCtrl.showCreateLine">Create a New Line</button>
     </div>
 
     <!-- Select Line Dropdown -->
@@ -43,16 +43,17 @@
         </ul>
     </div>
   </div>
+</div>
 
-  <h3 class="home-nav-title home-nav">Project Name: {{homeCtrl.currentProject.name}} </h3>
-  <h3 class="home-nav-title home-nav">Line Name: {{homeCtrl.currentLine.name}} </h3>
-  <line-info line="homeCtrl.currentLine"></line-info>
-
-  </div>
-  <!-- Create a New Line -->
   <div class="row">
-    <new-line project="homeCtrl.currentProject"> </new-line>
+    <h3 class="home-nav-title">Project Name: {{homeCtrl.currentProject.name}} </h3>
   </div>
+  <!-- Create a New Line - shown when button is clicked on -->
+  <div class="row">
+    <new-line project="homeCtrl.currentProject" ng-if="homeCtrl.showCreateLine"> </new-line>
+  </div>
+
+  <line-info line="homeCtrl.currentLine"></line-info>
 
 
 </main>
