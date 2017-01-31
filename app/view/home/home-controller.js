@@ -16,13 +16,22 @@ function HomeController($log, $location, $rootScope, projectService, lineService
     isopen2: false,
   };
 
-  // Only show line information and create line when clicked on
+  // Only show project and line information and create line when clicked on
   this.showCreateLine = false;
   this.showLineInfo = false;
+  this.showProjectInfo = false;
 
-  console.log('current project', this.currentProject);
-  console.log('the projects array', this.projects);
-  $log.debug('THE LINES', this.lines);
+  this.showProject = function() {
+    this.showProjectInfo = true;
+  };
+
+  this.showLine = function() {
+    this.showLineInfo = true;
+  };
+
+  // console.log('current project', this.currentProject);
+  // console.log('the projects array', this.projects);
+  // $log.debug('THE LINES', this.lines);
 
   this.currentLineCheck = function(){
     lineService.fetchLines(this.project._id);
