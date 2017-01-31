@@ -6,6 +6,12 @@
     padding: 3% 0;
     color: $app-black;
   }
+  .container {
+    width: 25%;
+    float: left;
+    margin-right: 50px;
+    padding: 1% 2%;
+  }
 
   // Main buttons for navigation on home
   .home-btn {
@@ -26,19 +32,11 @@
     width: 100%;
   }
 
- // Float/format the main buttons right
-  .home-nav-btn {
-    float: left;
-    margin-right: 50px;
-    padding: 1% 2%;
-  }
   // Project title
   .home-nav-title {
     background: $app-white;
     text-transform: uppercase;
-    // padding: 2% 1%;
     margin: 2% 0;
-    // display: inline-block;
     color: $app-black;
   }
   .dropdown-menu {

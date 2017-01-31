@@ -6,36 +6,54 @@
 
   <!-- Home Navbar -->
   <div class="home-nav row">
-    <h3 class="home-nav-title home-nav">Project Name: {{homeCtrl.currentProject.name}} </h3>
     <!-- Select Project Dropdown -->
-    <div uib-dropdown is-open="status.isopen" auto-close="outsideClick">
-      <button class="btn home-btn home-nav-btn" type="button" uib-dropdown-toggle >Select Project</button>
-        <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-          <project-li ng-repeat="item in homeCtrl.projects"
-              project="item" role="menuitem"
-              ng-click="homeCtrl.fetchProject(item)">
-              {{homeCtrl.currentProject.name}}
-          </project-li>
-          <li><new-project submission="homeCtrl.projectFormSubmission(projectData)" role="menuitem"></new-project></li>
-        </ul>
+    <div class="container">
+      <div uib-dropdown is-open="status.isopen1" auto-close="outsideClick">
+        <button class="btn home-btn home-nav-btn" type="button" uib-dropdown-toggle >Select Project</button>
+          <ul class="dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+            <project-li
+                ng-repeat="item in homeCtrl.projects"
+                project="item" role="menuitem"
+                ng-click="homeCtrl.fetchProject(item); homeCtrl.showProject()">
+                {{homeCtrl.currentProject.name}}
+            </project-li>
+            <li><new-project submission="homeCtrl.projectFormSubmission(projectData)" role="menuitem"></new-project></li>
+          </ul>
+      </div>
     </div>
     <!-- Create a New Line Button-->
-    <button class="btn home-btn home-nav-btn">Create a New Line</button>
-    <button class="btn home-btn home-nav-btn">Select Line</button>
+    <div class="container">
+      <button class="btn home-btn home-nav-btn" ng-show="homeCtrl.showProjectInfo" ng-click="homeCtrl.showCreateLine = !homeCtrl.showCreateLine">Create a New Line</button>
+    </div>
 
+    <!-- Select Line Dropdown -->
+  <div class="container">
+    <div uib-dropdown is-open="status.isopen2" auto-close="outsideClick">
+      <button class="btn home-btn home-nav-btn" ng-show="homeCtrl.showProjectInfo" type="button" uib-dropdown-toggle>Select Line</button>
+        <ul class="dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+
+          <line-li
+              ng-repeat="item in homeCtrl.currentProject.lines"
+              line="item" role="menuitem"
+              project="homeCtrl.currentProject"
+              ng-click="homeCtrl.fetchLine(item); homeCtrl.showLine()">
+              {{homeCtrl.currentProject.line.name}}
+          </line-li>
+
+        </ul>
+    </div>
   </div>
-  <!-- Create a New Line -->
-  <div class="row">
-    <new-line project="homeCtrl.currentProject"> </new-line>
-  </div>
+</div>
 
   <div class="row">
-    <line-li class="line"
-      delete-line-check="homeCtrl.currentLineCheck()"
-      ng-repeat="line in homeCtrl.currentProject.lines"
-      line="line"
-      project="homeCtrl.currentProject"
-      ng-click="homeCtrl.currentLine = line"> HELLOOOO</line-li>
+    <h3 class="home-nav-title" ng-show="homeCtrl.showProjectInfo">Project Name: {{homeCtrl.currentProject.name}} </h3>
   </div>
+  <!-- Create a New Line - shown when button is clicked on -->
+  <div class="row">
+    <new-line project="homeCtrl.currentProject" ng-if="homeCtrl.showCreateLine"> </new-line>
+  </div>
+
+  <line-info line="homeCtrl.currentLine" ng-show="homeCtrl.showLineInfo"></line-info>
+
 
 </main>

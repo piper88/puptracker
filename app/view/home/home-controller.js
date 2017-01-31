@@ -10,9 +10,28 @@ function HomeController($log, $location, $rootScope, projectService, lineService
   this.lines = [];
   this.projects = [];
   this.currentProject;
-  console.log('current project', this.currentProject);
-  console.log('the projects array', this.projects);
-  $log.debug('THE LINES', this.lines);
+
+  this.status = {
+    isopen1:false,
+    isopen2: false,
+  };
+
+  // Only show project and line information and create line when clicked on
+  this.showCreateLine = false;
+  this.showLineInfo = false;
+  this.showProjectInfo = false;
+
+  this.showProject = function() {
+    this.showProjectInfo = true;
+  };
+
+  this.showLine = function() {
+    this.showLineInfo = true;
+  };
+
+  // console.log('current project', this.currentProject);
+  // console.log('the projects array', this.projects);
+  // $log.debug('THE LINES', this.lines);
 
   this.currentLineCheck = function(){
     lineService.fetchLines(this.project._id);
@@ -24,6 +43,12 @@ function HomeController($log, $location, $rootScope, projectService, lineService
     lineService.fetchLines(this.currentProject._id);
   };
 
+  this.fetchLine = function(line){
+    this.currentLine = line;
+    console.log('the current line', this.currentLine);
+    // TODO: have cage service fetch the lines
+    // cageService.fetchCages(this.currentLine._id);
+  };
 
   this.fetchProjects = function(){
     console.log('THIS SHOULD HAPPEN EVERYTIME I SELECT A PROJECT');
