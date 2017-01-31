@@ -30,6 +30,7 @@ function lineService($q, $log, $http, authService){
     });
   };
 
+//
   service.createLine = function(projectId, line){
     $log.debug('LineService.createLine()');
 
