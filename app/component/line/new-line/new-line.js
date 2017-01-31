@@ -4,14 +4,14 @@ require('./_new-line.scss');
 
 module.exports = {
   template: require('./new-line.html'),
-  controller: ['$log', '$http', 'lineService', NewLineController],
+  controller: ['$log', '$http','$rootScope', 'lineService', NewLineController],
   controllerAs: 'newLineCtrl',
   bindings: {
     project: '<',
   },
 };
 
-function NewLineController($log, $http, lineService){
+function NewLineController($log, $http, $rootScope, lineService){
   $log.debug('init newLineCtrl');
 
   console.log('the current project', this.project);
@@ -33,5 +33,8 @@ function NewLineController($log, $http, lineService){
 
     });
   };
+  $rootScope.$on('$locationChangeSuccess', () => {
+    this.fetchLines();
+  });
 
 }

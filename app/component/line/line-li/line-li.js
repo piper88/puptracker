@@ -18,9 +18,9 @@ function lineLIController($log, lineService){
   // this.line = lineService.fetchLines();
   $log.debug('the line in lineLICtrl', this.line);
 
-  this.fetchLines = function() {
-    lineService.fetchLines();
-  };
+  // this.fetchLines = function() {
+  //   lineService.fetchLines();
+  // };
 
   this.showEditLine = false;
 
@@ -31,5 +31,5 @@ function lineLIController($log, lineService){
     });
   };
 
-  this.fetchLines();
+  // this.fetchLines();
 }
