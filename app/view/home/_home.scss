@@ -6,6 +6,12 @@
     padding: 3% 0;
     color: $app-black;
   }
+  .container {
+    width: 20%;
+    float: left;
+  //  margin-right: 50px;
+    padding: 1% 2%;
+  }
 
   // Main buttons for navigation on home
   .home-btn {
@@ -28,9 +34,9 @@
 
  // Float/format the main buttons right
   .home-nav-btn {
-    float: left;
-    margin-right: 50px;
-    padding: 1% 2%;
+    // float: left;
+    // margin-right: 50px;
+    // padding: 1% 2%;
   }
   // Project title
   .home-nav-title {
