@@ -13,8 +13,8 @@
         <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
           <project-li ng-repeat="item in homeCtrl.projects"
               project="item" role="menuitem"
-              ng-click="homeCtrl.currentProject = item">
-              {{homeCtrl.project.name}}
+              ng-click="homeCtrl.fetchProject(item)">
+              {{homeCtrl.currentProject.name}}
           </project-li>
           <li><new-project submission="homeCtrl.projectFormSubmission(projectData)" role="menuitem"></new-project></li>
         </ul>
@@ -34,8 +34,8 @@
       delete-line-check="homeCtrl.currentLineCheck()"
       ng-repeat="line in homeCtrl.currentProject.lines"
       line="line"
-      project="homeCtrl.project"
-      ng-click="homeCtrl.currentLine = line"> </line-li>
+      project="homeCtrl.currentProject"
+      ng-click="homeCtrl.currentLine = line"> HELLOOOO</line-li>
   </div>
 
 </main>

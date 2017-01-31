@@ -14,38 +14,25 @@ const bearerAuth = require('../lib/bearer-auth-middleware.js');
 const lineRouter = module.exports = Router();
 
 // Create a new line
-lineRouter.post('/api/project/:projectId/line', bearerAuth, jsonParser, function(req, res, next){
-  debug('POST /api/project/:projectId/line');
+//call Project.findByIdAdAddLine
 
-  if (!req.body) return Promise.reject(createError(400, 'no body'));
-  let tempProject, tempLine; // What is this purpose
-  // Find the project by ID given in query
+lineRouter.post('/api/project/:projectId/line', bearerAuth, jsonParser, function(req, res, next) {
+  debug('POST /api/project/:projectId/line');
   Project.findById(req.params.projectId)
-  // If this is incorrect, reject the promise and create error  .catch(err => Promise.reject(createError(404, err.message)))
   .catch(err => Promise.reject(createError(404, err.message)))
-  // If this is correct, project is passed into then statement
-  .then( project => {
-    // If ID on the project doesn't match user Id, reject promise
-    if (project.userId.toString() !== req.user._id.toString())
-      return Promise.reject(createError(401, 'invalid user'));
-    tempProject = project;
-    // Set the project and user ids on the line schema
+  .then(project => {
     req.body.projectId = project._id;
-    req.body.userId = req.user._id;
-    // Save the new line with the information from the request body
-    return new Line(req.body).save();
-  })
-  //  Line is passed in and its id is added to an array of ids
-  // stored in the lines array on the project model
-  .then (line => {
-    tempLine = line;
-    tempProject.lines.push(line._id);
-    return tempLine.save();
-  })
-  // Th server responds with a copy of the line information
-  // (stored in the variable tempLine)
-  .then(() => res.json(tempLine))
-  .catch(next);
+    new Line(req.body).save()
+    .then(line => {
+      Project.findByIdAndAddLine(req.params.projectId, line)
+      .then(project => {
+        debug('THE PROJECT WITH THE LINE ADDED', project);
+        req.project = project;
+        res.json(line);
+      });
+    })
+    .catch(err => next(err));
+  });
 });
 
 // Get a Line by its ID
