@@ -31,10 +31,6 @@ function NewCageController($log, $http, $rootScope, $scope, cageService){
   //   });
   // };
 
-  $rootScope.$on('$locationChangeSuccess', () => {
-    this.fetchCages();
-  });
-
   $scope.today = function() {
     $scope.dt = new Date();
   };
