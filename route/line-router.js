@@ -36,8 +36,8 @@ lineRouter.post('/api/project/:projectId/line', bearerAuth, jsonParser, function
 });
 
 // Get a Line by its ID
-lineRouter.get('/api/line/:lineId', function(req, res, next){
-  debug('GET /api/line/:lineId');
+lineRouter.get('/api/project/:projectId/line/:lineId', function(req, res, next){
+  debug('GET /api/project/:projectId/line/:lineId');
   // Find line by id
   Line.findById(req.params.lineId)
   // return all the cages in the array on the lines model
