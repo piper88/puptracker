@@ -1,0 +1,10 @@
+<div class = "edit-project-container">
+  <div class="row"><h3>Edit Project</h3></div>
+
+  <form novalidate ng-submit="editProjectCtrl.updateProject()">
+    <label>Name</label>
+      <input type="text" ng-model="editProjectCtrl.project.name" required>
+  <button class="btn home-btn"> Update </button>
+  </form>
+
+</div>

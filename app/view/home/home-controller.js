@@ -20,6 +20,7 @@ function HomeController($log, $location, $rootScope, projectService, lineService
   this.showCreateLine = false;
   this.showLineInfo = false;
   this.showProjectInfo = false;
+  this.showEditProject = false;
 
   this.showProject = function() {
     this.showProjectInfo = true;
@@ -28,11 +29,7 @@ function HomeController($log, $location, $rootScope, projectService, lineService
   this.showLine = function() {
     this.showLineInfo = true;
   };
-
-  // console.log('current project', this.currentProject);
-  // console.log('the projects array', this.projects);
-  // $log.debug('THE LINES', this.lines);
-
+  
   this.currentLineCheck = function(){
     lineService.fetchLines(this.project._id);
   };
