@@ -1,7 +1,5 @@
 'use strict';
 
-require('./_new-cage.scss');
-
 module.exports = {
   template: require('./new-cage.html'),
   controller: ['$log', '$http', '$rootScope', 'cageService',  NewCageController],
@@ -14,6 +12,8 @@ module.exports = {
 function NewCageController($log, $http, $rootScope, cageService){
   $log.debug('init newCageCtrl');
 
+  this.cage = {};
+
   // this.pickDate = function() {
   //   $log.debug('init pickDate');
   //   this.datetimepicker();
@@ -22,7 +22,8 @@ function NewCageController($log, $http, $rootScope, cageService){
   this.createNewCage = function(){
     $log.debug('init createNewCage()');
     cageService.createCage(this.line, this.cage)
-    .then( () => {
+    .then( cage => {
+      this.cage = cage;
       $log.debug('Sucessfully created cage');
     });
   };

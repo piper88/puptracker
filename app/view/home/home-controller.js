@@ -7,11 +7,12 @@ module.exports = ['$log', '$location', '$rootScope','projectService', 'lineServi
 function HomeController($log, $location, $rootScope, projectService, lineService, cageService){
   $log.debug('init homeCtrl');
 
-  this.lines = [];
   this.projects = [];
+  this.lines = [];
+  this.cages = [];
+
   this.currentProject;
   this.currentLine;
-  this.cages = [];
 
   this.status = {
     isopen1:false,
@@ -22,21 +23,10 @@ function HomeController($log, $location, $rootScope, projectService, lineService
   this.showCreateLine = false;
   this.showLineInfo = false;
   this.showProjectInfo = false;
-
-  this.showCreateCage = false;
-  this.showCageInfo = false;
   this.showEditProject = false;
 
   this.showProject = function() {
     this.showProjectInfo = true;
-  };
-
-  this.showCageForm = function() {
-    this.showCreateCage = true;
-  };
-
-  this.showCage = function() {
-    this.showCageInfo = true;
   };
 
   this.showLine = function() {
@@ -59,9 +49,10 @@ function HomeController($log, $location, $rootScope, projectService, lineService
   };
 
   this.fetchLine = function(line){
+    $log.debug('fetched current line');
     this.currentLine = line;
     $log.debug('the current line: ', this.currentLine);
-    cageService.fetchCages(this.currentLine._id);
+    // cageService.fetchCages(this.currentLine._id);
   };
 
   this.fetchProjects = function(){

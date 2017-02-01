@@ -15,4 +15,6 @@ function cageContainerController($log, cageService){
   this.currentCageCheck = function(){
     cageService.fetchCages(this.line._id);
   };
+
+
 }

@@ -17,7 +17,8 @@ function NewLineController($log, $http, $rootScope, lineService){
   this.createNewLine = function() {
     $log.debug('init createNewLine()');
     lineService.createLine(this.project._id, this.line)
-    .then( () => {
+    .then( line => {
+      this.line = line;
       this.line.name = null;
       this.line.gene1 = null;
       this.line.gene2 = null;
@@ -26,8 +27,5 @@ function NewLineController($log, $http, $rootScope, lineService){
       this.line.geneExpectedUsablePups = null;
     });
   };
-  $rootScope.$on('$locationChangeSuccess', () => {
-    this.fetchLines();
-  });
 
 }

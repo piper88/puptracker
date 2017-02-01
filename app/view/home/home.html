@@ -36,7 +36,7 @@
               ng-repeat="item in homeCtrl.currentProject.lines"
               line="item" role="menuitem"
               project="homeCtrl.currentProject"
-              ng-click="homeCtrl.fetchLine(item); homeCtrl.showLine(); homeCtrl.showCageForm(); homeCtrl.fetchCages(item)">
+              ng-click="homeCtrl.fetchLine(item); homeCtrl.showLine();">
               {{homeCtrl.currentProject.line.name}}
           </line-li>
 
@@ -61,10 +61,10 @@
   </div>
 
   <line-info line="homeCtrl.currentLine" ng-show="homeCtrl.showLineInfo"></line-info>
-
+  <new-cage line="homeCtrl.currentLine"></new-cage>
   <!-- Cage information Associated with selected CurrentLine -->
   <div class="row">
-    <cage-container line="homeCtrl.currentLine" ng-if="homeCtrl.showLineInfo"></cage-container>
+    <!-- <cage-container line="homeCtrl.currentLine" ng-if="homeCtrl.currentLine"></cage-container> -->
   </div>
 
 </main>

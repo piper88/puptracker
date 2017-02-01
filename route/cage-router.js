@@ -6,7 +6,7 @@ const jsonParser = require('body-parser').json();
 const debug = require('debug')('puptracker:cage-router');
 
 const Line = require('../model/line.js');
-const Project = require('../model/project.js');
+//const Project = require('../model/project.js');
 const Cage = require('../model/cage.js');
 const bearerAuth = require('../lib/bearer-auth-middleware.js');
 
@@ -17,6 +17,8 @@ cageRouter.post('/api/line/:lineId/cage', bearerAuth, jsonParser, function(req, 
   let tempLine, tempCage;
   Line.findById(req.params.lineId)
   .then(line => {
+    debug('line', line);
+
     if (line.userId.toString() !== req.user._id.toString())
       return Promise.reject(createError(401, 'invalid user'));
     req.body.userId = req.user._id;
@@ -47,7 +49,7 @@ cageRouter.get('/api/line/:lineId/cage/:cageId', function(req, res, next) {
 
 // Return all cages associated with line
 cageRouter.get('/api/line/:lineId/cages', function(req, res, next) {
-  debug('GET /api/lines/:lineId/cages');
+  debug('GET /api/line/:lineId/cages');
 
   Cage.find({lineId: req.params.lineId})
   // .populate('mice')
