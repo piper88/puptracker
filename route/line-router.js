@@ -9,6 +9,8 @@ const debug = require('debug')('puptracker:line-router');
 
 const Project = require('../model/project.js');
 const Line = require('../model/line.js');
+const Cage = require('../model/cage.js');
+
 const bearerAuth = require('../lib/bearer-auth-middleware.js');
 
 const lineRouter = module.exports = Router();
@@ -21,6 +23,7 @@ lineRouter.post('/api/project/:projectId/line', bearerAuth, jsonParser, function
   Project.findById(req.params.projectId)
   .catch(err => Promise.reject(createError(404, err.message)))
   .then(project => {
+    req.body.userId = req.user._id;
     req.body.projectId = project._id;
     new Line(req.body).save()
     .then(line => {
@@ -65,21 +68,31 @@ lineRouter.get('/api/project/:projectId/lines', function(req, res, next){
 
 lineRouter.delete('/api/project/:projectId/line/:lineId', bearerAuth, function(req, res, next){
   debug('DELETE /api/project/:projectId/line/:lineId');
+  console.log('got to router');
+  // First find the line by Id
+  Line.findById(req.params.lineId)
+  .catch(err => Promise.reject(createError(404, err.message)))
+  .then( line => {
+    if(line.userId.toString() !== req.user._id.toString())
+      return Promise.reject(createError(401, 'invalid userid'));
+    return Line.findByIdAndRemove(req.params.lineId);
+  })
+  .catch( err => Promise.reject(err))
 
-  Project.findById(req.params.projectId)
-    .then(() => {
-      Line.findById(req.params.lineId)
-      .catch(err => next(createError(404, err.message)))
-      .then(line => {
-        Line.findLineByIdAndRemoveLine(line._id);
-      })
-      .then(() => {
-        Project.findByIdAndRemoveLine(req.params.projectId, req.params.lineId);
-      })
-      .then(() => res.status(204).send())
-      .catch(next);
-    })
-  .catch(err => next(createError(404, err.message)));
+  // remove all cages associated with the line
+  .then( () => Cage.remove({ lineId: req.params.lineId}))
+  .then( () => {
+    Project.findById(req.params.projectId)
+    .then( project => {
+      project.lines.forEach( line => {
+        if (project.lines[line] === req.params.lineId)
+          project.lines.splice(project.lines.indexOf(line), 1);
+      });
+      return project.save();
+    });
+  })
+  .then( () => res.sendStatus(204))
+  .catch(next);
 });
 
 //for putting, will also have to update the project's line array

@@ -17,7 +17,7 @@ function LineInfoController($log, lineService){
   this.showEditLine = false;
 
   this.deleteLine = function() {
-    lineService.deleteLine(this.line, this.line._id, this.project._id);
+    lineService.deleteLine(this.line._id, this.line.projectId);
   };
 
 }
