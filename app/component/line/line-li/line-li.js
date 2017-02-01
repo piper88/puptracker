@@ -13,12 +13,6 @@ module.exports = {
 
 function lineLIController($log, lineService){
   $log.debug('init lineLICtrl');
-  // this.line = lineService.fetchLines();
-  $log.debug('the line in lineLICtrl', this.line);
-
-  // this.fetchLines = function() {
-  //   lineService.fetchLines();
-  // };
 
   this.showEditLine = false;
 
@@ -28,6 +22,4 @@ function lineLIController($log, lineService){
       this.deleteLineCheck();
     });
   };
-
-  // this.fetchLines();
 }

@@ -28,7 +28,7 @@ projectRouter.post('/api/project', bearerAuth, jsonParser, function(req, res, ne
 projectRouter.get('/api/projects', bearerAuth, function(req, res, next){
   debug('GET /api/projects');
   Project.find()
-  .populate('lines')
+  .populate({path: 'lines'})
   .then(projects => res.json(projects))
   .catch(next);
 });
@@ -37,7 +37,7 @@ projectRouter.get('/api/projects', bearerAuth, function(req, res, next){
 projectRouter.get('/api/project/:projectId', function(req, res, next) {
   debug('GET /api/project/:projectId');
   Project.findById(req.params.projectId)
-  .populate('lines')
+  .populate({path: 'lines'})
   .then( project => {
     res.json(project);
   })

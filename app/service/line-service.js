@@ -31,16 +31,14 @@ function lineService($q, $log, $http, authService){
   };
 
   service.createLine = function(projectId, line){
-    $log.debug('LineService.createLine()');
+    $log.debug('lineService.createLine()');
 
     return authService.getToken()
     .then(token => {
       let url = `${__API_URL__}/api/project/${projectId}/line`;
       let config = {
         headers: {
-          //what you're going to get back from  backend
           Accept: 'application/json',
-          //what you're going to send to backend
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
@@ -118,9 +116,7 @@ function lineService($q, $log, $http, authService){
           break;
         }
       }
-      //art-c did this way
-      // return $q.resolve('updated');
-      //abba did this way
+
       return line;
 
     })

@@ -8,10 +8,10 @@ function cageService($q, $log, $http, authService){
 
   service.cages = [];
 
-  service.fetchCages = function(line){
+  service.fetchCages = function(lineId){
     $log.debug('CageService.fetchCages()');
 
-    let url = `${__API_URL__}/api/project/${line.projectId}/line/${line._id}`;
+    let url = `${__API_URL__}/api/line/${lineId}/cages`;
     let config = {
       headers: {
         Accept: 'application/json',
@@ -31,12 +31,12 @@ function cageService($q, $log, $http, authService){
     });
   };
 
-  service.createCage = function(cage, projectId, lineId){
-    $log.debug('CageService.createCage()');
+  service.createCage = function(line, cage){
+    $log.debug('cageService.createCage()');
 
     return authService.getToken()
     .then(token => {
-      let url = `${__API_URL__}/api/project/${projectId}/line/${lineId}/cage`;
+      let url = `${__API_URL__}/api/line/${line._id}/cage`;
       let config = {
         headers: {
           Accept: 'application/json',
@@ -49,10 +49,7 @@ function cageService($q, $log, $http, authService){
     .then(res => {
       $log.debug('successfully created cage');
       let cage = res.data;
-      console.log('the cage from the cage service', cage);
-      console.log('the cages array', service.cages);
-      ////WHAT????????
-      service.cages.cages.unshift(cage);
+      line.cages.unshift(cage);
       return cage;
     })
     .catch(err => {
@@ -61,12 +58,12 @@ function cageService($q, $log, $http, authService){
     });
   };
 
-  service.deleteCage = function(cage){
+  service.deleteCage = function(cageId, lineId){
     $log.debug('CageService.deleteCage()');
 
     return authService.getToken()
     .then(token => {
-      let url = `${__API_URL__}/api/project/${cage.projectId}/line/${cage.lineId}/cage/${cage._id}`;
+      let url = `${__API_URL__}/api/line/${lineId}/cage/${cageId}`;
       let config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -78,7 +75,7 @@ function cageService($q, $log, $http, authService){
       $log.debug('successfully deleted cage');
       for (let i = 0; i < service.cages.length; ++i){
         let current = service.cages[i];
-        if (current._id === cage._id){
+        if (current._id === cageId){
           service.cages.splice(i, 1);
           break;
         }
@@ -91,12 +88,12 @@ function cageService($q, $log, $http, authService){
     });
   };
 
-  service.updateCage = function(cage){
+  service.updateCage = function(line, cage){
     $log.debug('CageService.updateCage()');
 
     return authService.getToken()
     .then(token => {
-      let url = `${__API_URL__}/api/project/${cage.projectId}/line/${cage.lineId}/cage/${cage._id}`;
+      let url = `${__API_URL__}/api/line/${cage.lineId}/cage/${cage._id}`;
       let config = {
         headers: {
           Accept: 'application/json',

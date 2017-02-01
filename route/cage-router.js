@@ -6,87 +6,85 @@ const jsonParser = require('body-parser').json();
 const debug = require('debug')('puptracker:cage-router');
 
 const Line = require('../model/line.js');
-const Project = require('../model/project.js');
+//const Project = require('../model/project.js');
 const Cage = require('../model/cage.js');
 const bearerAuth = require('../lib/bearer-auth-middleware.js');
 
 const cageRouter = module.exports = Router();
 
-cageRouter.post('/api/project/:projId/line/:lineId/cage', bearerAuth, jsonParser, function(req, res, next) {
-  debug('cage router POST');
-  if (!req.body) return Promise.reject(createError(400, 'no body'));
-
-  let cage = req.body;
-
+cageRouter.post('/api/line/:lineId/cage', bearerAuth, jsonParser, function(req, res, next) {
+  debug('POST /api/line/:lineId/cage');
+  let tempLine, tempCage;
   Line.findById(req.params.lineId)
-  .then((line) => {
-    cage.lineId = line._id;
-    cage.projectId = req.params.projId;
-    new Cage(cage).save()
-    .then((cage) => {
-      Line.findLineByIdAndAddCage(req.params.lineId, cage)
-      .then(line => {
-        req.line = line;
-        res.json(cage);
-      });
-    })
-    .catch(err => {
-      if (err.name === 'ValidationError') return next(err);
-      if (err.status) return next(err);
-      next(createError(404, err.message));
-    });
+  .then(line => {
+    debug('line', line);
+
+    if (line.userId.toString() !== req.user._id.toString())
+      return Promise.reject(createError(401, 'invalid user'));
+    req.body.userId = req.user._id;
+    req.body.lineId = line._id;
+    req.body.projectId = line.projectId;
+    tempLine = line;
+    return new Cage(req.body).save();
+  })
+  .then(cage => {
+    tempLine.cages.push(cage._id);
+    tempCage = cage;
+    return tempLine.save();
+  })
+  .then(() => res.json(tempCage))
+  .catch(next);
+});
+
+// Return one Cage by id
+cageRouter.get('/api/line/:lineId/cage/:cageId', function(req, res, next) {
+  debug('cage router GET');
+  Cage.findById(req.params.cageId)
+  .then(cage => res.json(cage))
+  .catch(err => {
+    if (err.name === 'ValidationError') return next(err);
+    next(createError(404, err.message));
   });
 });
 
-cageRouter.get('/api/project/:projId/line/:lineId/cage/:cageId', function(req, res, next) {
-  debug('cage router GET');
-  Project.findById(req.params.projId)
-  .then(() => {
-    Line.findById(req.params.lineId)
-    .then(() => {
-      Cage.findById(req.params.cageId)
-      .then((cage) => {
-        res.json(cage);
-      })
-      //are all of these necessary? or do we assume the project and line ids are correct?
-      .catch(err => next(createError(404, err.message)));
-    })
-    .catch(err => next(createError(404, err.message)));
-  })
-  .catch(err => next(createError(404, err.message)));
-});
-
-//not yet tested
-cageRouter.get('/api/project/:projId/line/:lineId/cages', function(req, res, next) {
-  debug('GET /api/project/:projId/lines/:lineId/cages');
+// Return all cages associated with line
+cageRouter.get('/api/line/:lineId/cages', function(req, res, next) {
+  debug('GET /api/line/:lineId/cages');
 
   Cage.find({lineId: req.params.lineId})
-  .then(cages => {
-    res.json(cages);
-  })
+  // .populate('mice')
+  .then(cages => res.json(cages))
   .catch(err => err.status ? next(err) : next(createError(404, 'no cages for that line')));
 });
 
-cageRouter.delete('/api/project/:projId/line/:lineId/cage/:cageId', bearerAuth, function(req, res, next) {
+cageRouter.delete('/api/line/:lineId/cage/:cageId', bearerAuth, function(req, res, next) {
   debug('cage router DELETE');
   Cage.findById(req.params.cageId)
-  //if you find the cage
-  .then((cage) => {
-    Cage.findCageByIdAndRemoveCage(cage._id)
-    .then(() => {
-      console.log('DAS CAGEEEEEEEEEEE', cage);
-      //remove the cage from the lines cage array
-      Line.findLineByIdAndRemoveCage(req.params.lineId, cage)
-      .then(() => res.status(204).send())
-      .catch(next);
-    })
-    .catch(next);
+  .catch(err => Promise.reject(createError(404, err.message)))
+  .then( cage => {
+    if(cage.userId.toString() !== req.user._id.toString())
+      return Promise.reject(createError(401, 'invalid userid'));
+    return Cage.findByIdAndRemove(req.params.cageId);
   })
-  //if you dont find the cage
-  .catch(err => next(createError(404, err.message)));
+  .catch( err => Promise.reject(err))
+
+  // remove all mice associated with the cage
+  // .then( () => Mouse.remove({ cageId: req.params.cageId}))
+  .then( () => {
+    Line.findById(req.params.lineId)
+    .then( line => {
+      line.cages.forEach( cage => {
+        if (line.cages[cage] === req.params.cageId)
+          line.cages.splice(line.cages.indexOf(cage), 1);
+      });
+      return line.save();
+    });
+  })
+  .then( () => res.sendStatus(204))
+  .catch(next);
 });
 
-cageRouter.put('/api/project/:projId/line/:lineId/cage/:cageId', bearerAuth, jsonParser, function(req, res, next) {
+cageRouter.put('/api/line/:lineId/cage/:cageId', bearerAuth, jsonParser, function(req, res, next) {
   debug('cage router PUT');
 
   Cage.findById(req.params.cageId)

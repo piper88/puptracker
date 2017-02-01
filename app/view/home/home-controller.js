@@ -7,11 +7,12 @@ module.exports = ['$log', '$location', '$rootScope','projectService', 'lineServi
 function HomeController($log, $location, $rootScope, projectService, lineService, cageService){
   $log.debug('init homeCtrl');
 
-  this.lines = [];
   this.projects = [];
+  this.lines = [];
+  this.cages = [];
+
   this.currentProject;
   this.currentLine;
-  this.cages = [];
 
   this.status = {
     isopen1:false,
@@ -22,21 +23,10 @@ function HomeController($log, $location, $rootScope, projectService, lineService
   this.showCreateLine = false;
   this.showLineInfo = false;
   this.showProjectInfo = false;
-
-  this.showCreateCage = false;
-  this.showCageInfo = false;
   this.showEditProject = false;
 
   this.showProject = function() {
     this.showProjectInfo = true;
-  };
-
-  this.showCageForm = function() {
-    this.showCreateCage = true;
-  };
-
-  this.showCage = function() {
-    this.showCageInfo = true;
   };
 
   this.showLine = function() {
@@ -54,31 +44,26 @@ function HomeController($log, $location, $rootScope, projectService, lineService
 
   this.fetchProject = function(project){
     this.currentProject = project;
-    console.log('the current project', this.currentProject);
+    $log.debug('the current project: ', this.currentProject);
     lineService.fetchLines(this.currentProject._id);
   };
 
   this.fetchLine = function(line){
+    $log.debug('fetched current line');
     this.currentLine = line;
-    console.log('the current line in home controller', this.currentLine);
-    console.log('the current project in home controller', this.currentProject);
-    cageService.fetchCages(this.currentLine)
-    .then(cages => {
-      $log.debug('The cages in the fetchLine() on homeCtrl', cages);
-      this.cages = cages.cages;
-    });
+    $log.debug('the current line: ', this.currentLine);
+    // cageService.fetchCages(this.currentLine._id);
   };
 
   this.fetchProjects = function(){
-    console.log('THIS SHOULD HAPPEN EVERYTIME I SELECT A PROJECT');
     projectService.fetchProjects()
     .then( projects => {
       this.projects = projects;
-      // this.currentProject = projects[0];
       $log.debug('Succesfully found projects', projects);
     });
   };
 
+  // Called when a specific project is seleted
   this.fetchLines = function(){
     lineService.fetchLines(this.currentProject._id)
     .then( lines => {
@@ -88,6 +73,7 @@ function HomeController($log, $location, $rootScope, projectService, lineService
     });
   };
 
+  //Fetch projects initially
   this.fetchProjects();
 
   this.deleteProject = function() {

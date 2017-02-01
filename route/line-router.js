@@ -20,6 +20,7 @@ const lineRouter = module.exports = Router();
 
 lineRouter.post('/api/project/:projectId/line', bearerAuth, jsonParser, function(req, res, next) {
   debug('POST /api/project/:projectId/line');
+
   Project.findById(req.params.projectId)
   .catch(err => Promise.reject(createError(404, err.message)))
   .then(project => {
@@ -45,7 +46,7 @@ lineRouter.get('/api/project/:projectId/line/:lineId', function(req, res, next){
   Line.findById(req.params.lineId)
   // return all the cages in the array on the lines model
   // Populate fills the arrays of ids with their corresponding schema info
-  .populate('cages')
+  .populate({path: 'cages'})
   .then(line => {
     res.json(line);
   })
@@ -68,7 +69,6 @@ lineRouter.get('/api/project/:projectId/lines', function(req, res, next){
 
 lineRouter.delete('/api/project/:projectId/line/:lineId', bearerAuth, function(req, res, next){
   debug('DELETE /api/project/:projectId/line/:lineId');
-  console.log('got to router');
   // First find the line by Id
   Line.findById(req.params.lineId)
   .catch(err => Promise.reject(createError(404, err.message)))

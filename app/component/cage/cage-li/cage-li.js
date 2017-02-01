@@ -1,18 +1,27 @@
 'use strict';
 
-// require('./_cage-li.scss');
-
 module.exports = {
   template: require('./cage-li.html'),
-  controller: ['$log', cageLIController],
+  controller: ['$log', 'cageService', cageLIController],
   controllerAs: 'cageLICtrl',
   bindings: {
     line: '<',
-    project: '<',
+    deleteCageCheck: '<',
     cage: '<',
   },
 };
 
-function cageLIController($log){
+function cageLIController($log, cageService){
   $log.debug('init cageLiCtrl');
+
+  this.showEditCage= false;
+
+  this.deleteCage = function(){
+    cageService.deleteCage(this.cage, this.line)
+    .then(() => {
+      this.deleteCageCheck();
+    });
+  };
+
+  cageService.fetchCages(this.line._id);
 }
