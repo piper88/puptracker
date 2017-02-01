@@ -13,7 +13,7 @@
   <div class="row"><label>Number of Male Breeders</label></div>
   <div class="row"><input name="numberOfMales" type="number" ng-model="newCageCtrl.cage.numberOfMales" required/></div>
 
-  <div class="row"><label>Breeding Start Date</label></div>
+  <!-- <div class="row"><label>Breeding Start Date</label></div>
     <div class="row">
       <div ng-click="newCageCtrl.pickDate()" class='input-group date' id='datetimepicker1'>
       <input type='text' class="form-control" ng-model="newCageCtrl.cage.breedingStartDate" required/>
@@ -39,7 +39,7 @@
       <div ng-click="newCageCtrl.pickDate()" class='input-group date' id='datetimepicker1'>
       <input type='text' class="form-control" ng-model="newCageCtrl.cage.actualDOB" required/>
       <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-  </div></div>
+  </div></div> -->
 
   <div class="row"><label>Number of Litters Monthly</label></div>
   <div class="row">
@@ -51,9 +51,9 @@
     <input name="expectedTotalPups" type="number" ng-model="newCageCtrl.cage.expectedTotalPups" required />
   </div>
 
-  <div class="row"><label>Actualy Number of Total Pups</label></div>
+  <div class="row"><label>Actual Number of Total Pups</label></div>
   <div class="row"><input name="expectedTotalPups" type="number" ng-model="newCageCtrl.cage.actualTotalPups"/>
   </div>
-
+  <button class="btn-round" type="submit">Create Cage</button>
   </form>
 </div>

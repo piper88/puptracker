@@ -2,14 +2,16 @@
 
 require('./_home.scss');
 
-module.exports = ['$log', '$location', '$rootScope','projectService', 'lineService', 'authService', HomeController];
+module.exports = ['$log', '$location', '$rootScope','projectService', 'lineService', 'cageService', HomeController];
 
-function HomeController($log, $location, $rootScope, projectService, lineService){
+function HomeController($log, $location, $rootScope, projectService, lineService, cageService){
   $log.debug('init homeCtrl');
 
   this.lines = [];
   this.projects = [];
   this.currentProject;
+  this.currentLine;
+  this.cages = [];
 
   this.status = {
     isopen1:false,
@@ -20,10 +22,21 @@ function HomeController($log, $location, $rootScope, projectService, lineService
   this.showCreateLine = false;
   this.showLineInfo = false;
   this.showProjectInfo = false;
+
+  this.showCreateCage = false;
+  this.showCageInfo = false;
   this.showEditProject = false;
 
   this.showProject = function() {
     this.showProjectInfo = true;
+  };
+
+  this.showCageForm = function() {
+    this.showCreateCage = true;
+  };
+
+  this.showCage = function() {
+    this.showCageInfo = true;
   };
 
   this.showLine = function() {
@@ -47,9 +60,13 @@ function HomeController($log, $location, $rootScope, projectService, lineService
 
   this.fetchLine = function(line){
     this.currentLine = line;
-    console.log('the current line', this.currentLine);
-    // TODO: have cage service fetch the lines
-    // cageService.fetchCages(this.currentLine._id);
+    console.log('the current line in home controller', this.currentLine);
+    console.log('the current project in home controller', this.currentProject);
+    cageService.fetchCages(this.currentLine)
+    .then(cages => {
+      $log.debug('The cages in the fetchLine() on homeCtrl', cages);
+      this.cages = cages.cages;
+    });
   };
 
   this.fetchProjects = function(){

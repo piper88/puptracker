@@ -31,12 +31,12 @@ function cageService($q, $log, $http, authService){
     });
   };
 
-  service.createCage = function(cage){
+  service.createCage = function(cage, projectId, lineId){
     $log.debug('CageService.createCage()');
 
     return authService.getToken()
     .then(token => {
-      let url = `${__API_URL__}/api/project/${cage.projectId}/line/${cage.lineId}/cage`;
+      let url = `${__API_URL__}/api/project/${projectId}/line/${lineId}/cage`;
       let config = {
         headers: {
           Accept: 'application/json',
@@ -49,7 +49,10 @@ function cageService($q, $log, $http, authService){
     .then(res => {
       $log.debug('successfully created cage');
       let cage = res.data;
-      service.cages.push(cage);
+      console.log('the cage from the cage service', cage);
+      console.log('the cages array', service.cages);
+      ////WHAT????????
+      service.cages.cages.unshift(cage);
       return cage;
     })
     .catch(err => {

@@ -14,16 +14,16 @@ const cageSchema = mongoose.Schema({
   mice: [{type: mongoose.Schema.Types.ObjectId, ref: 'mouse'}],
 
 
-  breedingStartDate: {type: Date, required: true},
+  // breedingStartDate: {type: Date, required: true},
   //end date will be calculated as when youngest mouse breeder is 200 days old
-  breedingEndDate: {type: Date, required: true},
-  expectedDOB: {type: Date, required: true},
-  actualDOB: {type: Date},
+  // breedingEndDate: {type: Date, required: true},
+  // expectedDOB: {type: Date, required: true},
+  // actualDOB: {type: Date},
   numberLittersMonthly: {type: Number, required: true},
   expectedTotalPups: {type: Number, required: true},
   actualTotalPups: {type: Number},
   //calculated from the ratio of genes of parents (from genes array)
-  expectedUsablePups: {type: Number, required: true},
+  // expectedUsablePups: {type: Number, required: true},
   actualUsablePups: {type: Number},
   //calculated from the array of genes
   expectedPercentUsableProgeny: {type: Number},

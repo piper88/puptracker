@@ -18,26 +18,24 @@ cageRouter.post('/api/project/:projId/line/:lineId/cage', bearerAuth, jsonParser
 
   let cage = req.body;
 
-  Project.findById(req.params.projId)
-  .then(() => {
+  Line.findById(req.params.lineId)
+  .then((line) => {
+    cage.lineId = line._id;
     cage.projectId = req.params.projId;
-    Line.findById(req.params.lineId)
-    .then(() => {
-      cage.lineId = req.params.lineId;
-      new Cage(req.body).save()
-      .then((cage) => {
-        Line.findLineByIdAndAddCage(req.params.lineId, cage)
-        .then((line => {
-          req.line = line;
-          res.json(cage);
-        }));
-        // .catch(err => next(err));
-      })
-        .catch(err => next(err));
+    new Cage(cage).save()
+    .then((cage) => {
+      Line.findLineByIdAndAddCage(req.params.lineId, cage)
+      .then(line => {
+        req.line = line;
+        res.json(cage);
+      });
     })
-      .catch(err => next(createError(404, err.message)));
-  })
-  .catch(err => next(createError(404, err.message)));
+    .catch(err => {
+      if (err.name === 'ValidationError') return next(err);
+      if (err.status) return next(err);
+      next(createError(404, err.message));
+    });
+  });
 });
 
 cageRouter.get('/api/project/:projId/line/:lineId/cage/:cageId', function(req, res, next) {
