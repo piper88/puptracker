@@ -7,7 +7,7 @@
     <button class="btn home-btn">Add Cages</button>
   </div>
 
-  <div class="row">
+  <div class="row"  ng-hide="lineInfoCtrl.showEditLine">
     <h3><strong>Line Details</strong></h3>
     <h3><span>Name: </span> {{lineInfoCtrl.line.name}} </h3>
     <h3><span>Genes: </span>{{lineInfoCtrl.line.genes}} </h3>
@@ -17,6 +17,6 @@
     <h3><span>Actual Usable Pups: </span>{{lineInfoCtrl.line.actualUsablePups}} </h3>
   </div>
 
-  <edit-line line="lineInfoCtrl.line" ng-if="showEditLine"></edit-line>
+  <edit-line line="lineInfoCtrl.line" ng-if="lineInfoCtrl.showEditLine"></edit-line>
 
 </section>

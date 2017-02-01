@@ -92,7 +92,6 @@ lineRouter.put('/api/project/:projId/line/:lineId', bearerAuth, jsonParser, func
     return Line.findByIdAndUpdate(line._id, req.body, options);
   })
   .then(line => {
-    console.log('THE NEW LINES ID', line._id);
     res.json(line);
   })
   .catch(err => {
