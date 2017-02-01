@@ -9,6 +9,7 @@ const cageSchema = mongoose.Schema({
   name: {type: String, required: true},
   numberOfFemales: {type: Number, required: true},
   numberOfMales: {type: Number, required: true},
+  userId: {type: mongoose.Schema.Types.ObjectId, required:true},
   lineId: {type: mongoose.Schema.Types.ObjectId, required: true},
   projectId: {type: mongoose.Schema.Types.ObjectId, required: true},
   mice: [{type: mongoose.Schema.Types.ObjectId, ref: 'mouse'}],

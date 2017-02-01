@@ -36,7 +36,7 @@ function cageService($q, $log, $http, authService){
 
     return authService.getToken()
     .then(token => {
-      let url = `${__API_URL__}/api/project/${projectId}/line/${lineId}/cage`;
+      let url = `${__API_URL__}/api/line/${lineId}/cage`;
       let config = {
         headers: {
           Accept: 'application/json',
@@ -51,7 +51,6 @@ function cageService($q, $log, $http, authService){
       let cage = res.data;
       console.log('the cage from the cage service', cage);
       console.log('the cages array', service.cages);
-      ////WHAT????????
       service.cages.cages.unshift(cage);
       return cage;
     })
@@ -61,12 +60,12 @@ function cageService($q, $log, $http, authService){
     });
   };
 
-  service.deleteCage = function(cage){
+  service.deleteCage = function(cageId, lineId){
     $log.debug('CageService.deleteCage()');
 
     return authService.getToken()
     .then(token => {
-      let url = `${__API_URL__}/api/project/${cage.projectId}/line/${cage.lineId}/cage/${cage._id}`;
+      let url = `${__API_URL__}/api/line/${lineId}/cage/${cageId}`;
       let config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -78,7 +77,7 @@ function cageService($q, $log, $http, authService){
       $log.debug('successfully deleted cage');
       for (let i = 0; i < service.cages.length; ++i){
         let current = service.cages[i];
-        if (current._id === cage._id){
+        if (current._id === cageId){
           service.cages.splice(i, 1);
           break;
         }
@@ -91,12 +90,12 @@ function cageService($q, $log, $http, authService){
     });
   };
 
-  service.updateCage = function(cage){
+  service.updateCage = function(line, cage){
     $log.debug('CageService.updateCage()');
 
     return authService.getToken()
     .then(token => {
-      let url = `${__API_URL__}/api/project/${cage.projectId}/line/${cage.lineId}/cage/${cage._id}`;
+      let url = `${__API_URL__}/api/line/${cage.lineId}/cage/${cage._id}`;
       let config = {
         headers: {
           Accept: 'application/json',

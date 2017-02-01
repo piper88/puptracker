@@ -67,26 +67,34 @@ cageRouter.get('/api/project/:projId/line/:lineId/cages', function(req, res, nex
   .catch(err => err.status ? next(err) : next(createError(404, 'no cages for that line')));
 });
 
-cageRouter.delete('/api/project/:projId/line/:lineId/cage/:cageId', bearerAuth, function(req, res, next) {
+cageRouter.delete('/api/line/:lineId/cage/:cageId', bearerAuth, function(req, res, next) {
   debug('cage router DELETE');
   Cage.findById(req.params.cageId)
-  //if you find the cage
-  .then((cage) => {
-    Cage.findCageByIdAndRemoveCage(cage._id)
-    .then(() => {
-      console.log('DAS CAGEEEEEEEEEEE', cage);
-      //remove the cage from the lines cage array
-      Line.findLineByIdAndRemoveCage(req.params.lineId, cage)
-      .then(() => res.status(204).send())
-      .catch(next);
-    })
-    .catch(next);
+  .catch(err => Promise.reject(createError(404, err.message)))
+  .then( cage => {
+    if(cage.userId.toString() !== req.user._id.toString())
+      return Promise.reject(createError(401, 'invalid userid'));
+    return Cage.findByIdAndRemove(req.params.cageId);
   })
-  //if you dont find the cage
-  .catch(err => next(createError(404, err.message)));
+  .catch( err => Promise.reject(err))
+
+  // remove all mice associated with the cage
+  // .then( () => Mouse.remove({ cageId: req.params.cageId}))
+  .then( () => {
+    Line.findById(req.params.lineId)
+    .then( line => {
+      line.cages.forEach( cage => {
+        if (line.cages[cage] === req.params.cageId)
+          line.cages.splice(line.cages.indexOf(cage), 1);
+      });
+      return line.save();
+    });
+  })
+  .then( () => res.sendStatus(204))
+  .catch(next);
 });
 
-cageRouter.put('/api/project/:projId/line/:lineId/cage/:cageId', bearerAuth, jsonParser, function(req, res, next) {
+cageRouter.put('/api/line/:lineId/cage/:cageId', bearerAuth, jsonParser, function(req, res, next) {
   debug('cage router PUT');
 
   Cage.findById(req.params.cageId)

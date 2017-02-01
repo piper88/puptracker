@@ -118,9 +118,7 @@ function lineService($q, $log, $http, authService){
           break;
         }
       }
-      //art-c did this way
-      // return $q.resolve('updated');
-      //abba did this way
+  
       return line;
 
     })

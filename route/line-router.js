@@ -68,7 +68,6 @@ lineRouter.get('/api/project/:projectId/lines', function(req, res, next){
 
 lineRouter.delete('/api/project/:projectId/line/:lineId', bearerAuth, function(req, res, next){
   debug('DELETE /api/project/:projectId/line/:lineId');
-  console.log('got to router');
   // First find the line by Id
   Line.findById(req.params.lineId)
   .catch(err => Promise.reject(createError(404, err.message)))
