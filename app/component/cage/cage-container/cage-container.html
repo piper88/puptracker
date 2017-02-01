@@ -5,11 +5,11 @@
 
   <!-- List Cages for the Current Line-->
   <cage-li
+      class="cage"
       delete-cage-check="cageContainerCtrl.currentCageCheck()"
       ng-repeat="item in cageContainerCtrl.line.cages"
       cage="item"
-      line="cageContainerCtrl.line"
-      ng-click="cageContainerCtrl.currentCage = item">
+      line="cageContainerCtrl.line">
   </cage-li>
 
 </div>

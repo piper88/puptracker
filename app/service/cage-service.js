@@ -36,7 +36,7 @@ function cageService($q, $log, $http, authService){
 
     return authService.getToken()
     .then(token => {
-      let url = `${__API_URL__}/api/line/${cage.lineId}/cage`;
+      let url = `${__API_URL__}/api/line/${line._id}/cage`;
       let config = {
         headers: {
           Accept: 'application/json',
