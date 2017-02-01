@@ -1,7 +1,5 @@
 'use strict';
 
-require('./_line-li.scss');
-
 module.exports = {
   template: require('./line-li.html'),
   controller: ['$log', 'lineService',  lineLIController],
