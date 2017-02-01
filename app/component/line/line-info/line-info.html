@@ -1,8 +1,8 @@
 <section class="line-info">
 
   <div class="row">
-    <button class="btn home-btn">Update</button>
-    <button class="btn home-btn">Delete</button>
+    <button class="btn home-btn" ng-click="lineInfoCtrl.showEditLine = !lineInfoCtrl.showEditLine">Update</button>
+    <button class="btn home-btn" ng-click="lineInfoCtrl.deleteLine()">Delete</button>
     <button class="btn home-btn">View Cages</button>
     <button class="btn home-btn">Add Cages</button>
   </div>
@@ -16,5 +16,7 @@
     <h3><span>Expected Usable Pups: </span>{{lineInfoCtrl.line.expectedUsablePups}} </h3>
     <h3><span>Actual Usable Pups: </span>{{lineInfoCtrl.line.actualUsablePups}} </h3>
   </div>
+
+  <edit-line line="lineInfoCtrl.line" ng-if="showEditLine"></edit-line>
 
 </section>

@@ -1,0 +1,21 @@
+<section class="edit-line-container">
+  <h3>Edit Line Information</h3>
+  <form class="generalForm" novalidate ng-submit="editLineCtrl.updateLine()">
+    <label>Name</label>
+      <input name="name" type="text" ng-model="editLineCtrl.line.name" required>
+    <label>Gene One</label>
+      <input name="gene1" type="text" ng-model="editLineCtrl.line.genes[0]" required>
+    <label>Gene Two</label>
+      <input name="gene2" type="text" ng-model="editLineCtrl.line.genes[1]" required>
+    <label>Gene Three</label>
+      <input name="gene3" type="text" ng-model="editLineCtrl.line.genes[2]" required>
+    <label>Expected Number of total pups per month</label>
+      <input name="expectedTotalPups" type="number" ng-model="editLineCtrl.line.expectedTotalPups" required>
+    <label>Expected Number of usable pups per month</label>
+      <input name="expectedUsablePups" type="number" ng-model="editLineCtrl.line.expectedUsablePups" required>
+
+  <button class="btn-round" type="submit"> Update </button>
+
+  </form>
+
+</sections>

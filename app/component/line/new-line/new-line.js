@@ -1,7 +1,5 @@
 'use strict';
 
-require('./_new-line.scss');
-
 module.exports = {
   template: require('./new-line.html'),
   controller: ['$log', '$http','$rootScope', 'lineService', NewLineController],
