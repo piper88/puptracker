@@ -1,0 +1,13 @@
+<div class="cage-container">
+  <!-- Create a New Cage for the Current Line-->
+  <new-cage line="cageContainerCtrl.line"></new-cage>
+
+  <!-- List Cages for the Current Line-->
+  <cage-li class="cage"
+      delete-cage-check="cageContainerCtrl.currentCageCheck()"
+      ng-repeat="cage in cageContainerCtrl.line.cages"
+      cage="cage"
+      line="cageContainerCtrl.line"
+      ng-click="cageContainerCtrl.currentCage = cage"></cage-li>
+
+</div>

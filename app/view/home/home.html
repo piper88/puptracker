@@ -62,19 +62,9 @@
 
   <line-info line="homeCtrl.currentLine" ng-show="homeCtrl.showLineInfo"></line-info>
 
-  <!-- Create a New Cage - shown when line is selected -->
+  <!-- Cage information Associated with selected CurrentLine -->
   <div class="row">
-    <new-cage project="homeCtrl.currentProject" line="homeCtrl.currentLine" ng-if="homeCtrl.showCreateCage"></new-cage>
+    <cage-container line="homeCtrl.currentLine" ng-if="homeCtrl.showLineInfo"></cage-container>
   </div>
-
-  <div class="container">
-    <cage-li
-      ng-repeat="item in homeCtrl.cages"
-      cage="item"
-      line="homeCtrl.currentLine"
-      project="homeCtrl.currentProject">
-    </cage-li>
-  </div>
-
 
 </main>

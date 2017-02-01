@@ -8,10 +8,10 @@ function cageService($q, $log, $http, authService){
 
   service.cages = [];
 
-  service.fetchCages = function(line){
+  service.fetchCages = function(lineId){
     $log.debug('CageService.fetchCages()');
 
-    let url = `${__API_URL__}/api/project/${line.projectId}/line/${line._id}`;
+    let url = `${__API_URL__}/api/line/${lineId}/cages`;
     let config = {
       headers: {
         Accept: 'application/json',
@@ -31,12 +31,12 @@ function cageService($q, $log, $http, authService){
     });
   };
 
-  service.createCage = function(cage, projectId, lineId){
-    $log.debug('CageService.createCage()');
+  service.createCage = function(line, cage){
+    $log.debug('cageService.createCage()');
 
     return authService.getToken()
     .then(token => {
-      let url = `${__API_URL__}/api/line/${lineId}/cage`;
+      let url = `${__API_URL__}/api/line/${line._id}/cage`;
       let config = {
         headers: {
           Accept: 'application/json',
@@ -49,9 +49,7 @@ function cageService($q, $log, $http, authService){
     .then(res => {
       $log.debug('successfully created cage');
       let cage = res.data;
-      console.log('the cage from the cage service', cage);
-      console.log('the cages array', service.cages);
-      service.cages.cages.unshift(cage);
+      service.cages.unshift(cage);
       return cage;
     })
     .catch(err => {

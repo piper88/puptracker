@@ -12,58 +12,46 @@ const bearerAuth = require('../lib/bearer-auth-middleware.js');
 
 const cageRouter = module.exports = Router();
 
-cageRouter.post('/api/project/:projId/line/:lineId/cage', bearerAuth, jsonParser, function(req, res, next) {
-  debug('cage router POST');
-  if (!req.body) return Promise.reject(createError(400, 'no body'));
-
-  let cage = req.body;
-
+cageRouter.post('/api/line/:lineId/cage', bearerAuth, jsonParser, function(req, res, next) {
+  debug('POST /api/line/:lineId/cage');
+  let tempLine, tempCage;
   Line.findById(req.params.lineId)
-  .then((line) => {
-    cage.lineId = line._id;
-    cage.projectId = req.params.projId;
-    new Cage(cage).save()
-    .then((cage) => {
-      Line.findLineByIdAndAddCage(req.params.lineId, cage)
-      .then(line => {
-        req.line = line;
-        res.json(cage);
-      });
-    })
-    .catch(err => {
-      if (err.name === 'ValidationError') return next(err);
-      if (err.status) return next(err);
-      next(createError(404, err.message));
-    });
+  .then(line => {
+    if (line.userId.toString() !== req.user._id.toString())
+      return Promise.reject(createError(401, 'invalid user'));
+    req.body.userId = req.user._id;
+    req.body.lineId = line._id;
+    req.body.projectId = line.projectId;
+    tempLine = line;
+    return new Cage(req.body).save();
+  })
+  .then(cage => {
+    tempLine.cages.push(cage._id);
+    tempCage = cage;
+    return tempLine.save();
+  })
+  .then(() => res.json(tempCage))
+  .catch(next);
+});
+
+// Return one Cage by id
+cageRouter.get('/api/line/:lineId/cage/:cageId', function(req, res, next) {
+  debug('cage router GET');
+  Cage.findById(req.params.cageId)
+  .then(cage => res.json(cage))
+  .catch(err => {
+    if (err.name === 'ValidationError') return next(err);
+    next(createError(404, err.message));
   });
 });
 
-cageRouter.get('/api/project/:projId/line/:lineId/cage/:cageId', function(req, res, next) {
-  debug('cage router GET');
-  Project.findById(req.params.projId)
-  .then(() => {
-    Line.findById(req.params.lineId)
-    .then(() => {
-      Cage.findById(req.params.cageId)
-      .then((cage) => {
-        res.json(cage);
-      })
-      //are all of these necessary? or do we assume the project and line ids are correct?
-      .catch(err => next(createError(404, err.message)));
-    })
-    .catch(err => next(createError(404, err.message)));
-  })
-  .catch(err => next(createError(404, err.message)));
-});
-
-//not yet tested
-cageRouter.get('/api/project/:projId/line/:lineId/cages', function(req, res, next) {
-  debug('GET /api/project/:projId/lines/:lineId/cages');
+// Return all cages associated with line
+cageRouter.get('/api/line/:lineId/cages', function(req, res, next) {
+  debug('GET /api/lines/:lineId/cages');
 
   Cage.find({lineId: req.params.lineId})
-  .then(cages => {
-    res.json(cages);
-  })
+  // .populate('mice')
+  .then(cages => res.json(cages))
   .catch(err => err.status ? next(err) : next(createError(404, 'no cages for that line')));
 });
 
