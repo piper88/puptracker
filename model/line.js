@@ -15,6 +15,7 @@ const lineSchema = mongoose.Schema({
   genes: {type: Array, required: true},
   expectedTotalPups: {type: Number},
   actualTotalPups: {type: Number},
+  //calculated based on parent's genotypes
   expectedUsablePups: {type: Number},
   actualUsablePups: {type: Number},
 });

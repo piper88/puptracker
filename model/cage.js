@@ -9,20 +9,23 @@ const cageSchema = mongoose.Schema({
   name: {type: String, required: true},
   numberOfFemales: {type: Number, required: true},
   numberOfMales: {type: Number, required: true},
+  userId: {type: mongoose.Schema.Types.ObjectId},
   lineId: {type: mongoose.Schema.Types.ObjectId, required: true},
   projectId: {type: mongoose.Schema.Types.ObjectId, required: true},
   mice: [{type: mongoose.Schema.Types.ObjectId, ref: 'mouse'}],
 
 
-  // breedingStartDate: {type: Date, required: true},
+  breedingStartDate: {type: Date, required: true},
   //end date will be calculated as when youngest mouse breeder is 200 days old
-  // breedingEndDate: {type: Date, required: true},
-  // expectedDOB: {type: Date, required: true},
-  // actualDOB: {type: Date},
+  breedingEndDate: {type: Date, required: true},
+  expectedDOB: {type: Date, required: true},
+  actualDOB: {type: Date},
+  //should calculate, on average 25 days after putting in cage together, should eventually have an option for min and max days
   numberLittersMonthly: {type: Number, required: true},
+  //calculated based on average litter size, when breeders were set up, and number of breeding females
   expectedTotalPups: {type: Number, required: true},
   actualTotalPups: {type: Number},
-  //calculated from the ratio of genes of parents (from genes array)
+  //calculated from the genes of parents, and number of breeding females
   // expectedUsablePups: {type: Number, required: true},
   actualUsablePups: {type: Number},
   //calculated from the array of genes
