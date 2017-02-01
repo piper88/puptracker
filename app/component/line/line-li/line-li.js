@@ -13,7 +13,6 @@ module.exports = {
 
 function lineLIController($log, lineService){
   $log.debug('init lineLICtrl');
-  $log.debug('the line in lineLICtrl', this.line);
 
   this.showEditLine = false;
 

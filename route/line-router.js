@@ -46,7 +46,7 @@ lineRouter.get('/api/project/:projectId/line/:lineId', function(req, res, next){
   Line.findById(req.params.lineId)
   // return all the cages in the array on the lines model
   // Populate fills the arrays of ids with their corresponding schema info
-  .populate('cages')
+  .populate({path: 'cages'})
   .then(line => {
     res.json(line);
   })

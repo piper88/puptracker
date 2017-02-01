@@ -24,6 +24,4 @@ function cageLIController($log, cageService){
   };
 
   cageService.fetchCages(this.line._id);
-
-
 }
