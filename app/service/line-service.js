@@ -30,7 +30,6 @@ function lineService($q, $log, $http, authService){
     });
   };
 
-//
   service.createLine = function(projectId, line){
     $log.debug('LineService.createLine()');
 
@@ -92,7 +91,7 @@ function lineService($q, $log, $http, authService){
     });
   };
 
-  service.updateLine = function(line){
+  service.updateLine = function(project, line){
     $log.debug('LineService.updateLine()');
 
     return authService.getToken()

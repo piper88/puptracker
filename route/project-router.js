@@ -6,6 +6,7 @@ const jsonParser = require('body-parser').json();
 const debug = require('debug')('puptracker:project-router');
 
 const User = require('../model/user.js');
+const Line = require('../model/line.js');
 const Project = require('../model/project.js');
 const bearerAuth = require('../lib/bearer-auth-middleware.js');
 
@@ -62,17 +63,16 @@ projectRouter.put('/api/project/:projectId', bearerAuth, jsonParser, function(re
   });
 });
 
-projectRouter.delete('/api/project/projectId', bearerAuth, function(req, res, next) {
-  debug('DELETE /api/project/projectId');
+projectRouter.delete('/api/project/:projectId', bearerAuth, function(req, res, next) {
+  debug('DELETE /api/project/:projectId');
   Project.findById(req.params.projectId)
   .catch(err => Promise.reject(createError(404, err.message)))
   .then(project => {
     if (project.userId.toString() !== req.user._id.toString()) return Promise.reject(createError(401, 'unauthorized request'));
-    return Project.findByIdAndRemoveProject(project._id);
+    return Project.findByIdAndRemove(req.params.projectId);
   })
-  .catch(err => {
-    return Promise.reject(err.status ? err : createError(404, err.message));
-  })
-  .then(() => res.status(204).send())
+  .catch( err => Promise.reject(err))
+  .then( () => Line.remove({projectId: req.params.projectId}))
+  .then( () => res.sendStatus(204))
   .catch(next);
 });

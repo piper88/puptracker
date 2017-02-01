@@ -20,6 +20,7 @@ function HomeController($log, $location, $rootScope, projectService, lineService
   this.showCreateLine = false;
   this.showLineInfo = false;
   this.showProjectInfo = false;
+  this.showEditProject = false;
 
   this.showProject = function() {
     this.showProjectInfo = true;
@@ -29,12 +30,13 @@ function HomeController($log, $location, $rootScope, projectService, lineService
     this.showLineInfo = true;
   };
 
-  // console.log('current project', this.currentProject);
-  // console.log('the projects array', this.projects);
-  // $log.debug('THE LINES', this.lines);
-
   this.currentLineCheck = function(){
     lineService.fetchLines(this.project._id);
+  };
+
+  // Close Edit Project on Submit
+  this.handleEditProject = function(){
+    this.showEditProject = false;
   };
 
   this.fetchProject = function(project){
@@ -70,4 +72,9 @@ function HomeController($log, $location, $rootScope, projectService, lineService
   };
 
   this.fetchProjects();
+
+  this.deleteProject = function() {
+    projectService.deleteProject(this.currentProject._id);
+    $log.debug('Successfully deleted project!');
+  };
 }

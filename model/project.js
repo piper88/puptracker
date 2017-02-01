@@ -3,10 +3,6 @@
 const mongoose = require('mongoose');
 const debug = require('debug')('puptracker:project');
 
-const Line = require('./line.js');
-const Cage = require('./cage.js');
-const Mouse = require('./mouse.js');
-
 const projectSchema = mongoose.Schema({
   name: {type: String, required:true},
   lines: [{type: mongoose.Schema.Types.ObjectId, ref: 'line'}],
@@ -38,14 +34,4 @@ Project.findByIdAndRemoveLine = function(projectId,lineId) {
     project.lines.splice(index, 1);
     return project.save();
   });
-};
-
-//remove all the lines, cages, and mice with the projectId, and then remove the project itself
-Project.findByIdAndRemoveProject = function(projectId) {
-  debug('Project: findByIdAndRemoveProject');
-  return Project.findById(projectId)
-  .then(() => Line.remove({projId:projectId}))
-  .then(() => Cage.remove({projId:projectId}))
-  .then(() => Mouse.remove({projId:projectId}))
-  .then(() => Project.findByIdAndRemove(projectId));
 };

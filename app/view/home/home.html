@@ -44,10 +44,17 @@
     </div>
   </div>
 </div>
+  <!-- Project Name -->
+  <div class="row" ng-show="homeCtrl.showProjectInfo">
+    <h3 class="home-nav-title">Project Name: {{homeCtrl.currentProject.name}} </h3>
+    <button class="btn home-btn" ng-click="homeCtrl.showEditProject = !homeCtrl.showEditProject">Edit Project</button>
+    <button class="btn home-btn" ng-click="homeCtrl.deleteProject()">Delete Project</button>
+  </div>
 
   <div class="row">
-    <h3 class="home-nav-title" ng-show="homeCtrl.showProjectInfo">Project Name: {{homeCtrl.currentProject.name}} </h3>
+    <edit-project on-update="homeCtrl.handleEditProject()" ng-if="homeCtrl.showEditProject" project="homeCtrl.currentProject"></edit-project>
   </div>
+
   <!-- Create a New Line - shown when button is clicked on -->
   <div class="row">
     <new-line project="homeCtrl.currentProject" ng-if="homeCtrl.showCreateLine"> </new-line>

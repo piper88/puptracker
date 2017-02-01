@@ -14,12 +14,10 @@ module.exports = {
 function LineInfoController($log, lineService){
   $log.debug('init lineInfoCtrl');
 
-  this.updateLine = function() {
-    lineService.updateLine(this.line, this.line._id);
-  };
+  this.showEditLine = false;
 
   this.deleteLine = function() {
-    lineService.deleteLine(this.line, this.line._id, this.project._id);
+    lineService.deleteLine(this.line._id, this.line.projectId);
   };
 
 }
