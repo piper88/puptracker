@@ -7,6 +7,7 @@ const Mouse = require('./mouse.js');
 
 const cageSchema = mongoose.Schema({
   name: {type: String, required: true},
+  //also want breeder birthdates...
   numberOfFemales: {type: Number, required: true},
   numberOfMales: {type: Number, required: true},
   userId: {type: mongoose.Schema.Types.ObjectId, required:true},
