@@ -23,14 +23,6 @@ function NewCageController($log, $http, $rootScope, $scope, cageService){
     });
   };
 
-  // this.fetchCages = function() {
-  //   $log.debug('init fetchCages()');
-  //   cageService.fetchCages(this.lineData)
-  //   .then(data => {
-  //     this.cages = data;
-  //   });
-  // };
-
   $scope.today = function() {
     $scope.dt = new Date();
   };

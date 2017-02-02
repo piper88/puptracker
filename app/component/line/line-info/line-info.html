@@ -8,11 +8,10 @@
   <div class="row"  ng-hide="lineInfoCtrl.showEditLine">
     <h3><strong>Line Details</strong></h3>
     <h3><span>Name: </span> {{lineInfoCtrl.line.name}} </h3>
-    <!-- <h3><span>Genes: </span>{{lineInfoCtrl.line.genes}} </h3>
-    <h3><span>Expected Total Pups: </span>{{lineInfoCtrl.line.expectedTotalPups}} </h3>
-    <h3><span>Actual Total Pups: </span>{{lineInfoCtrl.line.ActualTotalPups}} </h3>
-    <h3><span>Expected Usable Pups: </span>{{lineInfoCtrl.line.expectedUsablePups}} </h3>
-    <h3><span>Actual Usable Pups: </span>{{lineInfoCtrl.line.actualUsablePups}} </h3> -->
+    <!-- NEED TO BE CALCULATED -->
+    <h3><span>Expected Total Pups/month: </span> <!--calculation--> </h3>
+    <h3><span>Expected Usable Pups/month: </span> <!--calculation--> </h3>
+    <h3><span>Actual Usable Pups: </span>{{lineInfoCtrl.line.actualUsablePups}} </h3> 
   </div>
 
   <edit-line line="lineInfoCtrl.line" ng-if="lineInfoCtrl.showEditLine"></edit-line>
