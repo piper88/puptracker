@@ -23,5 +23,5 @@ function cageLIController($log, cageService){
     });
   };
 
-  cageService.fetchCages(this.line._id);
+  // cageService.fetchCages(this.line._id);
 }
