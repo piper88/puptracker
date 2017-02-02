@@ -1,4 +1,5 @@
 @import "theme";
+@import "vendor";
 .home {
   padding: 1% 2%;
   h2 {
@@ -6,24 +7,28 @@
     padding: 3% 0;
     color: $app-black;
   }
+
   .container {
-    width: 25%;
+    width: 30%;
     float: left;
-    margin-right: 50px;
-    padding: 1% 2%;
+  }
+
+  .nav-btn{
+    float: left;
+    width: 90%;
+    margin: 0 5%;
   }
 
   // Main buttons for navigation on home
   .home-btn {
     background-color: $app-secondary;
     color: $app-white;
-    font-size: 18px;
+    font-size: 12px;
     border: 2px solid $app-secondary;
   }
   .home-btn:hover {
-    background-color: $app-white;
+    background-color: $app-secondary-hover;
     border: 2px solid $app-secondary;
-    color: $app-secondary;
   }
   // Container for header title and buttons
   .home-nav {
@@ -36,14 +41,14 @@
   .home-nav-title {
     background: $app-white;
     text-transform: uppercase;
-    margin: 2% 0;
     color: $app-black;
   }
+
   .dropdown-menu {
-    width: 25%;
+    width: 30%;
   }
   .project-li {
-    width: 100%;
+    // width: 100%;
     padding: 3px;
     color: $app-black;
     text-transform: uppercase;
@@ -54,9 +59,35 @@
   }
 
   .new-project-container{
+    border-top: 1px solid $app-black;
     width: 100%;
     padding: 2%;
+    p {
+      text-transform: uppercase;
+      font-size: 110%;
+    }
   }
 
+  .new-line-container, .edit-project-container{
+    h4{
+      text-transform: uppercase;
+    }
+    input{
+      width: 30%;
+    }
+  }
+
+  .line-li-container {
+    margin-right: 10px;
+    h4{
+      text-transform: uppercase;
+    }
+  }
+
+  .line-info{
+    h3{
+      text-transform: uppercase;
+    }
+  }
 
 }

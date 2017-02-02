@@ -1,17 +1,18 @@
 <section class="line-info">
-
   <div class="row">
-    <button class="btn home-btn" ng-click="lineInfoCtrl.showEditLine = !lineInfoCtrl.showEditLine">Update Line</button>
-    <button class="btn home-btn" ng-click="lineInfoCtrl.deleteLine()">Delete Line</button>
+    <div class="edit-delete-container">
+      <h3><strong>Line Name: </strong>{{lineInfoCtrl.line.name}}
+      <span ng-click="lineInfoCtrl.showEditLine = !lineInfoCtrl.showEditLine" class="fa fa-pencil"></span>
+      <span ng-click="lineInfoCtrl.deleteLine()" class="fa fa-trash"></span>
+      </h3>
+    </div>
   </div>
 
   <div class="row"  ng-hide="lineInfoCtrl.showEditLine">
-    <h3><strong>Line Details</strong></h3>
-    <h3><span>Name: </span> {{lineInfoCtrl.line.name}} </h3>
     <!-- NEED TO BE CALCULATED -->
-    <h3><span>Expected Total Pups/month: </span> <!--calculation--> </h3>
-    <h3><span>Expected Usable Pups/month: </span> <!--calculation--> </h3>
-    <h3><span>Actual Usable Pups: </span>{{lineInfoCtrl.line.actualUsablePups}} </h3> 
+    <h5><span>Expected Total Pups/month: </span> <!--calculation--> </h5>
+    <h5><span>Expected Usable Pups/month: </span> <!--calculation--> </h5>
+    <h5><span>Actual Usable Pups: </span>{{lineInfoCtrl.line.actualUsablePups}} </h5>
   </div>
 
   <edit-line line="lineInfoCtrl.line" ng-if="lineInfoCtrl.showEditLine"></edit-line>

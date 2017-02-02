@@ -1,5 +1,5 @@
-<div class="new-cage-forms">
-  <h3>Add a new cage</h3>
+<div class="new-cage-form">
+  <h4>Add a new cage</h4>
   <form novalidate
   class = "generalForm"
   ng-submit="newCageCtrl.createNewCage()">
@@ -13,7 +13,7 @@
 
         <p class="input-group">
           <input type="text" class="form-control"
-            uib-datepicker-popup="{{format}}" 
+            uib-datepicker-popup="{{format}}"
             ng-model="newCageCtrl.cage.breedingStartDate "ng-model="dt" is-open="popup1.opened"
             datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats">
           <span class="input-group-btn">

@@ -1,4 +1,5 @@
 @import "theme";
+@import "vendor";
 @import "custom-bootstrap";
 
 //General Body Styles
@@ -9,6 +10,9 @@ html, body {
   background-color: $app-white;
   color: $app-black;
   overflow: auto;
+}
+h4{
+  text-transform: uppercase;
 }
 
 //General list styles
@@ -31,6 +35,30 @@ footer {
   }
 }
 
+.edit-delete-container{
+  span {
+    margin: 1%;
+    padding-left: 3%;
+    // font-size: 2em;
+    display: inline-block;
+    margin:10px 10px 0 0;
+    padding:5px 10px;
+
+  }
+}
+
+.fa {
+  color: $app-secondary;
+  transition: .2s;
+}
+.fa-trash:hover {
+  color: $app-warn;
+}
+.fa-pencil:hover {
+  color: $app-info;
+}
+
+
 // Form for creating/Editing new Lines, Cages and mice
 .generalForm {
   button {
@@ -45,7 +73,7 @@ footer {
     padding:6px;
     display:block;
     border-radius: 4px;
-    width: 50%;
+    width: 100%;
     margin-bottom: 3px;
     }
   input:focus{ outline:none; }
@@ -69,7 +97,7 @@ footer {
   border: none;
   text-transform: uppercase;
   border-radius: 3px;
-  padding: 2% 5%;
+  padding: 7px 10px;
   margin: 2% 0;
   display: inline-block;
   outline: none;

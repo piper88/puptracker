@@ -9,8 +9,8 @@
     <!-- Select Project Dropdown -->
     <div class="container">
       <div uib-dropdown is-open="status.isopen1" auto-close="outsideClick">
-        <button class="btn home-btn home-nav-btn" type="button" uib-dropdown-toggle >Select Project</button>
-          <ul class="dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+        <button class="btn home-btn nav-btn" type="button" uib-dropdown-toggle >Select Project</button>
+          <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
             <project-li
                 ng-repeat="item in homeCtrl.projects"
                 project="item" role="menuitem"
@@ -21,17 +21,17 @@
           </ul>
       </div>
     </div>
+
     <!-- Create a New Line Button-->
     <div class="container">
-      <button class="btn home-btn home-nav-btn" ng-show="homeCtrl.showProjectInfo" ng-click="homeCtrl.showCreateLine = !homeCtrl.showCreateLine">Create a New Line</button>
+      <button class="btn home-btn nav-btn" ng-show="homeCtrl.showProjectInfo" ng-click="homeCtrl.showCreateLine = !homeCtrl.showCreateLine">Create a New Line</button>
     </div>
 
     <!-- Select Line Dropdown -->
   <div class="container">
     <div uib-dropdown is-open="status.isopen2" auto-close="outsideClick">
-      <button class="btn home-btn home-nav-btn" ng-show="homeCtrl.showProjectInfo" type="button" uib-dropdown-toggle>Select Line</button>
+      <button class="btn home-btn nav-btn" ng-show="homeCtrl.showProjectInfo" type="button" uib-dropdown-toggle>Select Line</button>
         <ul class="dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-
           <line-li
               ng-repeat="item in homeCtrl.currentProject.lines"
               line="item" role="menuitem"
@@ -44,11 +44,15 @@
     </div>
   </div>
 </div>
+
   <!-- Project Name -->
   <div class="row" ng-show="homeCtrl.showProjectInfo">
-    <h3 class="home-nav-title">Project Name: {{homeCtrl.currentProject.name}} </h3>
-    <button class="btn home-btn" ng-click="homeCtrl.showEditProject = !homeCtrl.showEditProject">Edit Project</button>
-    <button class="btn home-btn" ng-click="homeCtrl.deleteProject()">Delete Project</button>
+      <div class="edit-delete-container">
+        <h3 class="home-nav-title"><strong>Project Name: </strong>{{homeCtrl.currentProject.name}}
+          <span ng-click="homeCtrl.showEditProject = !homeCtrl.showEditProject" class="fa fa-pencil"></span>
+          <span ng-click="homeCtrl.deleteProject()" class="fa fa-trash"></span>
+        </h3>
+      </div>
   </div>
 
   <div class="row">
@@ -60,10 +64,16 @@
     <new-line project="homeCtrl.currentProject" ng-if="homeCtrl.showCreateLine"> </new-line>
   </div>
 
-  <line-info line="homeCtrl.currentLine" ng-show="homeCtrl.showLineInfo"></line-info>
+  <div class="row">
+    <line-info line="homeCtrl.currentLine" ng-show="homeCtrl.showLineInfo"></line-info>
+  </div>
   <!-- Cage information Associated with selected CurrentLine -->
   <div class="row">
-    <cage-container line="homeCtrl.currentLine" ng-if="homeCtrl.currentLine"></cage-container>
+    <!-- <cage-container line="homeCtrl.currentLine" ng-if="homeCtrl.currentLine"></cage-container> -->
+    <h4>Create a Cage for: {{homeCtrl.currentLine.name}} </h4>
+    <!-- Create a New Cage for the Current Line-->
+    <new-cage line="homeCtrl.currentLine"></new-cage>
+
     <cage-li ng-repeat="item in homeCtrl.currentLine.cages" cage="item" line="homerCtrl.currentLine">
     </cage-li>
   </div>
