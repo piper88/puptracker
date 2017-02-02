@@ -1,14 +1,5 @@
 <li class="cage-li">
 
-  <h2><strong>Name: </strong>{{cageLICtrl.cage.name}}</h2>
-
-  <button ng-click="cageLICtrl.showEditCage = !cageLICtrl.showEditCage">Edit Cage Info</button>
-  <button ng-click="cageLICtrl.deleteCage()">Delete Cage</button>
-
-  <edit-cage
-    on-success="cageLICtrl.handleEditCage()"
-    ng-if="cageLICtrl.showEditCage"
-    cage="cageLICtrl.cage">
-  </edit-cage>
+  <h4><strong>Name: </strong>{{cageLICtrl.cage.name}}</h4>
 
 </li>

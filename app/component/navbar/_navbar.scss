@@ -1,13 +1,12 @@
 @import "theme";
 
 .navbar {
-  background: transparent;
-  height: 60px;
+  background: $app-primary;
+  height: 50px;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 10;
-  border-bottom: 1px solid $app-disabled;
   .logo{
     height: 50px;
   }
@@ -20,11 +19,11 @@
       float: right;
       -webkit-border-radius: 16px;
       border-radius: 16px;
-      font-size: 16px;
-      padding: 8px 20px;
-      margin: 10px 15px;
-      color: $app-white;
-      background-color: $app-primary;
+      font-size: 12px;
+      padding: 6px 15px;
+      margin: 10px 17px;
+      color: $app-black;
+      background-color: $app-white;
     }
 
     .btn-nav:hover {
@@ -35,7 +34,7 @@
     .navbar-brand {
       float: left;
       margin: 2px 0px 2px 15px;
-      font-size: 38px;
+      font-size: 50px;
       vertical-align: center;
       display:inline-block;
       text-decoration: none;

@@ -1,7 +1,5 @@
 'use strict';
 
-require('./_project-li.scss');
-
 module.exports = {
   template: require('./project-li.html'),
   controller: ['$log', ProjectLIController],

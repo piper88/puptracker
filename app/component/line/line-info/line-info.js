@@ -1,7 +1,5 @@
 'use strict';
 
-//require('./_line.scss');
-
 module.exports = {
   template: require('./line-info.html'),
   controller: ['$log', 'lineService', LineInfoController],
