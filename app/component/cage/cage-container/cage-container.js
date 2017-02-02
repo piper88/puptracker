@@ -12,9 +12,5 @@ module.exports = {
 function cageContainerController($log, cageService){
   $log.debug('init cageContainerCtrl');
 
-  this.currentCageCheck = function(){
-    cageService.fetchCages(this.line._id);
-  };
-
 
 }

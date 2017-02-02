@@ -9,7 +9,7 @@ const Mouse = require('./mouse.js');
 
 const lineSchema = mongoose.Schema({
   name: {type: String, required: true},
-  userId: {type: mongoose.Schema.Types.ObjectId},
+  userId: {type: mongoose.Schema.Types.ObjectId, required: true},
   projectId: {type: mongoose.Schema.Types.ObjectId, required: true},
   cages: [{type: mongoose.Schema.Types.ObjectId, ref: 'cage'}],
   // genes: {type: Array},

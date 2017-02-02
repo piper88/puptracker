@@ -17,11 +17,7 @@ function cageLIController($log, cageService){
   this.showEditCage= false;
 
   this.deleteCage = function(){
-    cageService.deleteCage(this.cage, this.line)
-    .then(() => {
-      this.deleteCageCheck();
-    });
+    cageService.deleteCage(this.cage._id, this.cage.lineId);
   };
 
-  cageService.fetchCages(this.line._id);
 }

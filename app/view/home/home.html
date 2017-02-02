@@ -64,6 +64,8 @@
   <!-- Cage information Associated with selected CurrentLine -->
   <div class="row">
     <cage-container line="homeCtrl.currentLine" ng-if="homeCtrl.currentLine"></cage-container>
+    <cage-li ng-repeat="item in homeCtrl.currentLine.cages" cage="item" line="homerCtrl.currentLine">
+    </cage-li>
   </div>
 
 </main>

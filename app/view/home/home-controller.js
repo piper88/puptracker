@@ -52,7 +52,11 @@ function HomeController($log, $location, $rootScope, projectService, lineService
     $log.debug('fetched current line');
     this.currentLine = line;
     $log.debug('the current line: ', this.currentLine);
-    // cageService.fetchCages(this.currentLine._id);
+    cageService.fetchCages(this.currentLine._id)
+    .then (cages =>{
+      this.cages = cages;
+      $log.debug('Succesfully found cages', cages);
+    });
   };
 
   this.fetchProjects = function(){

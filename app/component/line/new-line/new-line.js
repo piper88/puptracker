@@ -20,11 +20,6 @@ function NewLineController($log, $http, $rootScope, lineService){
     .then( line => {
       this.line = line;
       this.line.name = null;
-      this.line.gene1 = null;
-      this.line.gene2 = null;
-      this.line.gene3 = null;
-      this.line.geneExpectedTotalPups = null;
-      this.line.geneExpectedUsablePups = null;
     });
   };
 

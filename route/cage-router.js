@@ -16,6 +16,7 @@ cageRouter.post('/api/line/:lineId/cage', bearerAuth, jsonParser, function(req, 
   debug('POST /api/line/:lineId/cage');
   let tempLine, tempCage;
   Line.findById(req.params.lineId)
+  .catch(err => Promise.reject(createError(404, err.message)))
   .then(line => {
     debug('line', line);
 
