@@ -15,6 +15,11 @@ h4{
   text-transform: uppercase;
 }
 
+hr{
+  width: 100%;
+  color: $app-primary-hover;
+}
+
 //General list styles
 ul {
   padding: 0;
@@ -37,13 +42,10 @@ footer {
 
 .edit-delete-container{
   span {
-    margin: 1%;
     padding-left: 3%;
-    // font-size: 2em;
     display: inline-block;
     margin:10px 10px 0 0;
     padding:5px 10px;
-
   }
 }
 

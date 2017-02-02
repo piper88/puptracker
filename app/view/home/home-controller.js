@@ -13,10 +13,12 @@ function HomeController($log, $location, $rootScope, projectService, lineService
 
   this.currentProject;
   this.currentLine;
+  this.currentCage;
 
   this.status = {
     isopen1:false,
     isopen2: false,
+    isopen3: false,
   };
 
   // Only show project and line information and create line when clicked on
@@ -24,6 +26,7 @@ function HomeController($log, $location, $rootScope, projectService, lineService
   this.showLineInfo = false;
   this.showProjectInfo = false;
   this.showEditProject = false;
+  this.showCageInfo = false;
 
   this.showProject = function() {
     this.showProjectInfo = true;
@@ -31,6 +34,10 @@ function HomeController($log, $location, $rootScope, projectService, lineService
 
   this.showLine = function() {
     this.showLineInfo = true;
+  };
+
+  this.showCage = function() {
+    this.showCageInfo = true;
   };
 
   this.currentLineCheck = function(){
@@ -52,11 +59,17 @@ function HomeController($log, $location, $rootScope, projectService, lineService
     $log.debug('fetched current line');
     this.currentLine = line;
     $log.debug('the current line: ', this.currentLine);
-    cageService.fetchCages(this.currentLine._id)
-    .then (cages =>{
-      this.cages = cages;
-      $log.debug('Succesfully found cages', cages);
-    });
+    cageService.fetchCages(this.currentLine._id);
+    // .then (cages =>{
+    //   this.cages = cages;
+    //   $log.debug('Succesfully found cages', cages);
+    // });
+  };
+  this.fetchCage = function(cage){
+    $log.debug('fetched current cage');
+    this.currentCage = cage;
+    $log.debug('the current cage: ', this.currentCage);
+    // mouseService.fetchMice(this.currentCage._id);
   };
 
   this.fetchProjects = function(){
@@ -74,6 +87,16 @@ function HomeController($log, $location, $rootScope, projectService, lineService
       this.lines = lines;
       this.project.lines = lines;
       $log.debug('Succesfully found lines');
+    });
+  };
+
+  // Called when a specific project is seleted
+  this.fetchCages = function(){
+    cageService.fetchCages(this.currentLine._id)
+    .then( cages => {
+      this.cages = cages;
+      this.line.cages = cages;
+      $log.debug('Succesfully found cages');
     });
   };
 

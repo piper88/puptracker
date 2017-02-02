@@ -9,7 +9,7 @@
   }
 
   .container {
-    width: 30%;
+    width: 33.33333%;
     float: left;
   }
 
@@ -39,9 +39,9 @@
 
   // Project title
   .home-nav-title {
-    background: $app-white;
     text-transform: uppercase;
     color: $app-black;
+    margin: 0;
   }
 
   .dropdown-menu {
@@ -87,6 +87,14 @@
   .line-info{
     h3{
       text-transform: uppercase;
+    }
+  }
+
+  .secondary-menu-container {
+    margin-top: 50px;
+    .row {
+      margin: 0;
+      padding: 0;
     }
   }
 
