@@ -5,54 +5,54 @@
   ng-submit="editCageCtrl.updateCage()">
 
   <div class="row"><label>Name</label></div>
-  <div class="row"><input name="name" type="text" ng-model="editCageCtrl.cage.name" required/></div>
+  <div class="row"><input name="name" type="text" ng-model="editCageCtrl.cage.name"  /></div>
 
   <div class="row"><label>Number of Female Breeders</label></div>
-  <div class="row"><input name="numberOfFemales" type="number" ng-model="editCageCtrl.cage.numberOfFemales" required/></div>
+  <div class="row"><input name="numberOfFemales" type="number" ng-model="editCageCtrl.cage.numberOfFemales"  /></div>
 
   <div class="row"><label>Number of Male Breeders</label></div>
-  <div class="row"><input name="numberOfMales" type="number" ng-model="editCageCtrl.cage.numberOfMales" required/></div>
+  <div class="row"><input name="numberOfMales" type="number" ng-model="editCageCtrl.cage.numberOfMales"></div>
 
   <!-- <div class="row"><label>Breeding Start Date</label></div>
     <div class="row">
       <div ng-click="editCageCtrl.pickDate()" class='input-group date' id='datetimepicker1'>
-      <input type='text' class="form-control" ng-model="editCageCtrl.cage.breedingStartDate" required/>
+      <input type='text' class="form-control" ng-model="editCageCtrl.cage.breedingStartDate"  />
       <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
   </div></div>
 
   <div class="row"><label>Breeding End Date</label></div>
     <div class="row">
       <div class='input-group date' id='datetimepicker1'>
-      <input type='text' class="form-control" ng-model="editCageCtrl.cage.breedingEndDate" required/>
+      <input type='text' class="form-control" ng-model="editCageCtrl.cage.breedingEndDate"  />
       <span class="input-group-addon"><span ng-click="editCageCtrl.pickDate()" class="glyphicon glyphicon-calendar"></span></span>
   </div></div>
 
   <div class="row"><label>Expected Date of Birth of Litter</label></div>
     <div class="row">
       <div ng-click="editCageCtrl.pickDate()" class='input-group date' id='datetimepicker1'>
-      <input type='text' class="form-control" ng-model="editCageCtrl.cage.expectedDOB" required/>
+      <input type='text' class="form-control" ng-model="editCageCtrl.cage.expectedDOB"  />
       <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
   </div></div>
 
   <div class="row"><label>Actual Date of Birth of Litter</label></div>
     <div class="row">
       <div ng-click="editCageCtrl.pickDate()" class='input-group date' id='datetimepicker1'>
-      <input type='text' class="form-control" ng-model="editCageCtrl.cage.actualDOB" required/>
+      <input type='text' class="form-control" ng-model="editCageCtrl.cage.actualDOB"  />
       <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
   </div></div> -->
 
   <div class="row"><label>Number of Litters Monthly</label></div>
   <div class="row">
-    <input name="numberLittersMonthly" type="number" ng-model="editCageCtrl.cage.numberLittersMonthly" required />
+    <input name="numberLittersMonthly" type="number" ng-model="editCageCtrl.cage.numberLittersMonthly" >
   </div>
 
   <div class="row"><label>Expected Number of Total Pups</label></div>
   <div class="row">
-    <input name="expectedTotalPups" type="number" ng-model="editCageCtrl.cage.expectedTotalPups" required />
+    <input name="expectedTotalPups" type="number" ng-model="editCageCtrl.cage.expectedTotalPups" >
   </div>
 
   <div class="row"><label>Actual Number of Total Pups</label></div>
-  <div class="row"><input name="expectedTotalPups" type="number" ng-model="editCageCtrl.cage.actualTotalPups"/>
+  <div class="row"><input name="expectedTotalPups" type="number" ng-model="editCageCtrl.cage.actualTotalPups">
   </div>
   <button class="btn-round" type="submit"> Update </button>
   </form>

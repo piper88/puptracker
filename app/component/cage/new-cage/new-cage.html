@@ -7,12 +7,12 @@
   <div class="row"><label>Name</label></div>
   <div class="row"><input name="name" type="text" ng-model="newCageCtrl.cage.name"></div>
 
-  <div class="row"><label>Number of Female Breeders</label></div>
-  <div class="row"><input name="numberOfFemales" type="number" ng-model="newCageCtrl.cage.numberOfFemales"></div>
-<!--
+  <!-- <div class="row"><label>Number of Female Breeders</label></div>
+  <div class="row"><input name="numberOfFemales" type="number" ng-model="newCageCtrl.cage.numberOfFemales" required/></div>
+
   <div class="row"><label>Number of Male Breeders</label></div>
   <div class="row"><input name="numberOfMales" type="number" ng-model="newCageCtrl.cage.numberOfMales" required/></div>
-
+ -->
 
   <div class="row"><label>Breeding Start Date</label></div>
     <div class="row">
@@ -25,10 +25,10 @@
           </span>
         </p>
 
+    </div>
   </div>
-</div>
 
-  <div class="row"><label>Breeding End Date</label></div>
+  <!-- <div class="row"><label>Breeding End Date</label></div>
     <div class="row">
       <div class='input-group date' id='datetimepicker1'>
 
@@ -80,6 +80,7 @@
   <div class="row"><label>Actual Number of Total Pups</label></div>
   <div class="row"><input name="expectedTotalPups" type="number" ng-model="newCageCtrl.cage.actualTotalPups"/>
   </div> -->
+
   <button class="btn-round" type="submit">Create Cage</button>
   </form>
 </div>
