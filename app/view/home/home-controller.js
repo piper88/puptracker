@@ -32,8 +32,8 @@ function HomeController($log, $location, $rootScope, projectService, lineService
 
   // When project is selected, fetch all its lines
   this.fetchProjectLines = function(project){
+    $log.debug('fetched current project');
     this.currentProject = project;
-    $log.debug('the current project: ', this.currentProject);
     return lineService.fetchLines(this.currentProject._id)
     .then(lines => {
       this.currentProject.lines = lines;
@@ -44,7 +44,6 @@ function HomeController($log, $location, $rootScope, projectService, lineService
   this.fetchLineCages = function(line){
     $log.debug('fetched current line');
     this.currentLine = line;
-    $log.debug('the current line: ', this.currentLine);
     return cageService.fetchCages(this.currentLine._id)
     .then(cages => {
       this.currentLine.cages = cages;
@@ -55,7 +54,6 @@ function HomeController($log, $location, $rootScope, projectService, lineService
   this.fetchCageBreeders = function(cage){
     $log.debug('fetched current cage');
     this.currentCage = cage;
-    $log.debug('the current cage: ', this.currentCage);
     // mouseService.fetchMice(this.currentCage._id);
   };
 

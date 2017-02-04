@@ -12,12 +12,10 @@ const lineSchema = mongoose.Schema({
   userId: {type: mongoose.Schema.Types.ObjectId, required: true},
   projectId: {type: mongoose.Schema.Types.ObjectId, required: true},
   cages: [{type: mongoose.Schema.Types.ObjectId, ref: 'cage'}],
-  // genes: {type: Array},
-  expectedTotalPups: {type: Number},
   actualTotalPups: {type: Number},
-  //calculated based on parent's genotypes
-  expectedUsablePups: {type: Number},
-  actualUsablePups: {type: Number},
+  //expectedTotalPups: {type: Number}, CALCULATED ON FRONT END
+  // expectedUsablePups: {type: Number}, CALCULATED ON FRONT END
+  // actualUsablePups: {type: Number}, CALCULATED ON FRONT END
 });
 
 const Line = module.exports = mongoose.model('line', lineSchema);
