@@ -15,10 +15,9 @@ function NewLineController($log, $http, $rootScope, lineService){
   this.line = {};
 
   this.createNewLine = function() {
-    $log.debug('init createNewLine()');
+
     lineService.createLine(this.project._id, this.line)
-    .then( line => {
-      this.line = line;
+    .then(() => {
       this.line.name = null;
     });
   };

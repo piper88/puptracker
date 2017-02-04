@@ -76,19 +76,19 @@ Het x WT = 50%
 
 
 
-User Workflow:
+# User Workflow:
 
 Create a project
-    -Give the project a name
+  - Give the project a name
 Add a line to the project
-    -Give the line a name
+  - Give the line a name
 Add a cage to the line
-    -Give the cage a name
-    -Give the cage a "Breeding Start Date"
-Add Breeder to the cage
-    -Give name to the breeder
-    -List zygosity of the breeder (Homo Het or WT) for each of 2 or 3 genes
-    -Input DOB of breeder
+  - Give the cage a name
+  - Give the cage a "Breeding Start Date"
+Add Breeder(mouse) to the cage
+  - Give name to the breeder
+  - List zygosity of the breeder (Homo Het or WT) for each of 2 or 3 genes
+  - Input DOB of breeder
 Add second Breeder to the cage
 Add third Breeder to the cage if applicable
 

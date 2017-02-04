@@ -6,8 +6,10 @@
   <div class="home-nav">
     <!-- Select Project Dropdown -->
     <div class="container">
-      <div uib-dropdown is-open="status.isopen1" auto-close="outsideClick">
-        <button class="btn home-btn nav-btn" type="button" uib-dropdown-toggle >Select Project</button>
+      <div class="btn-group" uib-dropdown is-open="status.isopen1" auto-close="outsideClick">
+        <button id="single-button" class="btn home-btn nav-btn" type="button" uib-dropdown-toggle>
+          Select Project <span class="caret"></span>
+        </button>
           <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
             <project-li
                 ng-repeat="item in homeCtrl.projects"
@@ -15,6 +17,7 @@
                 ng-click="homeCtrl.fetchProject(item); homeCtrl.showProject()">
                 {{homeCtrl.currentProject.name}}
             </project-li>
+            <!-- <li class="divider"></li> -->
             <li><new-project submission="homeCtrl.projectFormSubmission(projectData)" role="menuitem"></new-project></li>
           </ul>
       </div>
@@ -22,9 +25,11 @@
 
     <!-- Select Line Dropdown -->
     <div class="container">
-      <div uib-dropdown is-open="status.isopen2" auto-close="outsideClick">
-        <button class="btn home-btn nav-btn" ng-show="homeCtrl.showProjectInfo" type="button" uib-dropdown-toggle>Select Line</button>
-          <ul class="dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+      <div class="btn-group" uib-dropdown is-open="status.isopen2" auto-close="outsideClick">
+        <button class="btn home-btn nav-btn" ng-show="homeCtrl.showProjectInfo" type="button" uib-dropdown-toggle>
+          Select Line <span class="caret"></span>
+        </button>
+          <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
             <line-li
                 ng-repeat="item in homeCtrl.currentProject.lines"
                 line="item" role="menuitem"
@@ -38,9 +43,11 @@
 
     <!-- Select Cage Dropdown -->
     <div class="container">
-      <div uib-dropdown is-open="status.isopen3" auto-close="outsideClick">
-        <button class="btn home-btn nav-btn" ng-show="homeCtrl.showProjectInfo" type="button" uib-dropdown-toggle>Select Cage</button>
-          <ul class="dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+      <div class="btn-group" uib-dropdown is-open="status.isopen3" auto-close="outsideClick">
+        <button class="btn home-btn nav-btn" ng-show="homeCtrl.showProjectInfo" type="button" uib-dropdown-toggle>
+          Select Cage <span class="caret"></span>
+        </button>
+          <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
             <cage-li
                 ng-repeat="item in homeCtrl.currentLine.cages"
                 cage="item" role="menuitem"

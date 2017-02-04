@@ -49,22 +49,22 @@ function HomeController($log, $location, $rootScope, projectService, lineService
     this.showEditProject = false;
   };
 
+  // When project is selected, fetch all its lines
   this.fetchProject = function(project){
     this.currentProject = project;
     $log.debug('the current project: ', this.currentProject);
     lineService.fetchLines(this.currentProject._id);
   };
 
+  // When line is selected, fetch all its cages
   this.fetchLine = function(line){
     $log.debug('fetched current line');
     this.currentLine = line;
     $log.debug('the current line: ', this.currentLine);
     cageService.fetchCages(this.currentLine._id);
-    // .then (cages =>{
-    //   this.cages = cages;
-    //   $log.debug('Succesfully found cages', cages);
-    // });
   };
+
+  //When Cage is selected, fetch all its mice
   this.fetchCage = function(cage){
     $log.debug('fetched current cage');
     this.currentCage = cage;
@@ -72,35 +72,19 @@ function HomeController($log, $location, $rootScope, projectService, lineService
     // mouseService.fetchMice(this.currentCage._id);
   };
 
+  this.fetchCurrentCage = function(cage) {
+    this.currentCage = cage;
+    cageService.fetchCage(this.currentCage._id);
+  };
+
+  //Fetch projects initially
   this.fetchProjects = function(){
     projectService.fetchProjects()
     .then( projects => {
       this.projects = projects;
-      $log.debug('Succesfully found projects', projects);
+      $log.debug('Succesfully found projects');
     });
   };
-
-  // Called when a specific project is seleted
-  this.fetchLines = function(){
-    lineService.fetchLines(this.currentProject._id)
-    .then( lines => {
-      this.lines = lines;
-      this.project.lines = lines;
-      $log.debug('Succesfully found lines');
-    });
-  };
-
-  // Called when a specific project is seleted
-  this.fetchCages = function(){
-    cageService.fetchCages(this.currentLine._id)
-    .then( cages => {
-      this.cages = cages;
-      this.line.cages = cages;
-      $log.debug('Succesfully found cages');
-    });
-  };
-
-  //Fetch projects initially
   this.fetchProjects();
 
   this.deleteProject = function() {

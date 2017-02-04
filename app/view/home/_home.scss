@@ -12,12 +12,15 @@
     width: 33.33333%;
     float: left;
   }
-
+  .btn-group {
+    width: 100%;
+  }
   .nav-btn{
     float: left;
     width: 90%;
     margin: 0 5%;
   }
+
 
   // Main buttons for navigation on home
   .home-btn {
@@ -44,9 +47,7 @@
     margin: 0;
   }
 
-  .dropdown-menu {
-    width: 30%;
-  }
+
   .project-li {
     // width: 100%;
     padding: 3px;
@@ -56,6 +57,9 @@
       font-size: 160%;
       margin-left: 1%;
     }
+  }
+  .cage-li, .project-li, .line-li {
+    width: 100%;
   }
 
   .new-project-container{
