@@ -2,7 +2,7 @@
 
 module.exports = {
   template: require('./cage-li.html'),
-  controller: ['$log', 'cageService', cageLIController],
+  controller: ['$log', cageLIController],
   controllerAs: 'cageLICtrl',
   bindings: {
     line: '<',
@@ -10,7 +10,7 @@ module.exports = {
   },
 };
 
-function cageLIController($log, cageService){
+function cageLIController($log){
   $log.debug('init cageLiCtrl');
 
 }

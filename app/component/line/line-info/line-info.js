@@ -9,13 +9,7 @@ module.exports = {
   },
 };
 
-function LineInfoController($log, lineService){
+function LineInfoController($log){
   $log.debug('init lineInfoCtrl');
-
-  this.showEditLine = false;
-
-  this.deleteLine = function() {
-    lineService.deleteLine(this.line._id, this.line.projectId);
-  };
 
 }

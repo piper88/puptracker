@@ -14,11 +14,11 @@
             <project-li
                 ng-repeat="item in homeCtrl.projects"
                 project="item" role="menuitem"
-                ng-click="homeCtrl.fetchProject(item); homeCtrl.showProject()">
+                ng-click="homeCtrl.fetchProjectLines(item); homeCtrl.showProject()">
                 {{homeCtrl.currentProject.name}}
             </project-li>
             <!-- <li class="divider"></li> -->
-            <li><new-project submission="homeCtrl.projectFormSubmission(projectData)" role="menuitem"></new-project></li>
+            <li><new-project role="menuitem"></new-project></li>
           </ul>
       </div>
     </div>
@@ -34,7 +34,7 @@
                 ng-repeat="item in homeCtrl.currentProject.lines"
                 line="item" role="menuitem"
                 project="homeCtrl.currentProject"
-                ng-click="homeCtrl.fetchLine(item); homeCtrl.showLine();">
+                ng-click="homeCtrl.fetchLineCages(item); homeCtrl.showLine()">
                 {{homeCtrl.currentProject.line.name}}
             </line-li>
           </ul>
@@ -52,7 +52,7 @@
                 ng-repeat="item in homeCtrl.currentLine.cages"
                 cage="item" role="menuitem"
                 line="homeCtrl.currentLine"
-                ng-click="homeCtrl.fetchCage(item); homeCtrl.showCage();">
+                ng-click="homeCtrl.showCage()">
                 {{homeCtrl.currentLine.cage.name}}
             </cage-li>
           </ul>
@@ -93,9 +93,10 @@
     </div>
 </div>
 <hr>
-  <line-info line="homeCtrl.currentLine" ng-show="homeCtrl.showLineInfo"></line-info>
+  <line-info line="homeCtrl.currentLine" ng-if="homeCtrl.currentLine"></line-info>
+  <cage-info line="homeCtrl.currentCage" ng-show="homeCtrl.currentCage"></cage-info>
 
-  <new-line project="homeCtrl.currentProject" ng-if="homeCtrl.showCreateLine"> </new-line>
+  <new-line project="homeCtrl.currentProject" ng-if="homeCtrl.showCreateLine" ng-if="homeCtrl.currentProject"> </new-line>
   <new-cage line="homeCtrl.currentLine" ng-if="homeCtrl.showCreateCage"></new-cage>
   <!-- <new-mouse cage="homeCtrl.currentCage" ng-if="homeCtrl.showCreateMouse"></new-mouse> -->
 

@@ -4,10 +4,10 @@ module.exports = {
   template: require('./edit-line.html'),
   controller: ['$log', 'lineService', EditLineController],
   controllerAs: 'editLineCtrl',
-  // bindings: {
-  //   line: '<',
-  //   project: '<',
-  // },
+  bindings: {
+    line: '<',
+    project: '<',
+  },
 };
 
 function EditLineController($log, lineService){

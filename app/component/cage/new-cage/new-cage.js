@@ -19,8 +19,6 @@ function NewCageController($log, $http, $rootScope, $scope, cageService){
     cageService.createCage(this.line._id, this.cage)
     .then( cage => {
       this.cage = cage;
-      console.log('line', this.line);
-      console.log('cage', this.cage);
     });
   };
 
