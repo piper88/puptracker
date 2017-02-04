@@ -14,7 +14,7 @@
             <project-li
                 ng-repeat="item in homeCtrl.projects"
                 project="item" role="menuitem"
-                ng-click="homeCtrl.fetchProjectLines(item); homeCtrl.showProject()">
+                ng-click="homeCtrl.fetchProjectLines(item)">
                 {{homeCtrl.currentProject.name}}
             </project-li>
             <!-- <li class="divider"></li> -->
@@ -26,7 +26,7 @@
     <!-- Select Line Dropdown -->
     <div class="container">
       <div class="btn-group" uib-dropdown is-open="status.isopen2" auto-close="outsideClick">
-        <button class="btn home-btn nav-btn" ng-show="homeCtrl.showProjectInfo" type="button" uib-dropdown-toggle>
+        <button class="btn home-btn nav-btn" ng-if="homeCtrl.currentProject" type="button" uib-dropdown-toggle>
           Select Line <span class="caret"></span>
         </button>
           <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
@@ -34,7 +34,7 @@
                 ng-repeat="item in homeCtrl.currentProject.lines"
                 line="item" role="menuitem"
                 project="homeCtrl.currentProject"
-                ng-click="homeCtrl.fetchLineCages(item); homeCtrl.showLine()">
+                ng-click="homeCtrl.fetchLineCages(item)">
                 {{homeCtrl.currentProject.line.name}}
             </line-li>
           </ul>
@@ -44,7 +44,7 @@
     <!-- Select Cage Dropdown -->
     <div class="container">
       <div class="btn-group" uib-dropdown is-open="status.isopen3" auto-close="outsideClick">
-        <button class="btn home-btn nav-btn" ng-show="homeCtrl.showProjectInfo" type="button" uib-dropdown-toggle>
+        <button class="btn home-btn nav-btn" ng-if="homeCtrl.currentLine" type="button" uib-dropdown-toggle>
           Select Cage <span class="caret"></span>
         </button>
           <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
@@ -52,7 +52,7 @@
                 ng-repeat="item in homeCtrl.currentLine.cages"
                 cage="item" role="menuitem"
                 line="homeCtrl.currentLine"
-                ng-click="homeCtrl.showCage()">
+                ng-click="homeCtrl.fetchCageBreeders(item)">
                 {{homeCtrl.currentLine.cage.name}}
             </cage-li>
           </ul>
@@ -62,7 +62,7 @@
 
   <!-- Project Info and Buttons -->
   <div class="secondary-menu-container">
-    <div class="row" ng-show="homeCtrl.showProjectInfo">
+    <div class="row" ng-if="homeCtrl.currentProject">
         <div class="edit-delete-container">
           <h4 class="home-nav-title"><strong>Project Name: </strong>{{homeCtrl.currentProject.name}}
             <span ng-click="homeCtrl.showEditProject = !homeCtrl.showEditProject" class="fa fa-pencil"></span>
@@ -72,7 +72,7 @@
         </div>
     </div>
 
-    <div class="row" ng-show="homeCtrl.showLineInfo">
+    <div class="row" ng-if="homeCtrl.currentLine">
       <div class="edit-delete-container">
         <h4 class="home-nav-title"><strong>Line Name: </strong>{{homeCtrl.currentLine.name}}
         <span ng-click="homeCtrl.showEditLine = !homeCtrl.showEditLine" class="fa fa-pencil"></span>
@@ -82,7 +82,7 @@
       </div>
     </div>
 
-    <div class="row" ng-show="homeCtrl.showCageInfo">
+    <div class="row" ng-if="homeCtrl.currentCage">
       <div class="edit-delete-container">
         <h4 class="home-nav-title"><strong>Cage Name: </strong>{{homeCtrl.currentCage.name}}
         <span ng-click="homeCtrl.showEditCage = !homeCtrl.showEditCage" class="fa fa-pencil"></span>
@@ -92,11 +92,12 @@
       </div>
     </div>
 </div>
-<hr>
+
+
   <line-info line="homeCtrl.currentLine" ng-if="homeCtrl.currentLine"></line-info>
   <cage-info line="homeCtrl.currentCage" ng-show="homeCtrl.currentCage"></cage-info>
 
-  <new-line project="homeCtrl.currentProject" ng-if="homeCtrl.showCreateLine" ng-if="homeCtrl.currentProject"> </new-line>
+  <new-line project="homeCtrl.currentProject" ng-if="homeCtrl.showCreateLine"> </new-line>
   <new-cage line="homeCtrl.currentLine" ng-if="homeCtrl.showCreateCage"></new-cage>
   <!-- <new-mouse cage="homeCtrl.currentCage" ng-if="homeCtrl.showCreateMouse"></new-mouse> -->
 

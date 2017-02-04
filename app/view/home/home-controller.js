@@ -21,34 +21,6 @@ function HomeController($log, $location, $rootScope, projectService, lineService
     isopen3: false,
   };
 
-  // Only show project and line information and create line when clicked on
-  this.showCreateLine = false;
-  this.showLineInfo = false;
-  this.showProjectInfo = false;
-  this.showEditProject = false;
-  this.showCageInfo = false;
-
-  this.showProject = function() {
-    this.showProjectInfo = true;
-  };
-
-  this.showLine = function() {
-    this.showLineInfo = true;
-  };
-
-  this.showCage = function() {
-    this.showCageInfo = true;
-  };
-
-  this.currentLineCheck = function(){
-    lineService.fetchLines(this.project._id);
-  };
-
-  // Close Edit Project on Submit
-  this.handleEditProject = function(){
-    this.showEditProject = false;
-  };
-
   //Fetch projects initially
   this.fetchProjects = function(){
     projectService.fetchProjects()
@@ -87,7 +59,7 @@ function HomeController($log, $location, $rootScope, projectService, lineService
     // mouseService.fetchMice(this.currentCage._id);
   };
 
-
+  //Fetch all projects on page load
   this.fetchProjects();
 
   this.deleteProject = function() {
