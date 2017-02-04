@@ -51,7 +51,7 @@ mouseRouter.get('/api/cage/:cageId/mice', function(req, res, next) {
   debug('GET /api/cage/:cageId/mice');
   Mouse.find({cageId: req.params.cageId})
   .then(mice => res.json(mice))
-  .catch(err => err.status ? next(err) : next(createError(404, 'no mice for that cage')));
+  .catch(next);
 });
 
 mouseRouter.delete('/api/cage/:cageId/mouse/:mouseId', bearerAuth, function(req, res, next) {

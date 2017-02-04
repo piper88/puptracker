@@ -124,5 +124,4 @@ function NewCageController($log, $http, $rootScope, $scope, cageService){
     return '';
   }
 
-  // this.fetchCages();
 }

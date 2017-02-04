@@ -53,7 +53,7 @@
                 ng-repeat="item in homeCtrl.currentLine.cages"
                 cage="item" role="menuitem"
                 line="homeCtrl.currentLine"
-                ng-click="homeCtrl.fetchCageBreeders(item)">
+                ng-click="homeCtrl.currentCage = item">
                 {{homeCtrl.currentLine.cage.name}}
             </cage-li>
             <li><new-cage role="menuitem" line="homeCtrl.currentLine"></new-cage></li>
@@ -92,16 +92,13 @@
       </div>
     </div>
 
-  <button class="btn-round" ng-if="homeCtrl.currentCage" ng-click="homeCtrl.showCreateMouse = !homeCtrl.showCreateMouse">Add Breeder</button>
   <line-info line="homeCtrl.currentLine" ng-if="homeCtrl.currentLine"></line-info>
   <cage-info cage="homeCtrl.currentCage" ng-if="homeCtrl.currentCage"></cage-info>
+  <mouse-container ng-if="homeCtrl.currentCage" cage="homeCtrl.currentCage"></mouse-container>
+
 
   <edit-project ng-if="homeCtrl.showEditProject" project="homeCtrl.currentProject"></edit-project>
   <edit-line ng-if="homeCtrl.showEditLine" line="homeCtrl.currentLine"></edit-line>
   <edit-cage ng-if="homeCtrl.showEditCage" cage="homeCtrl.currentCage"></edit-cage>
-
-  <new-mouse ng-if="homeCtrl.showCreateMouse" cage="homeCtrl.currentCage"></new-mouse>
-
-
 
 </main>

@@ -10,11 +10,6 @@ function HomeController($log, $location, $rootScope, projectService, lineService
   this.projects = [];
   this.lines = [];
   this.cages = [];
-  this.mice = [];
-
-  this.currentProject;
-  this.currentLine;
-  this.currentCage;
 
   this.status = {
     isopen1:false,
@@ -47,16 +42,20 @@ function HomeController($log, $location, $rootScope, projectService, lineService
     this.currentLine = line;
     return cageService.fetchCages(this.currentLine._id)
     .then(cages => {
+      $log.debug('currentLine', this.currentLine);
       this.currentLine.cages = cages;
     });
   };
 
-  //When Cage is selected, fetch all its breeders (mice)
-  this.fetchCageBreeders = function(cage){
-    $log.debug('fetched current cage');
-    this.currentCage = cage;
+  this.fetchMice = function() {
+    $log.debug('homeCtrl.fetchMice');
+    if(!this.currentProject) return;
+    if(!this.currentLine) return;
+    if(!this.currentCage) return;
+
     return mouseService.fetchMice(this.currentCage._id)
     .then(mice => {
+      this.mice = mice;
       this.currentCage.mice = mice;
     });
   };
