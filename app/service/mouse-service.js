@@ -8,20 +8,19 @@ function mouseService($q, $log, $http, authService){
 
   service.mice = [];
 
-  service.fetchMice = function(cage){
-    $log.debug('CageService.fetchCages()');
+  service.fetchMice = function(cageId){
+    $log.debug('MouseService.fetchMice()');
 
-    let url = `${__API_URL__}/api/project/${cage.projectId}/line/${cage.lineId}/mice`;
+    let url = `${__API_URL__}/api/cage/${cageId}/mice`;
     let config = {
       headers: {
         Accept: 'application/json',
       },
     };
-
     return $http.get(url, config)
 
     .then(res => {
-      $log.debug('successfully fetched cages');
+      $log.debug('successfully fetched mice');
       service.mice = res.data;
       return service.mice;
     })
@@ -31,14 +30,13 @@ function mouseService($q, $log, $http, authService){
     });
   };
 
-//pass in cage and mouse????
-  service.createMouse = function(mouse){
+  service.createMouse = function(cageId, mouse){
     $log.debug('MouseService.createMouse()');
 
     return authService.getToken()
     .then(token => {
       let url =
-      `${__API_URL__}/api/project/${mouse.projectId}/line/${mouse.lineId}/cage/${mouse.cageId}/mouse`;
+      `${__API_URL__}/api/cage/${cageId}/mouse`;
       let config = {
         headers: {
           Accept: 'application/json',
@@ -51,7 +49,7 @@ function mouseService($q, $log, $http, authService){
     .then(res => {
       $log.debug('successfully created mouse');
       let mouse = res.data;
-      service.mice.push(mouse);
+      service.mice.unshift(mouse);
       return mouse;
     })
     .catch(err => {
@@ -60,12 +58,12 @@ function mouseService($q, $log, $http, authService){
     });
   };
 
-  service.deleteMouse = function(mouse){
-    $log.debug('CageService.deleteCage()');
+  service.deleteMouse = function(mouseId, cageId){
+    $log.debug('ouseService.deleteMouse()');
 
     return authService.getToken()
     .then(token => {
-      let url = `${__API_URL__}/api/project/${mouse.projectId}/line/${mouse.lineId}/cage/${mouse._id}/mouse/${mouse._id}`;
+      let url = `${__API_URL__}/api/cage/${cageId}/mouse/${mouseId}`;
       let config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -77,7 +75,7 @@ function mouseService($q, $log, $http, authService){
       $log.debug('successfully deleted cage');
       for (let i = 0; i < service.mice.length; ++i){
         let current = service.mice[i];
-        if (current._id === mouse._id){
+        if (current._id === mouseId){
           service.mice.splice(i, 1);
           break;
         }
@@ -91,11 +89,11 @@ function mouseService($q, $log, $http, authService){
   };
 
   service.updateMouse = function(mouse){
-    $log.debug('CageService.updateCage()');
+    $log.debug('MouseService.updateMouse()');
 
     return authService.getToken()
     .then(token => {
-      let url = `${__API_URL__}/api/project/${mouse.projectId}/line/${mouse.lineId}/cage/${mouse.cageId}/mouse/${mouse._id}`;
+      let url = `${__API_URL__}/api/cage/${mouse.cageId}/mouse/${mouse._id}`;
       let config = {
         headers: {
           Accept: 'application/json',

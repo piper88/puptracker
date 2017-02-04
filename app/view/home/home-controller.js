@@ -2,14 +2,15 @@
 
 require('./_home.scss');
 
-module.exports = ['$log', '$location', '$rootScope','projectService', 'lineService', 'cageService', HomeController];
+module.exports = ['$log', '$location', '$rootScope','projectService', 'lineService', 'cageService', 'mouseService', HomeController];
 
-function HomeController($log, $location, $rootScope, projectService, lineService, cageService){
+function HomeController($log, $location, $rootScope, projectService, lineService, cageService, mouseService){
   $log.debug('init homeCtrl');
 
   this.projects = [];
   this.lines = [];
   this.cages = [];
+  this.mice = [];
 
   this.currentProject;
   this.currentLine;
@@ -50,11 +51,14 @@ function HomeController($log, $location, $rootScope, projectService, lineService
     });
   };
 
-  //When Cage is selected, fetch all its mice
+  //When Cage is selected, fetch all its breeders (mice)
   this.fetchCageBreeders = function(cage){
     $log.debug('fetched current cage');
     this.currentCage = cage;
-    // mouseService.fetchMice(this.currentCage._id);
+    return mouseService.fetchMice(this.currentCage._id)
+    .then(mice => {
+      this.currentCage.mice = mice;
+    });
   };
 
   //Fetch all projects on page load

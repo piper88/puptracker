@@ -6,8 +6,8 @@ const jsonParser = require('body-parser').json();
 const debug = require('debug')('puptracker:cage-router');
 
 const Line = require('../model/line.js');
-//const Project = require('../model/project.js');
 const Cage = require('../model/cage.js');
+const Mouse= require('../model/mouse.js');
 const bearerAuth = require('../lib/bearer-auth-middleware.js');
 
 const cageRouter = module.exports = Router();
@@ -26,7 +26,6 @@ cageRouter.post('/api/line/:lineId/cage', bearerAuth, jsonParser, function(req, 
     .then(cage => {
       Line.findLineByIdAndAddCage(req.params.lineId, cage)
       .then(line => {
-        debug('line with cage added', line);
         req.line = line;
         res.json(cage);
       });
@@ -35,9 +34,9 @@ cageRouter.post('/api/line/:lineId/cage', bearerAuth, jsonParser, function(req, 
   });
 });
 
-// Return one Cage by id
+// Return one Cage by Id
 cageRouter.get('/api/cage/:cageId', function(req, res, next) {
-  debug('cage router GET');
+  debug('GET /api/cage/:cageId');
   Cage.findById(req.params.cageId)
   .then(cage => res.json(cage))
   .catch(err => {
@@ -50,13 +49,14 @@ cageRouter.get('/api/cage/:cageId', function(req, res, next) {
 cageRouter.get('/api/line/:lineId/cages', function(req, res, next) {
   debug('GET /api/line/:lineId/cages');
   Cage.find({lineId: req.params.lineId})
-  // .populate('mice')
+  .populate('mice')
   .then(cages => res.json(cages))
   .catch(next);
 });
 
+// Delete cage and all associated mice
 cageRouter.delete('/api/line/:lineId/cage/:cageId', bearerAuth, function(req, res, next) {
-  debug('cage router DELETE');
+  debug('DELETE /api/line/:lineId/cage/:cageId');
   Cage.findById(req.params.cageId)
   .catch(err => Promise.reject(createError(404, err.message)))
   .then( cage => {
@@ -67,7 +67,7 @@ cageRouter.delete('/api/line/:lineId/cage/:cageId', bearerAuth, function(req, re
   .catch( err => Promise.reject(err))
 
   // remove all mice associated with the cage
-  // .then( () => Mouse.remove({ cageId: req.params.cageId}))
+  .then( () => Mouse.remove({ cageId: req.params.cageId}))
   .then( () => {
     Line.findById(req.params.lineId)
     .then( line => {
