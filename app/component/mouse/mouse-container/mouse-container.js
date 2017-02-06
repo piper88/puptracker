@@ -15,5 +15,4 @@ function mouseContainerController($log, mouseService){
   this.currentMouseCheck = function(){
     mouseService.fetchMice(this.cage._id);
   };
-
 }

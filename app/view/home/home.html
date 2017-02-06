@@ -53,7 +53,7 @@
                 ng-repeat="item in homeCtrl.currentLine.cages"
                 cage="item" role="menuitem"
                 line="homeCtrl.currentLine"
-                ng-click="homeCtrl.currentCage = item">
+                ng-click="homeCtrl.currentCage = item; homeCtrl.fetchMice()">
                 {{homeCtrl.currentLine.cage.name}}
             </cage-li>
             <li><new-cage role="menuitem" line="homeCtrl.currentLine"></new-cage></li>

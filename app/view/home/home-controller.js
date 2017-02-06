@@ -49,10 +49,7 @@ function HomeController($log, $location, $rootScope, projectService, lineService
 
   this.fetchMice = function() {
     $log.debug('homeCtrl.fetchMice');
-    if(!this.currentProject) return;
-    if(!this.currentLine) return;
-    if(!this.currentCage) return;
-
+    $log.debug('currentCage', this.currentCage);
     return mouseService.fetchMice(this.currentCage._id)
     .then(mice => {
       this.mice = mice;

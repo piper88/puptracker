@@ -4,16 +4,13 @@
 
     <button class="btn-round"
       ng-click="mouseContainerCtrl.showCreateMouse = !mouseContainerCtrl.showCreateMouse"> Add Breeder </button>
-
     <new-mouse ng-if="mouseContainerCtrl.showCreateMouse" cage="mouseContainerCtrl.cage"> </new-mouse>
-
     <h4>List of Breeders</h4>
-    <mouse-li 
+    <mouse-li
       delete-mouse-check="mouseContainerCtrl.currentMouseCheck()"
       ng-repeat="mouse in mouseContainerCtrl.cage.mice"
       mouse="mouse"
       cage="mouseContainerCtrl.cage"
-      ng-click="mouseContainerCtrl.currentMouse = mouse"> </mouse-li>
-
+      ng-click="mouseContainerCtrl.currentMouse = mouse"></mouse-li>
   </div>
 </div>
