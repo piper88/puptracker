@@ -14,7 +14,6 @@ function EditLineController($log, lineService){
   $log.debug('init editLineCtrl');
 
   this.updateLine = function(){
-    $log.debug('editLineCtrl.updateLine()');
     lineService.updateLine(this.project, this.line);
   };
 }

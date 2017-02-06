@@ -41,7 +41,6 @@ const Cage = module.exports = mongoose.model('cage', cageSchema);
 
 Cage.findCageByIdAndAddMouse = function(cageId, mouse) {
   debug('find cage by id and add mouse');
-
   return Cage.findById(cageId)
   .then((cage) => {
     cage.mice.push(mouse._id);
@@ -51,7 +50,6 @@ Cage.findCageByIdAndAddMouse = function(cageId, mouse) {
 
 Cage.findCageByIdAndRemoveMouse = function(cageId, mouse) {
   debug('find cage by id and remove mouse');
-
   return Cage.findById(cageId)
   .then((cage) => {
     let index = cage.mice.indexOf(mouse._id);
@@ -62,7 +60,6 @@ Cage.findCageByIdAndRemoveMouse = function(cageId, mouse) {
 
 Cage.findCageByIdAndRemoveCage = function(cageId) {
   debug('find cage by id and remove cage');
-
   return Cage.findById(cageId)
     .then(() => Mouse.remove({cageId:cageId}))
     .then(() => Cage.findByIdAndRemove(cageId));

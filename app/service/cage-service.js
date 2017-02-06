@@ -31,12 +31,33 @@ function cageService($q, $log, $http, authService){
     });
   };
 
-  service.createCage = function(line, cage){
+  service.fetchCage = function(cageId) {
+    $log.debug('CageService.fetchCage()');
+    let url = `${__API_URL__}/api/cage/${cageId}`;
+    let config = {
+      headers: {
+        Accept: 'application/json',
+      },
+    };
+    return $http.get(url, config)
+
+    .then(res => {
+      $log.debug('successfully fetched cage');
+      service.cages = res.data;
+      return service.cages;
+    })
+    .catch(err => {
+      $log.error(err.message);
+      $q.reject(err);
+    });
+  };
+
+  service.createCage = function(lineId, cage){
     $log.debug('cageService.createCage()');
 
     return authService.getToken()
     .then(token => {
-      let url = `${__API_URL__}/api/line/${line._id}/cage`;
+      let url = `${__API_URL__}/api/line/${lineId}/cage`;
       let config = {
         headers: {
           Accept: 'application/json',
@@ -49,7 +70,7 @@ function cageService($q, $log, $http, authService){
     .then(res => {
       $log.debug('successfully created cage');
       let cage = res.data;
-      line.cages.unshift(cage);
+      service.cages.unshift(cage);
       return cage;
     })
     .catch(err => {

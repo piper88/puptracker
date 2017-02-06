@@ -7,12 +7,21 @@
     padding: 3% 0;
     color: $app-black;
   }
+  .dropdown-menu{
+    li {
+      width: 100%;
+      text-transform: uppercase;
+      padding:0 15px;
+    }
 
+  }
   .container {
     width: 33.33333%;
     float: left;
   }
-
+  .btn-group {
+    width: 100%;
+  }
   .nav-btn{
     float: left;
     width: 90%;
@@ -44,22 +53,8 @@
     margin: 0;
   }
 
-  .dropdown-menu {
-    width: 30%;
-  }
-  .project-li {
-    // width: 100%;
-    padding: 3px;
-    color: $app-black;
-    text-transform: uppercase;
-    p {
-      font-size: 160%;
-      margin-left: 1%;
-    }
-  }
 
-  .new-project-container{
-    border-top: 1px solid $app-black;
+  .new-project-container, .new-line-container, .new-cage-container{
     width: 100%;
     padding: 2%;
     p {
@@ -68,19 +63,12 @@
     }
   }
 
-  .new-line-container, .edit-project-container{
+  .edit-project-container{
     h4{
       text-transform: uppercase;
     }
     input{
       width: 30%;
-    }
-  }
-
-  .line-li-container {
-    margin-right: 10px;
-    h4{
-      text-transform: uppercase;
     }
   }
 

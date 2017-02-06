@@ -16,10 +16,9 @@ function NewCageController($log, $http, $rootScope, $scope, cageService){
 
   this.createNewCage = function(){
     $log.debug('init createNewCage()');
-    cageService.createCage(this.line, this.cage)
+    cageService.createCage(this.line._id, this.cage)
     .then( cage => {
       this.cage = cage;
-      $log.debug('Sucessfully created cage');
     });
   };
 
@@ -125,5 +124,4 @@ function NewCageController($log, $http, $rootScope, $scope, cageService){
     return '';
   }
 
-  // this.fetchCages();
 }

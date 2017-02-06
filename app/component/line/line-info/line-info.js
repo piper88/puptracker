@@ -9,13 +9,13 @@ module.exports = {
   },
 };
 
-function LineInfoController($log, lineService){
+function LineInfoController($log){
   $log.debug('init lineInfoCtrl');
 
-  this.showEditLine = false;
+  // Number of breeding females
+  let numFemales = 10;
 
-  this.deleteLine = function() {
-    lineService.deleteLine(this.line._id, this.line.projectId);
-  };
+  // Number of breeding females * Litter Size(6)
+  this.expectedTotalPups = 6 * numFemales;
 
 }

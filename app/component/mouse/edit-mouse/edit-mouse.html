@@ -1,0 +1,20 @@
+<section class="edit-mouse-container">
+  <h3>Edit Breeder Information</h3>
+  <form class="generalForm" novalidate ng-submit="editMouseCtrl.updateMouse()">
+
+    <label>Name</label>
+    <input name="name" type="text" ng-model="editMouseCtrl.mouse.name">
+
+    <label>Genetic Makeup</label>
+    <input name="geneticMakeup" type="text"
+      ng-model="editMouseCtrl.mouse.geneticMakeup">
+
+    <label>Date of Birth</label>
+    <input name="DOB" type="text"
+      ng-model="editMouseCtrl.mouse.DOB">
+
+  <button class="btn-round" type="submit"> Update </button>
+
+  </form>
+
+</sections>

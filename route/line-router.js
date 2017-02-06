@@ -26,6 +26,7 @@ lineRouter.post('/api/project/:projectId/line', bearerAuth, jsonParser, function
   .then(project => {
     req.body.userId = req.user._id;
     req.body.projectId = project._id;
+
     new Line(req.body).save()
     .then(line => {
       Project.findByIdAndAddLine(req.params.projectId, line)
@@ -46,7 +47,8 @@ lineRouter.get('/api/project/:projectId/line/:lineId', function(req, res, next){
   Line.findById(req.params.lineId)
   // return all the cages in the array on the lines model
   // Populate fills the arrays of ids with their corresponding schema info
-  .populate('cages')
+  .populate({path: 'cages'})
+  .populate({path: 'mice'})
   .then(line => {
     res.json(line);
   })
@@ -62,7 +64,8 @@ lineRouter.get('/api/project/:projectId/lines', function(req, res, next){
   // Find a line by its project ID
   Line.find({projectId: req.params.projectId})
   // populate cages from the array on the model
-  .populate('cages')
+  .populate({path: 'cages'})
+  .populate({path: 'mice'})
   .then(lines => res.json(lines))
   .catch(err => err.status ? next(err) : next(createError(404, 'no lines for this project')));
 });

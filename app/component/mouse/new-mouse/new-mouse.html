@@ -1,0 +1,19 @@
+<section class="new-mouse-container">
+  <h4>Add Breeder</h4>
+  <form class="generalForm" novalidate ng-submit="newMouseCtrl.createNewMouse()">
+
+    <label>Name</label>
+    <input name="name" type="text" ng-model="newMouseCtrl.mouse.name">
+
+    <label>Genetic Makeup</label>
+    <input name="geneticMakeup" type="text"
+      ng-model="newMouseCtrl.mouse.geneticMakeup">
+
+    <label>Date of Birth</label>
+    <input name="DOB" type="text"
+      ng-model="mouseMouseCtrl.mouse.DOB">
+
+
+  <button class="btn-round" type="submit"> Add </button>
+  </form>
+</section>

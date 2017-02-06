@@ -4,9 +4,6 @@ module.exports = {
   template: require('./new-project.html'),
   controller: ['$log', '$http', 'projectService', NewProjectController],
   controllerAs: 'newProjectCtrl',
-  bindings: {
-    submission: '&',
-  },
 };
 
 function NewProjectController($log, $http, projectService){
@@ -15,18 +12,11 @@ function NewProjectController($log, $http, projectService){
   this.project = {};
 
   this.createNewProject = function() {
-    $log.debug('init createNewproject()');
     projectService.createProject(this.project)
-    .then(project => {
-      $log.debug('created a new project');
-      this.project = project;
-      this.submission({
-        projectData: this.project,
-      });
+    .then(() => {
+      // on success, nulls out inputs so it doesn't repeat the old data
+      // ng-model is using it, so they stay in there
+      this.project.name = null;
     });
   };
-  this.fetchProjectData = function(){
-    projectService.fetchProject(this.project._id);
-  };
-
 }
