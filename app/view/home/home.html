@@ -67,7 +67,7 @@
     <div class="col span-1-of-3" ng-if="homeCtrl.currentProject">
         <div class="edit-delete-container">
           <h4 class="home-nav-title"><strong>Project Name: </strong>{{homeCtrl.currentProject.name}}
-            <span ng-click="homeCtrl.showEditProject = !homeCtrl.showEditProject" class="fa fa-pencil"></span>
+            <span ng-click="homeCtrl.open3(1, homeCtrl.currentProject)" class="fa fa-pencil"></span>
             <span ng-click="homeCtrl.open(homeCtrl.currentProject)" class="fa fa-trash"></span>
           </h4>
         </div>
@@ -76,8 +76,8 @@
       <div class="col span-1-of-3" ng-if="homeCtrl.currentLine">
         <div class="edit-delete-container">
           <h4 class="home-nav-title"><strong>Current Line: </strong>{{homeCtrl.currentLine.name}}
-          <span ng-click="homeCtrl.showEditLine = !homeCtrl.showEditLine" class="fa fa-pencil"></span>
-          <span ng-click="homeCtrl.open(homeCtrl.currentLine)" class="fa fa-trash"></span>
+          <span ng-click="homeCtrl.open3(2)" class="fa fa-pencil"></span>
+          <span ng-click="homeCtrl.open2(homeCtrl.currentLine)" class="fa fa-trash"></span>
         </h4>
         </div>
       </div>
@@ -85,7 +85,7 @@
       <div class="col span-1-of-3" ng-if="homeCtrl.currentCage">
         <div class="edit-delete-container">
           <h4 class="home-nav-title"><strong>Current Cage: </strong>{{homeCtrl.currentCage.name}}
-          <span ng-click="homeCtrl.showEditCage = !homeCtrl.showEditCage" class="fa fa-pencil"></span>
+          <span ng-click="homeCtrl.open3(3)" class="fa fa-pencil"></span>
           <span ng-click="homeCtrl.deleteCage()" class="fa fa-trash"></span>
         </h4>
         </div>
@@ -112,8 +112,8 @@
   <cage-info cage="homeCtrl.currentCage" ng-if="homeCtrl.currentCage"></cage-info> -->
   <mouse-container ng-if="homeCtrl.currentCage" cage="homeCtrl.currentCage"></mouse-container>
 
-  <edit-project ng-if="homeCtrl.showEditProject" project="homeCtrl.currentProject"></edit-project>
+  <!-- <edit-project ng-if="homeCtrl.showEditProject" project="homeCtrl.currentProject"></edit-project>
   <edit-line ng-if="homeCtrl.showEditLine" line="homeCtrl.currentLine"></edit-line>
-  <edit-cage ng-if="homeCtrl.showEditCage" cage="homeCtrl.currentCage"></edit-cage>
+  <edit-cage ng-if="homeCtrl.showEditCage" cage="homeCtrl.currentCage"></edit-cage> -->
 
 </main>

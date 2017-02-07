@@ -1,0 +1,16 @@
+<div class="modal-container">
+  <div class="modal-header">
+  </div>
+
+  <div class="modal-body" id="modal-body">
+    <!-- <login login-success="editModalCtrl.handleClose()" ng-if="editModalCtrl.loginToggle"></login>
+    <signup login-success="editModalCtrl.handleClose()" ng-if="!editModalCtrl.loginToggle"></signup> -->
+    <edit-project ng-if="editModalCtrl.editToggle == 1" project="editModalCtrl.editData"></edit-project>
+    <edit-line ng-if="editModalCtrl.editToggle == 2" line="editModalCtrl.line"></edit-line>
+    <edit-cage ng-if="editModalCtrl.editToggle == 3" cage="editModalCtrl.cage"></edit-cage>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-dark" type="button" ng-click="editModalCtrl.handleClose()">Cancel</button>
+  </div>
+</div>

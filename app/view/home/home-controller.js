@@ -17,7 +17,7 @@ function HomeController($log, $location, $rootScope, $uibModal, projectService, 
     isopen3: false,
   };
 
-  // Opens Delete Project modal
+  // Opens Delete Project Modal
   this.open = function(project) {
     let modalInstance = $uibModal.open({
       component: 'delete-modal',
@@ -27,12 +27,11 @@ function HomeController($log, $location, $rootScope, $uibModal, projectService, 
         },
       },
     });
-
     return modalInstance;
   };
 
-  // Opens Delete Line modal
-  this.open = function(line) {
+  // Opens Delete Line Modal
+  this.open2 = function(line) {
     let modalInstance = $uibModal.open({
       component: 'delete-line-modal',
       resolve: {
@@ -41,7 +40,23 @@ function HomeController($log, $location, $rootScope, $uibModal, projectService, 
         },
       },
     });
+    return modalInstance;
+  };
 
+  // Opens Edit Project, Line, Cage Modal
+  this.open3 = function(itemToEdit, data) {
+    let modalInstance = $uibModal.open({
+      component: 'edit-modal',
+      resolve: {
+        editToggle: function(){
+          return itemToEdit;
+        },
+
+        editData: function(){
+          return data;
+        },
+      },
+    });
     return modalInstance;
   };
 
