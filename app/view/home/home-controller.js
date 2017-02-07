@@ -2,9 +2,9 @@
 
 require('./_home.scss');
 
-module.exports = ['$log', '$location', '$rootScope','projectService', 'lineService', 'cageService', 'mouseService', HomeController];
+module.exports = ['$log', '$location', '$rootScope', '$uibModal', 'projectService', 'lineService', 'cageService', 'mouseService', HomeController];
 
-function HomeController($log, $location, $rootScope, projectService, lineService, cageService, mouseService){
+function HomeController($log, $location, $rootScope, $uibModal, projectService, lineService, cageService, mouseService){
   $log.debug('init homeCtrl');
 
   this.projects = [];
@@ -16,6 +16,21 @@ function HomeController($log, $location, $rootScope, projectService, lineService
     isopen2: false,
     isopen3: false,
   };
+
+  // Opens Delete Project modal
+  this.open = function(project) {
+    let modalInstance = $uibModal.open({
+      component: 'delete-modal',
+      resolve: {
+        deleteProject: function(){
+          return project._id;
+        },
+      },
+    });
+
+    return modalInstance;
+  };
+
 
   //Fetch projects initially
   this.fetchProjects = function(){
@@ -64,6 +79,16 @@ function HomeController($log, $location, $rootScope, projectService, lineService
   this.deleteProject = function() {
     projectService.deleteProject(this.currentProject._id);
     $log.debug('Successfully deleted project!');
+  };
+
+  this.deleteLine = function() {
+    lineService.deleteLine(this.currentLine._id);
+    $log.debug('Successfully deleted line!');
+  };
+
+  this.deleteCage = function() {
+    cageService.deleteCage(this.currentCage._id);
+    $log.debug('Successfully deleted cage!');
   };
 
   this.calculate = function(){

@@ -68,7 +68,7 @@
         <div class="edit-delete-container">
           <h4 class="home-nav-title"><strong>Project Name: </strong>{{homeCtrl.currentProject.name}}
             <span ng-click="homeCtrl.showEditProject = !homeCtrl.showEditProject" class="fa fa-pencil"></span>
-            <span ng-click="homeCtrl.deleteProject()" class="fa fa-trash"></span>
+            <span ng-click="homeCtrl.open(homeCtrl.currentProject)" class="fa fa-trash"></span>
           </h4>
         </div>
     </div>
