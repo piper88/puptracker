@@ -2,7 +2,13 @@
   <p class="new-title">Create a New Line</p>
   <form class="generalForm" novalidate ng-submit="newLineCtrl.createNewLine()">
     <label>Name</label>
-    <input name="name" type="text" ng-model="newLineCtrl.line.name">
+    <input
+      name="name"
+      type="text"
+      ng-model="newLineCtrl.line.name"
+      uib-tooltip="Name Required"
+      tooltip-placement="bottom-right"
+      tooltip-trigger="'focus'">
   <button class="btn-round" type="submit"> Create </button>
   </form>
 </sections>

@@ -3,26 +3,31 @@
   <form novalidate
   class = "generalForm"
   ng-submit="newCageCtrl.createNewCage()">
+  <label>Name</label>
+  <input name="name" type="text"
+    ng-model="newCageCtrl.cage.name"
+    uib-tooltip="Name Required"
+    tooltip-placement="bottom-right"
+    tooltip-trigger="'focus'">
 
-  <div class="row"><label>Name</label></div>
-  <div class="row"><input name="name" type="text" ng-model="newCageCtrl.cage.name"></div>
-
-  <div class="row"><label>Breeding Start Date</label></div>
-    <div class="row">
-      <div class='input-group date' id='datetimepicker1'>
-
-        <p class="input-group">
-          <input type="text" class="form-control"
-            uib-datepicker-popup="{{format}}"
-            ng-model="newCageCtrl.cage.breedingStartDate "ng-model="dt" is-open="popup1.opened"
-            datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats">
-          <span class="input-group-btn">
-            <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
-          </span>
-        </p>
-
-    </div>
+  <label>Breeding Start Date</label>
+    <div class='input-group date'>
+      <p class="input-group">
+        <input type="text" class="form-control"
+          uib-datepicker-popup="{{format}}"
+          ng-model="newCageCtrl.cage.breedingStartDate"
+          ng-model="dt" is-open="popup1.opened"
+          datepicker-options="dateOptions"
+          close-text="Close" alt-input-formats="altInputFormats"
+          uib-tooltip="Start Date Required"
+          tooltip-placement="bottom-right"
+          tooltip-trigger="'focus'">
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+        </span>
+      </p>
   </div>
+
 
 
   <button class="btn-round" type="submit">Create Cage</button>
