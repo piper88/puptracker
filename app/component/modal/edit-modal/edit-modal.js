@@ -20,6 +20,7 @@ function EditModalController($log){
     this.editData = this.resolve.editData;
   };
 
+  // Close modal when cancel button is clicked
   this.handleClose = function() {
     this.modalInstance.close();
   };

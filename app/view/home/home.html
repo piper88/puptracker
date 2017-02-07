@@ -14,7 +14,7 @@
             <project-li
                 ng-repeat="item in homeCtrl.projects"
                 project="item" role="menuitem"
-                ng-click="homeCtrl.fetchProjectLines(item)">
+                ng-click="homeCtrl.fetchProjectLines(item); status.isopen1 = false">
                 {{homeCtrl.currentProject.name}}
             </project-li>
             <li><new-project role="menuitem"></new-project></li>
@@ -33,7 +33,7 @@
                 ng-repeat="item in homeCtrl.currentProject.lines"
                 line="item" role="menuitem"
                 project="homeCtrl.currentProject"
-                ng-click="homeCtrl.fetchLineCages(item)">
+                ng-click="homeCtrl.fetchLineCages(item); status.isopen2 = false">
                 {{homeCtrl.currentProject.line.name}}
             </line-li>
             <li><new-line role="menuitem" project="homeCtrl.currentProject"></new-line></li>
@@ -53,7 +53,7 @@
                 ng-repeat="item in homeCtrl.currentLine.cages"
                 cage="item" role="menuitem"
                 line="homeCtrl.currentLine"
-                ng-click="homeCtrl.currentCage = item; homeCtrl.fetchMice()">
+                ng-click="homeCtrl.currentCage = item; homeCtrl.fetchMice(); status.isopen3 = false">
                 {{homeCtrl.currentLine.cage.name}}
             </cage-li>
             <li><new-cage role="menuitem" line="homeCtrl.currentLine"></new-cage></li>

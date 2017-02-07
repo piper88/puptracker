@@ -19,4 +19,9 @@ function DeleteModalController($log, $location, projectService){
       this.modalInstance.close();
     });
   };
+
+  // Close modal when cancel button is clicked
+  this.handleClose = function() {
+    this.modalInstance.close();
+  };
 }

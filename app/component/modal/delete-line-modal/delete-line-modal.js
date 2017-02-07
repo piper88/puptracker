@@ -19,4 +19,9 @@ function DeleteLineModalController($log, $location, lineService){
       this.modalInstance.close();
     });
   };
+
+  // Close modal when cancel button is clicked
+  this.handleClose = function() {
+    this.modalInstance.close();
+  };
 }

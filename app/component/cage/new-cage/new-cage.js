@@ -17,8 +17,9 @@ function NewCageController($log, $http, $rootScope, $scope, cageService){
   this.createNewCage = function(){
     $log.debug('init createNewCage()');
     cageService.createCage(this.line._id, this.cage)
-    .then( cage => {
-      this.cage = cage;
+    .then(() => {
+      this.cage.name = null;
+      this.cage.breedingStartDate = null;
     });
   };
 

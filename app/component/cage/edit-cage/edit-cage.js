@@ -7,6 +7,7 @@ module.exports = {
   bindings: {
     cage: '<',
     line: '<',
+    updateSuccess: '&',
   },
 };
 
