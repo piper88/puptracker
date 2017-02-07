@@ -57,8 +57,9 @@
   .new-project-container, .new-line-container, .new-cage-container{
     width: 100%;
     padding: 2%;
-    p {
+    .new-title {
       text-transform: uppercase;
+      font-weight: bold;
       font-size: 110%;
     }
   }

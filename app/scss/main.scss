@@ -93,7 +93,7 @@ footer {
   }
 }
 
-//default button
+//default button styles
 .btn {
   background: $app-white;
   border: none;
@@ -117,31 +117,44 @@ footer {
 	transition: all 0.3s;
 }
 
-.btn-dark {
-  margin: 2px;
-  padding: 5px 7px;
-  border-radius: 10px;
-  text-transform: uppercase;
-  display: inline-block;
-  outline: none;
-  border: none;
-  background-color: $app-secondary;
-  color: #fff;
-  transition: all 0.3s;
+// Delete Button on modals
+.delete-btn {
+  float: left;
+  background-color: $app-warn;
+  color: $app-white;
 }
-.btn-dark:hover{
-  background:$app-primary;
+.delete-btn:hover{
+  background:$app-warn-hover;
+  color: $app-white;
 }
 
+// Applied to delete and cancel button on delete modals
+.modal-btn{
+  font-size: 16px;
+  padding: 10px 16px;
+}
+
+.cancel-btn{
+  background-color: $app-success;
+  color: $app-white;
+}
+
+.cancel-btn:hover{
+  background-color: $app-success-hover;
+  color: $app-white;
+}
+
+// Create/update item button
 .btn-round {
   background: $app-tertiary;
-  padding: 7.5px 20px;
+  padding: 6px 15px;
   border-radius: 16px;
   color: $app-white;
   font-size: 14px;
   text-transform: uppercase;
   text-decoration: none;
   vertical-align: middle;
+  transition: all 0.3s;
 }
 .btn-round:hover {
   background: $app-tertiary-hover;
