@@ -31,6 +31,20 @@ function HomeController($log, $location, $rootScope, $uibModal, projectService, 
     return modalInstance;
   };
 
+  // Opens Delete Line modal
+  this.open = function(line) {
+    let modalInstance = $uibModal.open({
+      component: 'delete-line-modal',
+      resolve: {
+        deleteLine: function(){
+          return line._id;
+        },
+      },
+    });
+
+    return modalInstance;
+  };
+
 
   //Fetch projects initially
   this.fetchProjects = function(){
@@ -76,15 +90,11 @@ function HomeController($log, $location, $rootScope, $uibModal, projectService, 
   //Fetch all projects on page load
   this.fetchProjects();
 
-  this.deleteProject = function() {
-    projectService.deleteProject(this.currentProject._id);
-    $log.debug('Successfully deleted project!');
-  };
 
-  this.deleteLine = function() {
-    lineService.deleteLine(this.currentLine._id);
-    $log.debug('Successfully deleted line!');
-  };
+  // this.deleteLine = function() {
+  //   lineService.deleteLine(this.currentLine._id);
+  //   $log.debug('Successfully deleted line!');
+  // };
 
   this.deleteCage = function() {
     cageService.deleteCage(this.currentCage._id);
