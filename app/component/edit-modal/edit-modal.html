@@ -3,11 +3,9 @@
   </div>
 
   <div class="modal-body" id="modal-body">
-    <!-- <login login-success="editModalCtrl.handleClose()" ng-if="editModalCtrl.loginToggle"></login>
-    <signup login-success="editModalCtrl.handleClose()" ng-if="!editModalCtrl.loginToggle"></signup> -->
-    <edit-project ng-if="editModalCtrl.editToggle == 1" project="editModalCtrl.editData"></edit-project>
-    <edit-line ng-if="editModalCtrl.editToggle == 2" line="editModalCtrl.line"></edit-line>
-    <edit-cage ng-if="editModalCtrl.editToggle == 3" cage="editModalCtrl.cage"></edit-cage>
+    <edit-project update-success="editModalCtrl.handleClose()" ng-if="editModalCtrl.editToggle == 1" project="editModalCtrl.editData"></edit-project>
+    <edit-line update-success="editModalCtrl.handleClose()" ng-if="editModalCtrl.editToggle == 2" line="editModalCtrl.editData"></edit-line>
+    <edit-cage update-success="editModalCtrl.handleClose()" ng-if="editModalCtrl.editToggle == 3" cage="editModalCtrl.editData"></edit-cage>
   </div>
 
   <div class="modal-footer">

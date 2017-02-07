@@ -7,8 +7,7 @@ module.exports = {
   bindings: {
     modalInstance: '<',
     resolve: '<',
-    project: '<',
-    line: '<',
+    updateSuccess: '&',
   },
 };
 

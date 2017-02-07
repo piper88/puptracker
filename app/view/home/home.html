@@ -76,7 +76,7 @@
       <div class="col span-1-of-3" ng-if="homeCtrl.currentLine">
         <div class="edit-delete-container">
           <h4 class="home-nav-title"><strong>Current Line: </strong>{{homeCtrl.currentLine.name}}
-          <span ng-click="homeCtrl.open3(2)" class="fa fa-pencil"></span>
+          <span ng-click="homeCtrl.open3(2, homeCtrl.currentLine)" class="fa fa-pencil"></span>
           <span ng-click="homeCtrl.open2(homeCtrl.currentLine)" class="fa fa-trash"></span>
         </h4>
         </div>
@@ -85,7 +85,7 @@
       <div class="col span-1-of-3" ng-if="homeCtrl.currentCage">
         <div class="edit-delete-container">
           <h4 class="home-nav-title"><strong>Current Cage: </strong>{{homeCtrl.currentCage.name}}
-          <span ng-click="homeCtrl.open3(3)" class="fa fa-pencil"></span>
+          <span ng-click="homeCtrl.open3(3, homeCtrl.currentCage)" class="fa fa-pencil"></span>
           <span ng-click="homeCtrl.deleteCage()" class="fa fa-trash"></span>
         </h4>
         </div>

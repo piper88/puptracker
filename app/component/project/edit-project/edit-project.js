@@ -2,19 +2,23 @@
 
 module.exports = {
   template: require('./edit-project.html'),
-  controller: ['$log', 'projectService', EditProjectController],
+  controller: ['$log', '$location', 'projectService', EditProjectController],
   controllerAs: 'editProjectCtrl',
   bindings: {
     project: '<',
-    onUpdate: '&',
+    updateSuccess: '&',
   },
 };
 
-function EditProjectController($log, projectService){
+function EditProjectController($log, $location, projectService){
   $log.debug('init editprojectCtrl');
 
   this.updateProject = function(){
     $log.debug('init updateProject()');
-    projectService.updateProject(this.project);
+    projectService.updateProject(this.project)
+    .then(() => {
+      $location.url('/home');
+      this.updateSuccess();
+    });
   };
 }

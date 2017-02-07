@@ -2,7 +2,7 @@
 
 module.exports = {
   template: require('./edit-cage.html'),
-  controller: ['$log', '$scope', 'cageService', EditCageController],
+  controller: ['$log', '$location', '$scope', 'cageService', EditCageController],
   controllerAs: 'editCageCtrl',
   bindings: {
     cage: '<',
@@ -10,12 +10,16 @@ module.exports = {
   },
 };
 
-function EditCageController($log, $scope, cageService){
+function EditCageController($log, $location, $scope, cageService){
   $log.debug('init editCageCtrl');
 
   this.updateCage = function(){
     $log.debug('editCageCtrl.updateCage()');
-    cageService.updateCage(this.line, this.cage);
+    cageService.updateCage(this.line, this.cage)
+    .then(() => {
+      $location.url('/home');
+      this.updateSuccess();
+    });
   };
 
   $scope.today = function() {
