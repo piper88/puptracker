@@ -92,10 +92,25 @@
       </div>
     </div>
 
-  <line-info line="homeCtrl.currentLine" ng-if="homeCtrl.currentLine"></line-info>
-  <cage-info cage="homeCtrl.currentCage" ng-if="homeCtrl.currentCage"></cage-info>
-  <mouse-container ng-if="homeCtrl.currentCage" cage="homeCtrl.currentCage"></mouse-container>
 
+  <div class="row">
+    <!-- Line Information from Calculations -->
+    <div class="line-calculations-container" ng-if="homeCtrl.currentLine">
+      <h5><span>Expected Total Pups/Line: </span>{{homeCtrl.expectedTotalPups}}</h5>
+      <h5><span>Actual Total Pups/Line: </span> {{homeCtrl.currentLine.actualTotalPups}}</h5>
+      <h5><span>Expected Usable Pups/Line: </span>{{homeCtrl.expectedUsablePups}}</h5>
+    </div>
+
+    <!-- Cage Information from Calculations -->
+    <div class="cage-calculations-container" ng-if="homeCtrl.currentCage">
+      <h5><span>Expected Date of Birth: </span>{{homeCtrl.expectedDOB}}</h5>
+      <h5><span>Actual Date of Birth: </span> {{homeCtrl.actualDOB}}</h5>
+    </div>
+  </div>
+
+  <!-- <line-info line="homeCtrl.currentLine" ng-if="homeCtrl.currentLine"></line-info>
+  <cage-info cage="homeCtrl.currentCage" ng-if="homeCtrl.currentCage"></cage-info> -->
+  <mouse-container ng-if="homeCtrl.currentCage" cage="homeCtrl.currentCage"></mouse-container>
 
   <edit-project ng-if="homeCtrl.showEditProject" project="homeCtrl.currentProject"></edit-project>
   <edit-line ng-if="homeCtrl.showEditLine" line="homeCtrl.currentLine"></edit-line>

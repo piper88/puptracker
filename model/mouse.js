@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 const mouseSchema = mongoose.Schema({
   name: {type: String},
-  geneticMakeup: {type: [String]},
+  geneticMakeup: {type: String},
   DOB: {type: Date},
   cageId: {type: mongoose.Schema.Types.ObjectId, required: true},
   lineId: {type: mongoose.Schema.Types.ObjectId, required: true},
