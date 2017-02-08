@@ -44,6 +44,47 @@ footer {
 .modal-container{
   width: 90%;
   margin: 0 5%;
+  .modal-body{
+    h3{
+      margin: 0;
+      padding: 0;
+      line-height: 150%;
+    }
+  }
+  .delete-title {
+    text-transform: uppercase;
+    color: $app-error-hover;
+    font-weight: bold;
+  }
+  .update-title {
+    text-transform: uppercase;
+    color: $app-success;
+    font-weight: bold;
+  }
+  .modal-header {
+    h2{
+      margin-top:10px;
+      margin-bottom:0px;
+      padding:0;
+    }
+  }
+}
+
+.modal-icon {
+  font-size: 70px;
+  background-color: transparent;
+  transition: .2s;
+  cursor: pointer;
+}
+.modal-close{
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding-top: 2%;
+  padding-right: 2%;
+}
+.modal-icon:hover{
+  color: $app-white;
 }
 
 .edit-delete-container{
@@ -57,6 +98,7 @@ footer {
 
 .fa {
   color: $app-secondary;
+  cursor: pointer;
   transition: .2s;
 }
 .fa-trash:hover {
@@ -69,8 +111,8 @@ footer {
 
 // Form for creating/Editing new Lines, Cages and mice
 .generalForm {
-  button {
-    margin-top: 10px;
+  .submit-btn {
+    margin-top: 12px;
   }
   .group {
     position:relative;
@@ -91,7 +133,6 @@ footer {
     pointer-events:none;
     font-size:14px;
   }
-
   //Changes Placeholder Color
   input::-webkit-input-placeholder,
   textarea::-webkit-input-placeholder {
@@ -99,9 +140,15 @@ footer {
   }
 }
 
+.edit-line-container, .edit-cage-container, .edit-project-container {
+  input {
+    width: 80%;
+  }
+}
+
 //default button styles
 .btn {
-  background: $app-white;
+  background: transparent;
   border: none;
   text-transform: uppercase;
   border-radius: 3px;
@@ -123,14 +170,15 @@ footer {
 	transition: all 0.3s;
 }
 
+
 // Delete Button on modals
 .delete-btn {
   float: left;
-  background-color: $app-warn;
+  background-color: $app-error;
   color: $app-white;
 }
 .delete-btn:hover{
-  background:$app-warn-hover;
+  background:$app-error-hover;
   color: $app-white;
 }
 
@@ -152,7 +200,7 @@ footer {
 
 // Create/update item button
 .btn-round {
-  background: $app-tertiary;
+  background: $app-success;
   padding: 6px 15px;
   border-radius: 16px;
   color: $app-white;
@@ -163,7 +211,7 @@ footer {
   transition: all 0.3s;
 }
 .btn-round:hover {
-  background: $app-tertiary-hover;
+  background: $app-success-hover;
 }
 .btn-round:active {
   background:  $app-tertiary-hover;

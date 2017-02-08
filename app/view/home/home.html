@@ -25,7 +25,7 @@
     <!-- Select Line Dropdown -->
     <div class="container">
       <div class="btn-group" uib-dropdown is-open="status.isopen2" auto-close="outsideClick">
-        <button class="btn home-btn nav-btn" ng-if="homeCtrl.currentProject" type="button" uib-dropdown-toggle>
+        <button id="single-button" class="btn home-btn nav-btn" ng-if="homeCtrl.currentProject" type="button" uib-dropdown-toggle>
           Select Line <span class="caret"></span>
         </button>
           <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
@@ -45,7 +45,7 @@
     <!-- Select Cage Dropdown -->
     <div class="container">
       <div class="btn-group" uib-dropdown is-open="status.isopen3" auto-close="outsideClick">
-        <button class="btn home-btn nav-btn" ng-if="homeCtrl.currentLine" type="button" uib-dropdown-toggle>
+        <button id="single-button" class="btn home-btn nav-btn" ng-if="homeCtrl.currentLine" type="button" uib-dropdown-toggle>
           Select Cage <span class="caret"></span>
         </button>
           <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">

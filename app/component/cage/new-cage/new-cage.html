@@ -3,6 +3,7 @@
   <form novalidate
   class = "generalForm"
   ng-submit="newCageCtrl.createNewCage()">
+
   <label>Name</label>
   <input name="name" type="text"
     ng-model="newCageCtrl.cage.name"
@@ -10,6 +11,7 @@
     tooltip-placement="bottom-right"
     tooltip-trigger="'focus'">
 
+<div class="row">
   <label>Breeding Start Date</label>
     <div class='input-group date'>
       <p class="input-group">
@@ -23,13 +25,12 @@
           tooltip-placement="bottom-right"
           tooltip-trigger="'focus'">
         <span class="input-group-btn">
-          <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+          <button type="button" class="btn" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
         </span>
       </p>
   </div>
+</div>
 
-
-
-  <button class="btn-round" type="submit">Create Cage</button>
+  <button class="btn-round submit-btn" type="submit">Create Cage</button>
   </form>
 </div>

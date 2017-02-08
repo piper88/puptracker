@@ -12,6 +12,7 @@
       width: 100%;
       text-transform: uppercase;
       padding:0 15px;
+      cursor: pointer;
     }
   }
   .container {
@@ -52,7 +53,6 @@
     margin: 0;
   }
 
-
   .new-project-container, .new-line-container, .new-cage-container{
     width: 100%;
     padding: 2%;
@@ -60,21 +60,6 @@
       text-transform: uppercase;
       font-weight: bold;
       font-size: 110%;
-    }
-  }
-
-  .edit-project-container{
-    h4{
-      text-transform: uppercase;
-    }
-    input{
-      width: 30%;
-    }
-  }
-
-  .line-info{
-    h3{
-      text-transform: uppercase;
     }
   }
 

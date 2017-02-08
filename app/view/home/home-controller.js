@@ -105,17 +105,6 @@ function HomeController($log, $location, $rootScope, $uibModal, projectService, 
   //Fetch all projects on page load
   this.fetchProjects();
 
-
-  // this.deleteLine = function() {
-  //   lineService.deleteLine(this.currentLine._id);
-  //   $log.debug('Successfully deleted line!');
-  // };
-
-  this.deleteCage = function() {
-    cageService.deleteCage(this.currentCage._id);
-    $log.debug('Successfully deleted cage!');
-  };
-
   this.calculate = function(){
       // Calculations
     let numFemales = this.currentCage.numberOfFemales;
