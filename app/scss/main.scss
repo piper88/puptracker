@@ -112,7 +112,7 @@ footer {
 // Form for creating/Editing new Lines, Cages and mice
 .generalForm {
   .submit-btn {
-    margin-top: 12px;
+    margin-top: 5px;
   }
   .group {
     position:relative;
@@ -127,6 +127,11 @@ footer {
     margin-bottom: 3px;
     }
   input:focus{ outline:none; }
+
+  .input-group{
+    padding:0;
+    margin:0;
+  }
 
   label{
     color:$app-black;
