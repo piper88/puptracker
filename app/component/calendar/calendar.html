@@ -1,8 +1,7 @@
 <section class="calendar">
 
   <h3>Calendar for: {{calendarCtrl.line.name}}</h3>
-  <div ng-repeat="cage in calendarCtrl.line.cages"
-  cage="cage"></div>
+  <button type="button" class="btn home-btn" ng-click="calendarCtrl.updateEvents(calendarCtrl.line)"> Display Events </button>
 
   <div
     ui-calendar="calendarCtrl.uiConfig.calendar"
@@ -11,5 +10,4 @@
     ng-model="calendarCtrl.eventSources">
   </div>
 
-  <button type="button" class="btn home-btn" ng-click="calendarCtrl.addEvents(calendarCtrl.line)"> Add Event </button>
 </section>

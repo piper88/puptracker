@@ -17,10 +17,11 @@ function CalendarController($log){
   this.uiConfig = {
     calendar:{
       height: 500,
+      width: 100,
       editable: false,
       header:{
         left:'title',
-        center: 'Line',
+        center: '',
         right: 'today prev,next',
       },
       eventClick: this.alertOnEventClick,
@@ -32,9 +33,17 @@ function CalendarController($log){
 
   // event source that contains custom events on the scope
   this.events = [];
+  this.colorArray = {
+    0:'#ff0040',
+    1:'#ec891d',
+    2:'#55b555',
+    3:'#0079c0',
+    4:'#d6e03e',
+    5:'#6d276a',
+  };
 
   // Adds event to represent breeding start and expected end for each cage
-  this.addEvents = function(line) {
+  this.updateEvents = function(line) {
     for(var i = 0; i < line.cages.length; i++) {
        // Breeding Start Date
       let cage = line.cages[i];
@@ -51,14 +60,16 @@ function CalendarController($log){
       endDate.setDate(endDate.getDate() + 22);
       endDate.toDateString();
       let endDay = endDate.getDate();
-      let endMonth = endDate.getMonth()+1;
+      let endMonth = endDate.getMonth();
       let endYear= endDate.getFullYear();
+
 
       // Push events into array
       this.events.push({
         title: cage.name,
         start: new Date(startYear, startMonth, startDay),
         end: new Date(endYear, endMonth, endDay),
+        color: this.colorArray[i],
       });
     }
   };
@@ -68,7 +79,6 @@ function CalendarController($log){
     this.events.splice(index,1);
   };
 
-  /* event sources array*/
+  // Event sources array
   this.eventSources = [this.events];
-  this.eventSources2 = [this.events];
 }
