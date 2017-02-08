@@ -106,19 +106,22 @@ function HomeController($log, $location, $rootScope, $uibModal, projectService, 
   this.fetchProjects();
 
   this.calculate = function(){
-      // Calculations
-    let numFemales = this.currentCage.numberOfFemales;
-    let d2 = this.currentCage.actualDOB;
+    // Calculations
+    // Calculate Expected DOB and return formatted date
     let d = this.currentCage.breedingStartDate;
     let date =  new Date(d);
-    let date2 = new Date(d2);
     date.setDate(date.getDate() + 22);
     date.toDateString();
-    date2.toDateString();
     let expectedDOB = (date.getMonth()+1) + '/' + date.getDate() + '/' + date.getFullYear();
+
+    // Return formatted date for actualDOB
+    let d2 = this.currentCage.actualDOB;
+    let date2 = new Date(d2);
+    date2.toDateString();
     let actualDOB = (date2.getMonth()+1) + '/' + date2.getDate() + '/' + date2.getFullYear();
 
-
+    // Constants from inputs and pre-known
+    let numFemales = this.currentCage.numberOfFemales;
     let litterSize = 6;
     let usablePercent = .25;
 
@@ -126,6 +129,6 @@ function HomeController($log, $location, $rootScope, $uibModal, projectService, 
     this.expectedUsablePups = numFemales * litterSize * usablePercent;
     this.expectedDOB = expectedDOB;
     this.actualDOB = actualDOB;
-    this.numLitters = 20;
+    this.numLitters = 20; // for testing purposes
   };
 }

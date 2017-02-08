@@ -1,3 +1,15 @@
 <section class="calendar">
-  <div ui-calendar="calendarCtrl.uiConfig.calendar" class="span8 calendar" ng-model="eventSources"></div> 
+
+  <h3>Calendar for: {{calendarCtrl.line.name}}</h3>
+  <div ng-repeat="cage in calendarCtrl.line.cages"
+  cage="cage"></div>
+
+  <div
+    ui-calendar="calendarCtrl.uiConfig.calendar"
+    class="span8 calendar"
+    line="calendarCtrl.line"
+    ng-model="calendarCtrl.eventSources">
+  </div>
+
+  <button type="button" class="btn home-btn" ng-click="calendarCtrl.addEvents(calendarCtrl.line)"> Add Event </button>
 </section>
