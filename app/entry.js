@@ -14,13 +14,13 @@ const pascalcase = require('pascalcase');
 const ngTouch = require('angular-touch');
 const ngAnimate = require('angular-animate');
 const uiRouter = require('angular-ui-router');
-// const uiCalendar = require('angular-ui-calendar');
-// const fullCalendar = require('fullcalendar');
+require('angular-ui-calendar');
+require('fullcalendar');
 const uiBootstrap = require('angular-ui-bootstrap');
 const ngFileUpload = require('ng-file-upload');
 
 // Create angular module
-const app = angular.module('app', [ngTouch, uiBootstrap, ngAnimate, ngFileUpload, uiRouter]);
+const app = angular.module('app', [ngTouch, uiBootstrap, ngAnimate, ngFileUpload, uiRouter, 'ui.calendar']);
 
 // LOAD CONFIG
 let context = require.context('./config/', true, /.js$/);

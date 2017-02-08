@@ -11,7 +11,6 @@
     "start": "node server.js",
     "start-watch": "DEBUG='puptracker*' ./node_modules/nodemon/bin/nodemon.js server.js"
   },
-  
   "repository": {
     "type": "git",
     "url": "git+https://github.com/prungy88/puptracker.git"
@@ -25,7 +24,6 @@
   "dependencies": {
     "angular": "^1.6.1",
     "angular-animate": "^1.6.1",
-    "angular-moment": "^1.0.1",
     "angular-touch": "^1.6.1",
     "angular-ui-bootstrap": "^2.4.0",
     "angular-ui-calendar": "^1.0.2",
@@ -46,12 +44,12 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
     "font-awesome": "^4.6.3",
+    "fs": "0.0.1-security",
     "fullcalendar": "^3.1.0",
     "html-loader": "^0.4.4",
     "html-webpack-plugin": "^2.26.0",
     "istanbul": "^0.4.5",
     "jquery": "^3.1.1",
-    "jquery-ui": "^1.12.1",
     "jsonwebtoken": "^7.2.0",
     "lorem-ipsum": "^1.0.3",
     "moment": "^2.17.1",

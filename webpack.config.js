@@ -33,7 +33,6 @@ let plugins = [
   }),
 ];
 
-
 module.exports = {
   entry: `${__dirname}/app/entry.js`,
   plugins,
