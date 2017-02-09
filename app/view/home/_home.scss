@@ -1,11 +1,17 @@
 @import "theme";
 @import "vendor";
 .home {
-  padding: 1% 3%;
+  margin-bottom: 50px;
+
   h2 {
     text-transform: uppercase;
     padding: 3% 0;
     color: $app-black;
+  }
+// Contains everything in home except nav with dropdowns
+  .home-body-container {
+    padding: 3%;
+    background-color: $app-white;
   }
   .dropdown-menu{
     li {
@@ -15,18 +21,38 @@
       cursor: pointer;
     }
   }
-  .container {
-    width: 33.33333%;
-    float: left;
-  }
-  .btn-group {
+  // Container for header title and buttons
+  .home-nav {
+    margin-top: 0;
+    padding:0;
     width: 100%;
+    background-color: $app-white;
+    .row {
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      // width: 33.333333% to center
+      width: 25%;
+      float: left;
+      .btn-group {
+        width: 100%;
+      }
+    }
+    .nav-btn{
+      float: left;
+      width: 98%;
+      margin: 2%;
+    }
   }
-  .nav-btn{
-    float: left;
-    width: 90%;
-    margin: 0 5%;
+
+  // Project title
+  .home-nav-title {
+    text-transform: uppercase;
+    color: $app-black;
+    margin: 0;
   }
+
 
   // Main buttons for navigation on home
   .home-btn {
@@ -39,19 +65,8 @@
     background-color: $app-secondary-hover;
     border: 2px solid $app-secondary;
   }
-  // Container for header title and buttons
-  .home-nav {
-    margin-top: 0;
-    padding:0;
-    width: 100%;
-  }
-  // Project title
-  .home-nav-title {
-    text-transform: uppercase;
-    color: $app-black;
-    margin: 0;
-  }
 
+// Styling for creating new objects in the dropdown menus
   .new-project-container, .new-line-container, .new-cage-container{
     width: 100%;
     padding: 2%;
@@ -59,14 +74,6 @@
       text-transform: uppercase;
       font-weight: bold;
       font-size: 110%;
-    }
-  }
-
-  .secondary-menu-container {
-    margin-top: 50px;
-    .row {
-      margin: 0;
-      padding: 0;
     }
   }
 

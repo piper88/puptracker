@@ -28,9 +28,14 @@ li {
 }
 
 footer {
-  position: relative;
+  position: absolute;
   bottom: 0;
-  p{
+  height: 50px;
+  width: 100%;
+  background-color: $app-white;
+  color: $app-secondary-hover;
+  p {
+    margin: 1% 0;
     text-align: center;
     font-size: 10px;
   }
