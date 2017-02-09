@@ -16,8 +16,8 @@ function CalendarController($log){
 
   this.uiConfig = {
     calendar:{
-      height: 500,
-      width: 100,
+      //height: 700,
+      aspectRatio: 1.5,
       editable: false,
       header:{
         left:'title',
@@ -43,10 +43,11 @@ function CalendarController($log){
   };
 
   // Adds event to represent breeding start and expected end for each cage
-  this.updateEvents = function(line) {
-    for(var i = 0; i < line.cages.length; i++) {
+  this.showEvents = function() {
+    $log.debug('init calendarCtrl.showEvents');
+    for(var i = 0; i < this.line.cages.length; i++) {
        // Breeding Start Date
-      let cage = line.cages[i];
+      let cage = this.line.cages[i];
       $log.debug('cage', cage.breedingStartDate);
       let start = cage.breedingStartDate;
       let startDate =  new Date(start);
@@ -63,13 +64,13 @@ function CalendarController($log){
       let endMonth = endDate.getMonth();
       let endYear= endDate.getFullYear();
 
-
       // Push events into array
       this.events.push({
         title: cage.name,
         start: new Date(startYear, startMonth, startDay),
         end: new Date(endYear, endMonth, endDay),
         color: this.colorArray[i],
+        stick: true,
       });
     }
   };

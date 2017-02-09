@@ -60,7 +60,6 @@ function HomeController($log, $location, $rootScope, $uibModal, projectService, 
     return modalInstance;
   };
 
-
   //Fetch projects initially
   this.fetchProjects = function(){
     projectService.fetchProjects()
@@ -104,6 +103,7 @@ function HomeController($log, $location, $rootScope, $uibModal, projectService, 
 
   //Fetch all projects on page load
   this.fetchProjects();
+
 
   this.calculate = function(){
     // Calculations
