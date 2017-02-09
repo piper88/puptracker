@@ -1,2 +1,13 @@
 <section class="calendar">
+
+  <h3>Calendar for: {{calendarCtrl.line.name}}</h3>
+
+  <div
+    ui-calendar="calendarCtrl.uiConfig.calendar"
+    class="span8 calendar"
+    line="calendarCtrl.line"
+    ng-init="calendarCtrl.showEvents()"
+    ng-model="calendarCtrl.eventSources">
+  </div>
+
 </section>

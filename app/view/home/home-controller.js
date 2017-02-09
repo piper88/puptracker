@@ -2,9 +2,9 @@
 
 require('./_home.scss');
 
-module.exports = ['$log', '$location', '$rootScope','projectService', 'lineService', 'cageService', 'mouseService', HomeController];
+module.exports = ['$log', '$location', '$rootScope', '$uibModal', 'projectService', 'lineService', 'cageService', 'mouseService', HomeController];
 
-function HomeController($log, $location, $rootScope, projectService, lineService, cageService, mouseService){
+function HomeController($log, $location, $rootScope, $uibModal, projectService, lineService, cageService, mouseService){
   $log.debug('init homeCtrl');
 
   this.projects = [];
@@ -15,6 +15,49 @@ function HomeController($log, $location, $rootScope, projectService, lineService
     isopen1:false,
     isopen2: false,
     isopen3: false,
+  };
+
+  // Opens Delete Project Modal
+  this.open = function(project) {
+    let modalInstance = $uibModal.open({
+      component: 'delete-modal',
+      resolve: {
+        deleteProject: function(){
+          return project._id;
+        },
+      },
+    });
+    return modalInstance;
+  };
+
+  // Opens Delete Line Modal
+  this.open2 = function(line) {
+    let modalInstance = $uibModal.open({
+      component: 'delete-line-modal',
+      resolve: {
+        deleteLine: function(){
+          return line._id;
+        },
+      },
+    });
+    return modalInstance;
+  };
+
+  // Opens Edit Project, Line, Cage Modal
+  this.open3 = function(itemToEdit, data) {
+    let modalInstance = $uibModal.open({
+      component: 'edit-modal',
+      resolve: {
+        editToggle: function(){
+          return itemToEdit;
+        },
+
+        editData: function(){
+          return data;
+        },
+      },
+    });
+    return modalInstance;
   };
 
   //Fetch projects initially
@@ -49,10 +92,8 @@ function HomeController($log, $location, $rootScope, projectService, lineService
 
   this.fetchMice = function() {
     $log.debug('homeCtrl.fetchMice');
-    if(!this.currentProject) return;
-    if(!this.currentLine) return;
-    if(!this.currentCage) return;
-
+    $log.debug('currentCage', this.currentCage);
+    this.calculate();
     return mouseService.fetchMice(this.currentCage._id)
     .then(mice => {
       this.mice = mice;
@@ -63,8 +104,31 @@ function HomeController($log, $location, $rootScope, projectService, lineService
   //Fetch all projects on page load
   this.fetchProjects();
 
-  this.deleteProject = function() {
-    projectService.deleteProject(this.currentProject._id);
-    $log.debug('Successfully deleted project!');
+
+  this.calculate = function(){
+    // Calculations
+    // Calculate Expected DOB and return formatted date
+    let d = this.currentCage.breedingStartDate;
+    let date =  new Date(d);
+    date.setDate(date.getDate() + 22);
+    date.toDateString();
+    let expectedDOB = (date.getMonth()+1) + '/' + date.getDate() + '/' + date.getFullYear();
+
+    // Return formatted date for actualDOB
+    let d2 = this.currentCage.actualDOB;
+    let date2 = new Date(d2);
+    date2.toDateString();
+    let actualDOB = (date2.getMonth()+1) + '/' + date2.getDate() + '/' + date2.getFullYear();
+
+    // Constants from inputs and pre-known
+    let numFemales = this.currentCage.numberOfFemales;
+    let litterSize = 6;
+    let usablePercent = .25;
+
+    this.expectedTotalPups = litterSize * numFemales;
+    this.expectedUsablePups = numFemales * litterSize * usablePercent;
+    this.expectedDOB = expectedDOB;
+    this.actualDOB = actualDOB;
+    this.numLitters = 20; // for testing purposes
   };
 }

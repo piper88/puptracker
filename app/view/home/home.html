@@ -14,7 +14,7 @@
             <project-li
                 ng-repeat="item in homeCtrl.projects"
                 project="item" role="menuitem"
-                ng-click="homeCtrl.fetchProjectLines(item)">
+                ng-click="homeCtrl.fetchProjectLines(item); status.isopen1 = false">
                 {{homeCtrl.currentProject.name}}
             </project-li>
             <li><new-project role="menuitem"></new-project></li>
@@ -25,7 +25,7 @@
     <!-- Select Line Dropdown -->
     <div class="container">
       <div class="btn-group" uib-dropdown is-open="status.isopen2" auto-close="outsideClick">
-        <button class="btn home-btn nav-btn" ng-if="homeCtrl.currentProject" type="button" uib-dropdown-toggle>
+        <button id="single-button" class="btn home-btn nav-btn" ng-if="homeCtrl.currentProject" type="button" uib-dropdown-toggle>
           Select Line <span class="caret"></span>
         </button>
           <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
@@ -33,7 +33,7 @@
                 ng-repeat="item in homeCtrl.currentProject.lines"
                 line="item" role="menuitem"
                 project="homeCtrl.currentProject"
-                ng-click="homeCtrl.fetchLineCages(item)">
+                ng-click="homeCtrl.fetchLineCages(item); status.isopen2 = false">
                 {{homeCtrl.currentProject.line.name}}
             </line-li>
             <li><new-line role="menuitem" project="homeCtrl.currentProject"></new-line></li>
@@ -45,7 +45,7 @@
     <!-- Select Cage Dropdown -->
     <div class="container">
       <div class="btn-group" uib-dropdown is-open="status.isopen3" auto-close="outsideClick">
-        <button class="btn home-btn nav-btn" ng-if="homeCtrl.currentLine" type="button" uib-dropdown-toggle>
+        <button id="single-button" class="btn home-btn nav-btn" ng-if="homeCtrl.currentLine" type="button" uib-dropdown-toggle>
           Select Cage <span class="caret"></span>
         </button>
           <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
@@ -53,7 +53,7 @@
                 ng-repeat="item in homeCtrl.currentLine.cages"
                 cage="item" role="menuitem"
                 line="homeCtrl.currentLine"
-                ng-click="homeCtrl.currentCage = item">
+                ng-click="homeCtrl.currentCage = item; homeCtrl.fetchMice(); status.isopen3 = false">
                 {{homeCtrl.currentLine.cage.name}}
             </cage-li>
             <li><new-cage role="menuitem" line="homeCtrl.currentLine"></new-cage></li>
@@ -67,8 +67,8 @@
     <div class="col span-1-of-3" ng-if="homeCtrl.currentProject">
         <div class="edit-delete-container">
           <h4 class="home-nav-title"><strong>Project Name: </strong>{{homeCtrl.currentProject.name}}
-            <span ng-click="homeCtrl.showEditProject = !homeCtrl.showEditProject" class="fa fa-pencil"></span>
-            <span ng-click="homeCtrl.deleteProject()" class="fa fa-trash"></span>
+            <span ng-click="homeCtrl.open3(1, homeCtrl.currentProject)" class="fa fa-pencil"></span>
+            <span ng-click="homeCtrl.open(homeCtrl.currentProject)" class="fa fa-trash"></span>
           </h4>
         </div>
     </div>
@@ -76,8 +76,8 @@
       <div class="col span-1-of-3" ng-if="homeCtrl.currentLine">
         <div class="edit-delete-container">
           <h4 class="home-nav-title"><strong>Current Line: </strong>{{homeCtrl.currentLine.name}}
-          <span ng-click="homeCtrl.showEditLine = !homeCtrl.showEditLine" class="fa fa-pencil"></span>
-          <span ng-click="homeCtrl.deleteLine()" class="fa fa-trash"></span>
+          <span ng-click="homeCtrl.open3(2, homeCtrl.currentLine)" class="fa fa-pencil"></span>
+          <span ng-click="homeCtrl.open2(homeCtrl.currentLine)" class="fa fa-trash"></span>
         </h4>
         </div>
       </div>
@@ -85,20 +85,26 @@
       <div class="col span-1-of-3" ng-if="homeCtrl.currentCage">
         <div class="edit-delete-container">
           <h4 class="home-nav-title"><strong>Current Cage: </strong>{{homeCtrl.currentCage.name}}
-          <span ng-click="homeCtrl.showEditCage = !homeCtrl.showEditCage" class="fa fa-pencil"></span>
+          <span ng-click="homeCtrl.open3(3, homeCtrl.currentCage)" class="fa fa-pencil"></span>
           <span ng-click="homeCtrl.deleteCage()" class="fa fa-trash"></span>
         </h4>
         </div>
       </div>
     </div>
 
-  <line-info line="homeCtrl.currentLine" ng-if="homeCtrl.currentLine"></line-info>
-  <cage-info cage="homeCtrl.currentCage" ng-if="homeCtrl.currentCage"></cage-info>
+  <!-- <div class="row">
+    <div class="line-calculations-container" ng-if="homeCtrl.currentLine">
+      <h5><span>Expected Total Pups/Line: </span>{{homeCtrl.expectedTotalPups}}</h5>
+      <h5><span>Actual Total Pups/Line: </span> {{homeCtrl.currentLine.actualTotalPups}}</h5>
+      <h5><span>Expected Usable Pups/Line: </span>{{homeCtrl.expectedUsablePups}}</h5>
+    </div>
+    <div class="cage-calculations-container" ng-if="homeCtrl.currentCage">
+      <h5><span>Expected Date of Birth: </span>{{homeCtrl.expectedDOB}}</h5>
+      <h5><span>Actual Date of Birth: </span> {{homeCtrl.actualDOB}}</h5>
+    </div>
+  </div> -->
+
+  <calendar ng-if="homeCtrl.currentLine" line="homeCtrl.currentLine"></calendar>
   <mouse-container ng-if="homeCtrl.currentCage" cage="homeCtrl.currentCage"></mouse-container>
-
-
-  <edit-project ng-if="homeCtrl.showEditProject" project="homeCtrl.currentProject"></edit-project>
-  <edit-line ng-if="homeCtrl.showEditLine" line="homeCtrl.currentLine"></edit-line>
-  <edit-cage ng-if="homeCtrl.showEditCage" cage="homeCtrl.currentCage"></edit-cage>
 
 </main>

@@ -1,10 +1,15 @@
 <div class="new-project-container">
-  <div class="row"><p>Create a New Project</p></div>
+  <div class="row"><p class="new-title">Create a New Project</p></div>
 
   <form class="generalForm" novalidate ng-submit="newProjectCtrl.createNewProject()">
     <label>Name</label>
-      <input type="text" ng-model="newProjectCtrl.project.name">
-  <button class="btn-round" type="submit"> Create </button>
+      <input
+        type="text"
+        ng-model="newProjectCtrl.project.name"
+        uib-tooltip="Name Required"
+        tooltip-placement="bottom-right"
+        tooltip-trigger="'focus'">
+  <button class="btn-round submit-btn" type="submit"> Create </button>
   </form>
 
 </div>

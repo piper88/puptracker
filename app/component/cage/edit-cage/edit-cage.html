@@ -1,74 +1,55 @@
-<div>
-  <h3>Update Cage Information</h3>
+<section class="edit-cage-container">
   <form novalidate
   class = "generalForm"
   ng-submit="editCageCtrl.updateCage()">
 
-   <label>Name</label>
-   <input name="name" type="text" ng-model="editCageCtrl.cage.name">
+   <div class="row"><div class="col span-1-of-2">
+     <label>Name</label>
+     <input name="name" type="text" ng-model="editCageCtrl.cage.name">
+   </div></div>
 
-   <label>Number of Female Breeders</label>
-   <input name="numberOfFemales" type="number" ng-model="editCageCtrl.cage.numberOfFemales">
+   <div class="row">
+     <div class="col span-1-of-2">
+       <label>Number of Female Breeders</label>
+       <input name="numberOfFemales" type="number" ng-model="editCageCtrl.cage.numberOfFemales">
+     </div>
 
-   <label>Number of Male Breeders</label>
-   <input name="numberOfMales" type="number" ng-model="editCageCtrl.cage.numberOfMales">
+     <div class="col span-1-of-2">
+       <label>Number of Male Breeders</label>
+       <input name="numberOfMales" type="number" ng-model="editCageCtrl.cage.numberOfMales">
+     </div>
+   </div>
 
-   <label>Breeding End Date</label>
-    <div class='input-group date' id='datetimepicker1'>
+   <div class="row">
+    <div class="col span-1-of-2">
+     <label>Breeding End Date</label>
+      <div class='input-group date'>
+        <p class="input-group">
+          <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
+          ng-model="editCageCtrl.cage.breedingEndDate" ng-model="dt" is-open="popup1.opened"
+          datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats">
+          <span class="input-group-btn">
+            <button type="button" class="btn" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
 
-      <p class="input-group">
-        <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
-        ng-model="editCageCtrl.cage.breedingEndDate" ng-model="dt" is-open="popup2.opened"
-        datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats">
-        <span class="input-group-btn">
-          <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
-        </span>
-      </p>
+    <div class="row">
+     <label>Actual Date of Birth of Litter</label>
+      <div class='input-group date'>
+        <p class="input-group">
+          <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
+          ng-model="editCageCtrl.cage.actualDOB "ng-model="dt" is-open="popup2.opened"
+          datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats">
+          <span class="input-group-btn">
+            <button type="button" class="btn" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+        </p>
+      </div>
     </div>
 
-   <label>Expected Date of Birth of Litter</label>
-    <div class='input-group date' id='datetimepicker1'>
-      <p class="input-group">
-        <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
-        ng-model="editCageCtrl.cage.expectedDOB "ng-model="dt" is-open="popup3.opened"
-        datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats">
-        <span class="input-group-btn">
-          <button type="button" class="btn btn-default" ng-click="open3()"><i class="glyphicon glyphicon-calendar"></i></button>
-        </span>
-      </p>
-    </div>
-
-   <label>Actual Date of Birth of Litter</label>
-
-    <div class='input-group date' id='datetimepicker1'>
-      <p class="input-group">
-        <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
-        ng-model="editCageCtrl.cage.actualDOB "ng-model="dt" is-open="popup4.opened"
-        datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats">
-        <span class="input-group-btn">
-          <button type="button" class="btn btn-default" ng-click="open4()"><i class="glyphicon glyphicon-calendar"></i></button>
-        </span>
-      </p>
-    </div>
-
-  <label>Number of Litters Monthly</label>
-  <input name="numberLittersMonthly" type="number" ng-model="editCageCtrl.cage.numberLittersMonthly">
-
-   <label>Expected Number of Total Pups</label>
-   <input name="expectedTotalPups" type="number" ng-model="editCageCtrl.cage.expectedTotalPups">
-
-   <label>Actual Number of Total Pups</label>
-   <input name="expectedTotalPups" type="number" ng-model="editCageCtrl.cage.actualTotalPups">
-
-   <label>Number of Litters Monthly</label>
-  <input name="numberLittersMonthly" type="number" ng-model="editCageCtrl.cage.numberLittersMonthly">
-
-   <label>Expected Number of Total Pups</label>
-   <input name="expectedTotalPups" type="number" ng-model="editCageCtrl.cage.expectedTotalPups">
-
-   <label>Actual Number of Total Pups</label>
-   <input name="expectedTotalPups" type="number" ng-model="editCageCtrl.cage.actualTotalPups">
-
-  <button class="btn-round" type="submit"> Update </button>
+  <button class="btn-round submit-btn" type="submit"> Update </button>
   </form>
-</div>
+</section>

@@ -1,0 +1,17 @@
+<div class="modal-container">
+  <div class="modal-header">
+    <h2 class="update-title" ng-if="editModalCtrl.editToggle == 1">Update Project</h2>
+    <h2 class="update-title" ng-if="editModalCtrl.editToggle == 2">Update Line</h2>
+    <h2 class="update-title" ng-if="editModalCtrl.editToggle == 3">Update Cage</h2>
+
+    <span><i class="fa fa-close modal-icon modal-close" ng-click="editModalCtrl.handleClose()"></i></span>
+  </div>
+
+  <div class="modal-body">
+    <edit-project update-success="editModalCtrl.handleClose()" ng-if="editModalCtrl.editToggle == 1" project="editModalCtrl.editData"></edit-project>
+    <edit-line update-success="editModalCtrl.handleClose()" ng-if="editModalCtrl.editToggle == 2" line="editModalCtrl.editData"></edit-line>
+    <edit-cage update-success="editModalCtrl.handleClose()" ng-if="editModalCtrl.editToggle == 3" cage="editModalCtrl.editData"></edit-cage>
+  </div>
+
+  <div class="modal-footer"></div>
+</div>

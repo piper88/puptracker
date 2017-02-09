@@ -20,7 +20,7 @@ Initial User Inputs - `name`, `breedingStart`
 Update User Inputs - `actualDOB`
 
 `breedingEnd`
-  - Set end date for when youngest breeder in cage is 200 days old
+  - Calculated: Set end date for when youngest breeder in cage is 200 days old
 `expectedDOB`
   - Calculated. 22 days after Breeding Start Date
 `actualDOB`

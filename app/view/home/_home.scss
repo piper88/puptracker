@@ -1,7 +1,7 @@
 @import "theme";
 @import "vendor";
 .home {
-  padding: 1% 2%;
+  padding: 1% 3%;
   h2 {
     text-transform: uppercase;
     padding: 3% 0;
@@ -12,8 +12,8 @@
       width: 100%;
       text-transform: uppercase;
       padding:0 15px;
+      cursor: pointer;
     }
-
   }
   .container {
     width: 33.33333%;
@@ -45,7 +45,6 @@
     padding:0;
     width: 100%;
   }
-
   // Project title
   .home-nav-title {
     text-transform: uppercase;
@@ -53,28 +52,13 @@
     margin: 0;
   }
 
-
   .new-project-container, .new-line-container, .new-cage-container{
     width: 100%;
     padding: 2%;
-    p {
+    .new-title {
       text-transform: uppercase;
+      font-weight: bold;
       font-size: 110%;
-    }
-  }
-
-  .edit-project-container{
-    h4{
-      text-transform: uppercase;
-    }
-    input{
-      width: 30%;
-    }
-  }
-
-  .line-info{
-    h3{
-      text-transform: uppercase;
     }
   }
 

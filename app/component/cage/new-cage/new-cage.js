@@ -17,8 +17,9 @@ function NewCageController($log, $http, $rootScope, $scope, cageService){
   this.createNewCage = function(){
     $log.debug('init createNewCage()');
     cageService.createCage(this.line._id, this.cage)
-    .then( cage => {
-      this.cage = cage;
+    .then(() => {
+      this.cage.name = null;
+      this.cage.breedingStartDate = null;
     });
   };
 
@@ -41,6 +42,7 @@ function NewCageController($log, $http, $rootScope, $scope, cageService){
     formatYear: 'yy',
     maxDate: new Date(2020, 5, 22),
     minDate: new Date(),
+    minMode: 'day',
     startingDay: 1,
   };
 
@@ -55,17 +57,6 @@ function NewCageController($log, $http, $rootScope, $scope, cageService){
     $scope.popup1.opened = true;
   };
 
-  $scope.open2 = function() {
-    $scope.popup2.opened = true;
-  };
-
-  $scope.open3 = function() {
-    $scope.popup3.opened = true;
-  };
-
-  $scope.open4 = function() {
-    $scope.popup4.opened = true;
-  };
 
   $scope.setDate = function(year, month, day) {
     $scope.dt = new Date(year, month, day);
@@ -76,18 +67,6 @@ function NewCageController($log, $http, $rootScope, $scope, cageService){
   $scope.altInputFormats = ['M!/d!/yyyy'];
 
   $scope.popup1 = {
-    opened: false,
-  };
-
-  $scope.popup2 = {
-    opened: false,
-  };
-
-  $scope.popup3 = {
-    opened: false,
-  };
-
-  $scope.popup4 = {
     opened: false,
   };
 
@@ -110,10 +89,10 @@ function NewCageController($log, $http, $rootScope, $scope, cageService){
     var date = data.date,
       mode = data.mode;
     if (mode === 'day') {
-      var dayToCheck = new Date(date).setHours(0,0,0,0);
+      var dayToCheck = new Date(date);
 
       for (var i = 0; i < $scope.events.length; i++) {
-        var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
+        var currentDay = new Date($scope.events[i].date);
 
         if (dayToCheck === currentDay) {
           return $scope.events[i].status;
