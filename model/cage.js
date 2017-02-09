@@ -6,7 +6,7 @@ const debug = require('debug')('puptracker:cage');
 const Mouse = require('./mouse.js');
 
 const cageSchema = mongoose.Schema({
-  name: {type: String},
+  name: {type: String, required:true},
   numberOfFemales: {type: Number},
   numberOfMales: {type: Number},
   userId: {type: mongoose.Schema.Types.ObjectId, required: true},

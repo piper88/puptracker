@@ -5,7 +5,7 @@
   ng-submit="newCageCtrl.createNewCage()">
 
   <label>Name</label>
-  <input name="name" type="text"
+  <input required name="name" type="text"
     ng-model="newCageCtrl.cage.name"
     uib-tooltip="Name Required"
     tooltip-placement="bottom-right"
@@ -14,7 +14,7 @@
   <label>Breeding Start Date</label>
     <div class='input-group date'>
       <p class="input-group">
-        <input type="text" class="form-control"
+        <input required type="text" class="form-control"
           uib-datepicker-popup="{{format}}"
           ng-model="newCageCtrl.cage.breedingStartDate"
           ng-model="dt" is-open="popup1.opened"
