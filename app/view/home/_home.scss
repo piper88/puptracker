@@ -55,15 +55,15 @@
 
   // Main buttons for navigation on home
   .home-btn {
-    background-color: $app-secondary;
+    background: linear-gradient($app-secondary-hover, $app-secondary);
     color: $app-white;
     font-size: 12px;
-    border: 2px solid $app-secondary;
+    transition: background .5s;
   }
   .home-btn:hover {
-    background-color: $app-secondary-hover;
-    border: 2px solid $app-secondary-hover;
+    background: linear-gradient($app-secondary,$app-primary);
   }
+
 
 // Styling for creating new objects in the dropdown menus
   .new-project-container, .new-line-container, .new-cage-container{

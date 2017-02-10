@@ -45,7 +45,7 @@ li {
   .edit-delete-icons{
     span{
       font-size: 1.4em;
-      margin-left: 20px;
+      margin-left: 15px;
       float: right;
     }
     .fa {
@@ -167,6 +167,7 @@ footer {
     padding:6px;
     display:block;
     border-radius: 4px;
+    color: $app-black;
     width: 100%;
     margin-bottom: 3px;
     }
@@ -181,6 +182,8 @@ footer {
     color:$app-black;
     pointer-events:none;
     font-size:14px;
+    text-transform: uppercase;
+    margin-bottom: 3px;
   }
   //Changes Placeholder Color
   input::-webkit-input-placeholder,
@@ -222,7 +225,7 @@ footer {
 
 // Create/update item button
 .btn-round {
-  background: $app-success;
+  background: linear-gradient($app-success-light2, $app-success);
   padding: 6px 15px;
   border-radius: 16px;
   border:none;
@@ -234,7 +237,7 @@ footer {
   transition: all 0.3s;
 }
 .btn-round:hover {
-  background: $app-success-hover;
+  background: linear-gradient($app-success, $app-success-hover);
 }
 
 //Error and success classes for validation
