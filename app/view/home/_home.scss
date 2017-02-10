@@ -10,19 +10,28 @@
   h5{
     font-size: 120%;
   }
+
 // Contains everything in home except nav with dropdowns
   .home-body-container {
     padding: 3%;
     background-color: $app-white;
 
-    .project-name{
-      font-size: 170%;
+    .info-container{
+      border: 2px solid $app-secondary-light;
+      padding: 0 1.5%;
+      margin-bottom: 20px;
     }
+    .project-name{
+      font-size: 200%;
+      letter-spacing: .5px;
+    }
+
     .line-name{
       font-size: 140%;
     }
     .cage-name {
-      font-size: 120%;
+      font-size: 130%;
+      letter-spacing: .5px;
     }
     .calculations-container {
       margin-bottom: 30px;
@@ -61,7 +70,7 @@
     transition: background .5s;
   }
   .home-btn:hover {
-    background: linear-gradient($app-secondary,$app-primary);
+    background: linear-gradient($app-secondary,$app-secondary-dark);
   }
 
 
