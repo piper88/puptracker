@@ -13,12 +13,16 @@ function ProjectLIController($log, $uibModal){
   $log.debug('init projectLICtrl');
 
   // Opens Delete Project Modal
-  this.open = function(project) {
+  this.openDeleteModal = function(itemToDelete, data) {
     let modalInstance = $uibModal.open({
       component: 'delete-modal',
       resolve: {
-        deleteProject: function(){
-          return project._id;
+        deleteToggle: function(){
+          return itemToDelete;
+        },
+
+        deleteData: function(){
+          return data;
         },
       },
     });
@@ -26,7 +30,7 @@ function ProjectLIController($log, $uibModal){
   };
 
   // Opens Edit Project, Line, Cage Modal
-  this.open3 = function(itemToEdit, data) {
+  this.openEditModal = function(itemToEdit, data) {
     let modalInstance = $uibModal.open({
       component: 'edit-modal',
       resolve: {

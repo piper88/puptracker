@@ -1,8 +1,12 @@
 <li class="line-li-container">
-  <div class="edit-delete-container">
-    {{lineLICtrl.line.name}}
-    <span ng-click="lineLICtrl.open3(2, lineLICtrl.line)" class="fa fa-pencil"></span>
-    <span ng-click="lineLICtrl.open2(lineLICtrl.line)" class="fa fa-trash"></span>
-  </div>
+  <table>
+    <tr>
+      <td>{{lineLICtrl.line.name}}</td>
+      <td><div class="edit-delete-icons">
+        <span ng-click="lineLICtrl.open2(lineLICtrl.line)"><i class="fa fa-trash"></i></span>
+        <span ng-click="lineLICtrl.open3(2, lineLICtrl.line)"><i class="fa fa-pencil"></i></span>
+      </div></td>
+    </tr>
+  </table>
 </li>
 <li class="divider"></li>

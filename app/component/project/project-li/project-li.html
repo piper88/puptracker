@@ -2,10 +2,10 @@
 <li class="project-li-container">
     <table>
       <tr>
-        <td>{{ projectLICtrl.project.name}}</td>
+        <td>{{projectLICtrl.project.name}}</td>
         <td><div class="edit-delete-icons">
-          <span ng-click="projectLICtrl.open3(1, projectLICtrl.project)"><i class="fa fa-pencil"></i></span>
-          <span ng-click="projectLICtrl.open(projectLICtrl.project)"><i class="fa fa-trash"></i></span>
+          <span ng-click="projectLICtrl.openDeleteModal(1, projectLICtrl.project)"><i class="fa fa-trash"></i></span>
+          <span ng-click="projectLICtrl.openEditModal(1, projectLICtrl.project)"><i class="fa fa-pencil"></i></span>
         </div></td>
       </tr>
     </table>
