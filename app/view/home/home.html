@@ -61,6 +61,10 @@
           </ul>
       </div>
     </div>
+
+    <div class="container" ng-if="homeCtrl.currentCage">
+      <button class="btn-round nav-btn" ng-click="homeCtrl.open3(4, homeCtrl.currentCage)"> Add Breeder </button>
+    </div>
   </div>
 </div> <!-- End Nav Row -->
 

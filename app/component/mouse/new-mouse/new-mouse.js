@@ -6,6 +6,7 @@ module.exports = {
   controllerAs: 'newMouseCtrl',
   bindings: {
     cage: '<',
+    updateSuccess: '&',
   },
 };
 
@@ -19,7 +20,8 @@ function NewMouseController($log, $http, $rootScope, mouseService){
     mouseService.createMouse(this.cage._id, this.mouse)
     .then( mouse => {
       this.mouse = mouse;
-      // this.mouse.name = null;
+      this.mouse.name = null;
+      this.updateSuccess();
     });
   };
 

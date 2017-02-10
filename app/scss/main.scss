@@ -212,6 +212,7 @@ footer {
   background: $app-success;
   padding: 6px 15px;
   border-radius: 16px;
+  border:none;
   color: $app-white;
   font-size: 14px;
   text-transform: uppercase;
@@ -221,9 +222,6 @@ footer {
 }
 .btn-round:hover {
   background: $app-success-hover;
-}
-.btn-round:active {
-  background:  $app-tertiary-hover;
 }
 
 //Error and success classes for validation
