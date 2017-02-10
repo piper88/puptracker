@@ -11,16 +11,18 @@ module.exports = {
 
 function cageLIController($log, $uibModal){
   $log.debug('init cageLiCtrl');
-  // Opens Delete Line Modal
-  this.openDeleteModal = function(itemToDelete) {
+
+  // Opens Delete Cage Modal
+  this.openDeleteModal = function(itemToDelete, data) {
     let modalInstance = $uibModal.open({
-      component: 'delete-line-modal',
+      component: 'delete-modal',
       resolve: {
         deleteToggle: function(){
           return itemToDelete;
         },
+
         deleteData: function(){
-          return itemToDelete._id;
+          return data;
         },
       },
     });

@@ -18,7 +18,7 @@ function DeleteModalController($log, $location, projectService, lineService, cag
     this.deleteToggle = this.resolve.deleteToggle;
   };
 
-  // need project id
+  // resolve.deleteData = project._id
   this.deleteProject = function(){
     projectService.deleteProject(this.resolve.deleteData._id)
     .then(() => {
@@ -26,17 +26,17 @@ function DeleteModalController($log, $location, projectService, lineService, cag
     });
   };
 
-  // need project and line id
+  // resolve.deleteData = line._id
   this.deleteLine = function(){
-    lineService.deleteLine(this.resolve.deleteData.project, this.resolve.deleteData._id)
+    lineService.deleteLine(this.resolve.deleteData._id, this.resolve.deleteData.projectId)
     .then(() => {
       this.modalInstance.close();
     });
   };
 
-  // need line and cage id
+  // resolve.deleteData = cage._id
   this.deleteCage = function(){
-    cageService.deletecage(this.resolve.deleteData.line, this.resolve.deleteData._id)
+    cageService.deleteCage(this.resolve.deleteData._id, this.resolve.deleteData.lineId)
     .then(() => {
       this.modalInstance.close();
     });
