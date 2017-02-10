@@ -71,52 +71,65 @@
 <div class="home-body-container">
   <div class="row">
     <div class="col span-1-of-3">
-      <!-- Project Info and Buttons -->
+        <!-- Project Info and Buttons -->
         <div ng-if="homeCtrl.currentProject">
-            <div class="edit-delete-container">
-              <h4 class="home-nav-title"><strong>{{homeCtrl.currentProject.name}}</strong>
-                <span ng-click="homeCtrl.open3(1, homeCtrl.currentProject)" class="fa fa-pencil"></span>
-                <span ng-click="homeCtrl.open(homeCtrl.currentProject)" class="fa fa-trash"></span>
-              </h4>
-            </div>
+          <!-- Name and Edit/Delete Icons -->
+          <div class="edit-delete-container">
+            <h4><strong class="project-name">{{homeCtrl.currentProject.name}}</strong>
+              <span ng-click="homeCtrl.open3(1, homeCtrl.currentProject)" class="fa fa-pencil"></span>
+              <span ng-click="homeCtrl.open(homeCtrl.currentProject)" class="fa fa-trash"></span>
+            </h4>
+          </div>
         </div>
 
-          <div ng-if="homeCtrl.currentLine">
-            <div class="edit-delete-container">
-              <h4 class="home-nav-title"><strong>Current Line: </strong>{{homeCtrl.currentLine.name}}
+        <!-- Display Current Line Calculations -->
+        <div ng-if="homeCtrl.currentLine">
+          <!-- Name and Edit/Delete Icons -->
+          <div class="edit-delete-container">
+            <h4><strong class="line-name">{{homeCtrl.currentLine.name}}</strong>
               <span ng-click="homeCtrl.open3(2, homeCtrl.currentLine)" class="fa fa-pencil"></span>
               <span ng-click="homeCtrl.open2(homeCtrl.currentLine)" class="fa fa-trash"></span>
             </h4>
-            </div>
           </div>
+          <!-- Line Calculations -->
+          <div class="calculations-container">
+            <h5><span>Number of Litters: </span>{{homeCtrl.numLitters}}</h5>
+            <h5><span>Expected Total Pups: </span>{{homeCtrl.expectedTotalPups}}</h5>
+            <h5><span>Expected Usable Pups: </span>{{homeCtrl.expectedUsablePups}}</h5>
+            <h5 ng-if="homeCtrl.currentCage.actualTotalPups"><span>Actual Total Pups: </span> {{homeCtrl.currentLine.actualTotalPups}}</h5>
+          </div>
+        </div>
 
-          <div  ng-if="homeCtrl.currentCage">
-            <div class="edit-delete-container">
-              <h4 class="home-nav-title"><strong>Current Cage: </strong>{{homeCtrl.currentCage.name}}
+        <!-- Display Selected Cage Information -->
+        <div ng-if="homeCtrl.currentCage">
+          <!-- Name and Edit/Delete Icons -->
+          <div class="edit-delete-container">
+            <h4><strong>Current Cage: </strong>{{homeCtrl.currentCage.name}}
               <span ng-click="homeCtrl.open3(3, homeCtrl.currentCage)" class="fa fa-pencil"></span>
               <span ng-click="homeCtrl.deleteCage()" class="fa fa-trash"></span>
             </h4>
-            </div>
           </div>
 
-      <div class="line-calculations-container" ng-if="homeCtrl.currentLine">
-        <h5><span>Expected Total Pups: </span>{{homeCtrl.expectedTotalPups}}</h5>
-        <h5><span>Actual Total PupsLine: </span> {{homeCtrl.currentLine.actualTotalPups}}</h5>
-        <h5><span>Expected Usable Pups/Line: </span>{{homeCtrl.expectedUsablePups}}</h5>
-      </div>
-      <div class="cage-calculations-container" ng-if="homeCtrl.currentCage">
-        <h5><span>Expected Date of Birth: </span>{{homeCtrl.expectedDOB}}</h5>
-        <h5><span>Actual Date of Birth: </span> {{homeCtrl.actualDOB}}</h5>
-      </div>
-      <mouse-container ng-if="homeCtrl.currentCage" cage="homeCtrl.currentCage"></mouse-container>
-    </div>
+          <!-- Cage Calculations -->
+          <div class="calculations-container">
+            <h5><span>Expected Date of Birth: </span>{{homeCtrl.expectedDOB}}</h5>
+            <h5 ng-if="homeCtrl.currentCage.actualDOB"><span>Actual Date of Birth: </span> {{homeCtrl.actualDOB}}</h5>
+            <h5 ng-if="homeCtrl.currentCage.numberOfFemales"><span>Expected Number of Pups: </span>{{homeCtrl.expectedPupsPerCage}}</h5>
+            <h5 ng-if="homeCtrl.currentCage.numberOfFemales"><span>Expected Number of Usable Pups: </span>{{homeCtrl.expectedUsablePupsPerCage}}</h5>
+          </div>
 
-  <div class="col span-2-of-3">
-    <calendar ng-if="homeCtrl.currentLine" line="homeCtrl.currentLine"></calendar>
-  </div>
-</div>
-</div>
+          <!-- Display list of breeders for selected cage-->
+          <mouse-container ng-if="homeCtrl.currentCage" cage="homeCtrl.currentCage"></mouse-container>
+        </div>
+      </div>
 
-<footer><p>Copyright 2017</p></footer>
+      <!-- Display Calendar -->
+      <div class="col span-2-of-3">
+        <calendar ng-if="homeCtrl.currentLine" line="homeCtrl.currentLine"></calendar>
+      </div>
+    </div> <!-- end row -->
+  </div> <!-- end home-body-container -->
+
+  <footer><p>Copyright 2017</p></footer>
 
 </main>

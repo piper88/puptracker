@@ -83,6 +83,7 @@ function HomeController($log, $location, $rootScope, $uibModal, projectService, 
   this.fetchLineCages = function(line){
     $log.debug('fetched current line');
     this.currentLine = line;
+    this.calculateLineInfo();
     return cageService.fetchCages(this.currentLine._id)
     .then(cages => {
       $log.debug('currentLine', this.currentLine);
@@ -93,7 +94,7 @@ function HomeController($log, $location, $rootScope, $uibModal, projectService, 
   this.fetchMice = function() {
     $log.debug('homeCtrl.fetchMice');
     $log.debug('currentCage', this.currentCage);
-    this.calculate();
+    this.calculateCageInfo();
     return mouseService.fetchMice(this.currentCage._id)
     .then(mice => {
       this.mice = mice;
@@ -104,9 +105,21 @@ function HomeController($log, $location, $rootScope, $uibModal, projectService, 
   //Fetch all projects on page load
   this.fetchProjects();
 
+  this.calculateLineInfo = function(){
+    $log.debug('homeCtrl.calculateLineInfo');
+    let numCages = this.currentLine.cages.length;
+    let totalFemales = 0, litterSize = 6, usablePercent =.25;
+    for(var i = 0; i < this.currentLine.cages.length; i++){
+      let currentCage = this.currentLine.cages[i];
+      totalFemales += currentCage.numberOfFemales;
+    }
+    this.numLitters = numCages;
+    this.expectedTotalPups = litterSize * this.numLitters * totalFemales;
+    this.expectedUsablePups = totalFemales * litterSize * usablePercent;
+  };
 
-  this.calculate = function(){
-    // Calculations
+  this.calculateCageInfo = function() {
+    $log.debug('homeCtrl.calculateCageInfo');
     // Calculate Expected DOB and return formatted date
     let d = this.currentCage.breedingStartDate;
     let date =  new Date(d);
@@ -125,10 +138,9 @@ function HomeController($log, $location, $rootScope, $uibModal, projectService, 
     let litterSize = 6;
     let usablePercent = .25;
 
-    this.expectedTotalPups = litterSize * numFemales;
-    this.expectedUsablePups = numFemales * litterSize * usablePercent;
+    this.expectedPupsPerCage = litterSize * numFemales;
+    this.expectedUsablePupsPerCage = numFemales * litterSize * usablePercent;
     this.expectedDOB = expectedDOB;
     this.actualDOB = actualDOB;
-    this.numLitters = 20; // for testing purposes
   };
 }

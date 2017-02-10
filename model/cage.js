@@ -25,8 +25,6 @@ const cageSchema = mongoose.Schema({
   //calculated based on average litter size, when breeders were set up, and number of breeding females
   expectedTotalPups: {type: Number},
   actualTotalPups: {type: Number},
-  //calculated from the genes of parents, and number of breeding females
-  // expectedUsablePups: {type: Number, required: true},
   actualUsablePups: {type: Number},
   //calculated from the array of genes
   expectedPercentUsableProgeny: {type: Number},

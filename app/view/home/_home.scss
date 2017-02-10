@@ -2,16 +2,21 @@
 @import "vendor";
 .home {
   margin-bottom: 50px;
-
   h2 {
     text-transform: uppercase;
     padding: 3% 0;
     color: $app-black;
   }
+  h5{
+    font-size: 120%;
+  }
 // Contains everything in home except nav with dropdowns
   .home-body-container {
     padding: 3%;
     background-color: $app-white;
+    .calculations-container {
+      margin-bottom: 30px;
+    }
   }
   .dropdown-menu{
     li {
@@ -45,14 +50,6 @@
       margin: 2%;
     }
   }
-
-  // Project title
-  .home-nav-title {
-    text-transform: uppercase;
-    color: $app-black;
-    margin: 0;
-  }
-
 
   // Main buttons for navigation on home
   .home-btn {
