@@ -53,8 +53,8 @@ function NewCageController($log, $http, $rootScope, $scope, cageService){
 
   $scope.toggleMin();
 
-  $scope.open1 = function() {
-    $scope.popup1.opened = true;
+  $scope.open6 = function() {
+    $scope.popup6.opened = true;
   };
 
 
@@ -66,7 +66,7 @@ function NewCageController($log, $http, $rootScope, $scope, cageService){
   $scope.format = $scope.formats[0];
   $scope.altInputFormats = ['M!/d!/yyyy'];
 
-  $scope.popup1 = {
+  $scope.popup6 = {
     opened: false,
   };
 

@@ -96,7 +96,7 @@
             <h5><span>Number of Litters: </span>{{homeCtrl.numLitters}}</h5>
             <h5><span>Expected Total Pups: </span>{{homeCtrl.expectedTotalPups}}</h5>
             <h5><span>Expected Usable Pups: </span>{{homeCtrl.expectedUsablePups}}</h5>
-            <h5 ng-if="homeCtrl.currentCage.actualTotalPups"><span>Actual Total Pups: </span> {{homeCtrl.currentLine.actualTotalPups}}</h5>
+            <h5 ng-if="homeCtrl.currentLine.actualTotalPups"><span>Actual Total Pups: </span> {{homeCtrl.currentLine.actualTotalPups}}</h5>
           </div>
         </div>
 
@@ -113,9 +113,10 @@
           <!-- Cage Calculations -->
           <div class="calculations-container">
             <h5><span>Expected Date of Birth: </span>{{homeCtrl.expectedDOB}}</h5>
+            <h5><span>Number of Litters/Month: </span> need to calculate!</h5>
             <h5 ng-if="homeCtrl.currentCage.actualDOB"><span>Actual Date of Birth: </span> {{homeCtrl.actualDOB}}</h5>
-            <h5 ng-if="homeCtrl.currentCage.numberOfFemales"><span>Expected Number of Pups: </span>{{homeCtrl.expectedPupsPerCage}}</h5>
-            <h5 ng-if="homeCtrl.currentCage.numberOfFemales"><span>Expected Number of Usable Pups: </span>{{homeCtrl.expectedUsablePupsPerCage}}</h5>
+            <h5 ng-if="homeCtrl.currentCage.numberOfFemales"><span>Expected Total of Pups/Cage: </span>{{homeCtrl.expectedPupsPerCage}}</h5>
+            <h5 ng-if="homeCtrl.currentCage.numberOfFemales"><span>Expected Number of Usable Pups/Cage: </span>{{homeCtrl.expectedUsablePupsPerCage}}</h5>
           </div>
 
           <!-- Display list of breeders for selected cage-->
