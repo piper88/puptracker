@@ -1,3 +1,8 @@
-
-<li class="cage-li-container">{{cageLICtrl.cage.name}}</li>
+<li class="cage-li-container">
+  <div class="edit-delete-container">
+    {{cageLICtrl.cage.name}}
+    <span ng-click="cageLICtrl.openUpdateModal(2, cageLICtrl.cage)" class="fa fa-pencil"></span>
+    <span ng-click="cageLICtrl.openDeleteModal(cageLICtrl.cage)" class="fa fa-trash"></span>
+  </div>
+</li>
 <li class="divider"></li>

@@ -17,7 +17,7 @@ function HomeController($log, $location, $rootScope, $uibModal, projectService, 
     isopen3: false,
   };
 
-  // Opens Edit Project, Line, Cage Modal
+  // Opens Create Breeder Modal
   this.open3 = function(itemToEdit, data) {
     let modalInstance = $uibModal.open({
       component: 'edit-modal',
@@ -25,7 +25,6 @@ function HomeController($log, $location, $rootScope, $uibModal, projectService, 
         editToggle: function(){
           return itemToEdit;
         },
-
         editData: function(){
           return data;
         },

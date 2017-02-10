@@ -23,8 +23,43 @@ ul {
 
 li {
   float: left;
-  padding: 1%;
   list-style: none;
+}
+
+.dropdown-menu{
+  li {
+    width: 100%;
+    text-transform: uppercase;
+    padding:0 10px;
+    cursor: pointer;
+  }
+}
+.project-li-container, .line-li-container, .cage-li-container{
+  table, tr{
+    width: 100%;
+  }
+  td{
+    // text-align: right;
+  }
+  // Edit and delete Icons
+  .edit-delete-icons{
+    span{
+      font-size: 1.4em;
+      margin-left: 15px;
+      float: right;
+    }
+    .fa {
+      color: $app-secondary;
+      cursor: pointer;
+      transition: .2s;
+    }
+    .fa-trash:hover {
+      color: $app-warn;
+    }
+    .fa-pencil:hover {
+      color: $app-info;
+    }
+  }
 }
 
 footer {
@@ -117,35 +152,6 @@ footer {
     color: $app-white;
   }
 }
-
-// Edit and delete Icons
-.edit-delete-container{
-  .project-name{
-    font-size: 150%;
-  }
-  .line-name{
-    font-size: 120%;
-  }
-  span {
-    float: right;
-    padding-left: 3%;
-    display: inline-block;
-    margin:10px;
-    //padding:5px 10px;
-  }
-  .fa {
-    color: $app-secondary;
-    cursor: pointer;
-    transition: .2s;
-  }
-  .fa-trash:hover {
-    color: $app-warn;
-  }
-  .fa-pencil:hover {
-    color: $app-info;
-  }
-}
-
 
 // Form for creating/Editing new Lines, Cages and mice
 .generalForm {

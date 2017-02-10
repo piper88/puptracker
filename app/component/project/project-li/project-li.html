@@ -1,9 +1,13 @@
 
 <li class="project-li-container">
-  <div class="edit-delete-container">
-    {{ projectLICtrl.project.name}}
-    <span ng-click="projectLICtrl.open3(1, projectLICtrl.project)" class="fa fa-pencil"></span>
-    <span ng-click="projectLICtrl.open(projectLICtrl.project)" class="fa fa-trash"></span>
-  </div>
-</li>
+    <table>
+      <tr>
+        <td>{{ projectLICtrl.project.name}}</td>
+        <td><div class="edit-delete-icons">
+          <span ng-click="projectLICtrl.open3(1, projectLICtrl.project)"><i class="fa fa-pencil"></i></span>
+          <span ng-click="projectLICtrl.open(projectLICtrl.project)"><i class="fa fa-trash"></i></span>
+        </div></td>
+      </tr>
+    </table>
+  </li>
 <li class="divider"></li>
