@@ -1,15 +1,12 @@
 @import "theme";
 
 .navbar {
-  background: $app-primary;
+  background: linear-gradient(to right, $app-secondary, $app-secondary-hover);
   height: 50px;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 10;
-  .logo{
-    height: 50px;
-  }
 
   .nav-container{
     padding: 0 10px;
@@ -27,7 +24,12 @@
     }
 
     .btn-nav:hover {
-      background-color: $app-primary-hover;
+      background-color: rgba(255,255,255,.8);
+    }
+    .logo {
+      height: 40px;
+      margin: 5px;
+      color: $app-white;
     }
 
     //logo
@@ -38,12 +40,11 @@
       vertical-align: center;
       display:inline-block;
       text-decoration: none;
-      color: $app-secondary;
+       color: $app-white;
     }
     .navbar-brand:hover {
-      color: $app-secondary;
+      // color: $app-secondary;
     }
-
   }
 }
 

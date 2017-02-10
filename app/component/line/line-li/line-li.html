@@ -1,4 +1,12 @@
 <li class="line-li-container">
-  {{lineLICtrl.line.name}}
+  <table>
+    <tr>
+      <td>{{lineLICtrl.line.name}}</td>
+      <td><div class="edit-delete-icons">
+        <span ng-click="lineLICtrl.openDeleteModal(2, lineLICtrl.line)"><i class="fa fa-trash"></i></span>
+        <span ng-click="lineLICtrl.openEditModal(2, lineLICtrl.line)"><i class="fa fa-pencil"></i></span>
+      </div></td>
+    </tr>
+  </table>
 </li>
 <li class="divider"></li>

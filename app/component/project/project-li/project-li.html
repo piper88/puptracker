@@ -1,5 +1,13 @@
-<li class="project-li">
-    {{ projectLICtrl.project.name}}
-</li>
 
+<li class="project-li-container">
+    <table>
+      <tr>
+        <td>{{projectLICtrl.project.name}}</td>
+        <td><div class="edit-delete-icons">
+          <span ng-click="projectLICtrl.openDeleteModal(1, projectLICtrl.project)"><i class="fa fa-trash"></i></span>
+          <span ng-click="projectLICtrl.openEditModal(1, projectLICtrl.project)"><i class="fa fa-pencil"></i></span>
+        </div></td>
+      </tr>
+    </table>
+  </li>
 <li class="divider"></li>

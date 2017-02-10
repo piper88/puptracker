@@ -16,11 +16,6 @@ h4{
   text-transform: uppercase;
 }
 
-hr{
-  width: 100%;
-  color: $app-primary-hover;
-}
-
 //General list styles
 ul {
   padding: 0;
@@ -28,14 +23,54 @@ ul {
 
 li {
   float: left;
-  padding: 1%;
   list-style: none;
 }
 
+.dropdown-menu{
+  li {
+    width: 100%;
+    text-transform: uppercase;
+    padding:0 10px;
+    cursor: pointer;
+  }
+}
+.project-li-container, .line-li-container, .cage-li-container{
+  table, tr{
+    width: 100%;
+  }
+  td{
+    // text-align: right;
+  }
+  // Edit and delete Icons
+  .edit-delete-icons{
+    span{
+      font-size: 1.4em;
+      margin-left: 15px;
+      float: right;
+    }
+    .fa {
+      color: $app-secondary;
+      cursor: pointer;
+      transition: .2s;
+    }
+    .fa-trash:hover {
+      color: $app-warn;
+    }
+    .fa-pencil:hover {
+      color: $app-info;
+    }
+  }
+}
+
 footer {
-  position: relative;
+  position: absolute;
   bottom: 0;
-  p{
+  height: 50px;
+  width: 100%;
+  background-color: $app-white;
+  color: $app-secondary-hover;
+  p {
+    margin: 1% 0;
     text-align: center;
     font-size: 10px;
   }
@@ -69,46 +104,54 @@ footer {
       padding:0;
     }
   }
-}
+  // X icon in corner of modals
+  .modal-icon {
+    font-size: 2em;
+    background-color: transparent;
+    color: $app-disabled;
+    opacity: .7;
+    transition: .2s;
+    cursor: pointer;
+  }
+  .modal-close{
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding-top: 2%;
+    padding-right: 2.5%;
+  }
+  .modal-icon:hover{
+    color: $app-disabled;
+    opacity: .4;
+  }
 
-.modal-icon {
-  font-size: 70px;
-  background-color: transparent;
-  transition: .2s;
-  cursor: pointer;
-}
-.modal-close{
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding-top: 2%;
-  padding-right: 2%;
-}
-.modal-icon:hover{
-  color: $app-white;
-}
+  // Delete Button on modals
+  .delete-btn {
+    float: left;
+    background-color: $app-error;
+    opacity: .9;
+    color: $app-white;
+  }
+  .delete-btn:hover{
+    background:$app-error;
+    opacity: 1;
+    color: $app-white;
+  }
 
-.edit-delete-container{
-  span {
-    padding-left: 3%;
-    display: inline-block;
-    margin:10px 10px 0 0;
-    padding:5px 10px;
+  // Applied to delete and cancel button on delete modals
+  .modal-btn{
+    font-size: 16px;
+    padding: 10px 16px;
+  }
+  .cancel-btn{
+    background-color: $app-success;
+    color: $app-white;
+  }
+  .cancel-btn:hover{
+    background-color: $app-success-hover;
+    color: $app-white;
   }
 }
-
-.fa {
-  color: $app-secondary;
-  cursor: pointer;
-  transition: .2s;
-}
-.fa-trash:hover {
-  color: $app-warn;
-}
-.fa-pencil:hover {
-  color: $app-info;
-}
-
 
 // Form for creating/Editing new Lines, Cages and mice
 .generalForm {
@@ -124,6 +167,7 @@ footer {
     padding:6px;
     display:block;
     border-radius: 4px;
+    color: $app-black;
     width: 100%;
     margin-bottom: 3px;
     }
@@ -138,6 +182,8 @@ footer {
     color:$app-black;
     pointer-events:none;
     font-size:14px;
+    text-transform: uppercase;
+    margin-bottom: 3px;
   }
   //Changes Placeholder Color
   input::-webkit-input-placeholder,
@@ -146,6 +192,7 @@ footer {
   }
 }
 
+// Edit model input styling
 .edit-line-container, .edit-cage-container, .edit-project-container {
   input {
     width: 80%;
@@ -176,39 +223,12 @@ footer {
 	transition: all 0.3s;
 }
 
-
-// Delete Button on modals
-.delete-btn {
-  float: left;
-  background-color: $app-error;
-  color: $app-white;
-}
-.delete-btn:hover{
-  background:$app-error-hover;
-  color: $app-white;
-}
-
-// Applied to delete and cancel button on delete modals
-.modal-btn{
-  font-size: 16px;
-  padding: 10px 16px;
-}
-
-.cancel-btn{
-  background-color: $app-success;
-  color: $app-white;
-}
-
-.cancel-btn:hover{
-  background-color: $app-success-hover;
-  color: $app-white;
-}
-
 // Create/update item button
 .btn-round {
-  background: $app-success;
+  background: linear-gradient($app-success-light2, $app-success);
   padding: 6px 15px;
   border-radius: 16px;
+  border:none;
   color: $app-white;
   font-size: 14px;
   text-transform: uppercase;
@@ -217,10 +237,7 @@ footer {
   transition: all 0.3s;
 }
 .btn-round:hover {
-  background: $app-success-hover;
-}
-.btn-round:active {
-  background:  $app-tertiary-hover;
+  background: linear-gradient($app-success, $app-success-hover);
 }
 
 //Error and success classes for validation

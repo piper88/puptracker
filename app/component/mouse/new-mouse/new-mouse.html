@@ -1,19 +1,41 @@
 <section class="new-mouse-container">
-  <h4>Add Breeder</h4>
   <form class="generalForm" novalidate ng-submit="newMouseCtrl.createNewMouse()">
 
     <label>Name</label>
-    <input name="name" type="text" ng-model="newMouseCtrl.mouse.name">
+    <input name="name" type="text"
+      ng-model="newMouseCtrl.mouse.name"
+      uib-tooltip="Name Required"
+      tooltip-placement="bottom-right"
+      tooltip-trigger="'focus'">
 
     <label>Genetic Makeup</label>
     <input name="geneticMakeup" type="text"
-      ng-model="newMouseCtrl.mouse.geneticMakeup">
+      ng-model="newMouseCtrl.mouse.geneticMakeup"
+      uib-tooltip="Genetic Makeup Required"
+      tooltip-placement="bottom-right"
+      tooltip-trigger="'focus'">
 
     <label>Date of Birth</label>
-    <input name="DOB" type="text"
-      ng-model="mouseMouseCtrl.mouse.DOB">
+    <div class='input-group date'>
+      <p class="input-group">
+        <input required
+          name="DOB"
+          type="text"
+          class="form-control"
+          uib-datepicker-popup="{{format}}"
+          ng-model="mouseMouseCtrl.mouse.DOB"
+          ng-model="dt" is-open="popup5.opened"
+          datepicker-options="dateOptions"
+          close-text="Close" alt-input-formats="altInputFormats"
+          uib-tooltip="Date of Birth Required"
+          tooltip-placement="bottom-right"
+          tooltip-trigger="'focus'">
+        <span class="input-group-btn">
+          <button type="button" class="btn" ng-click="open5()"><i class="glyphicon glyphicon-calendar"></i></button>
+        </span>
+      </p>
+    </div>
 
-
-  <button class="btn-round" type="submit"> Add </button>
+  <button class="btn-round submit-btn" type="submit"> Add </button>
   </form>
 </section>

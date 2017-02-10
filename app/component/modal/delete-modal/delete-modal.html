@@ -1,16 +1,46 @@
-<div class="modal-container">
-  <div class="modal-header">
-    <h2 class='delete-title'>Delete Project</h2>
-  </div>
-
+<!-- Modal Option 1 - Delete Project -->
+<div class="modal-container" ng-if="deleteModalCtrl.deleteToggle == 1">
+  <div class="modal-header"><h2 class='delete-title'>Delete Project</h2></div>
   <div class="modal-body">
-    <h3> Are you sure you want to delete this Project?
-      All associated lines, cages, and breeders will be permanently removed.</h3>
-  </div>
+    <h3> Are you sure you want to delete this project?</br>
+    All associated lines, cages, and breeders will be permanently removed.</h3> </div>
 
   <div class="modal-footer">
     <button class="btn delete-btn modal-btn" type="button" ng-click="deleteModalCtrl.deleteProject(this.project)">
-      I understand, delete this entire project.</button>
+      I understand, delete this entire project </button>
+    <button class="btn modal-btn cancel-btn" type="button" ng-click="deleteModalCtrl.handleClose()">Cancel</button>
+  </div>
+</div>
+
+<!-- Modal Option 2 - Delete Line -->
+<div class="modal-container" ng-if="deleteModalCtrl.deleteToggle == 2">
+  <div class="modal-header">
+    <h2 class='delete-title'>Delete Line</h2>
+  </div>
+  <div class="modal-body">
+    <h3> Are you sure you want to delete this Line? All associated cages and breeders will be permanently removed.</h3>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn delete-btn modal-btn" type="button" ng-click="deleteModalCtrl.deleteLine(this.line)">
+      I understand, delete this line.</button>
+    <button class="btn modal-btn cancel-btn" type="button" ng-click="deleteModalCtrl.handleClose()">Cancel</button>
+  </div>
+</div>
+
+<!-- Modal Option 3 - Delete Cage -->
+<div class="modal-container" ng-if="deleteModalCtrl.deleteToggle == 3">
+  <div class="modal-header">
+    <h2 class='delete-title'>Delete Cage</h2>
+  </div>
+  <div class="modal-body">
+    <h3> Are you sure you want to delete this cage?</br>
+      All associated breeders will be permanently removed.</h3>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn delete-btn modal-btn" type="button" ng-click="deleteModalCtrl.deleteCage(this.cage)">
+      I understand, delete this cage.</button>
     <button class="btn modal-btn cancel-btn" type="button" ng-click="deleteModalCtrl.handleClose()">Cancel</button>
   </div>
 </div>
