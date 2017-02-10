@@ -1,10 +1,9 @@
 <section class="line-info">
 
   <div class="row" >
-    <!-- NEED TO BE CALCULATED -->
     <h4>Line Name: {{lineInfoCtrl.line.name}}</h4>
-    <h5><span>Expected Total Pups/month: </span> {{lineInfoCtrl.expectedTotalPups}} </h5>
-    <h5><span>Expected Usable Pups/month: </span> {{lineInfoCtrl.expectedUsablePups}} </h5>
-    <h5><span>Actual Usable Pups: </span>{{lineInfoCtrl.line.actualUsablePups}} </h5>
   </div>
+
+  <calendar line="lineInfoCtrl.line"></calendar>
+
 </section>

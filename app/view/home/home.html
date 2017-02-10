@@ -69,18 +69,14 @@
 </div> <!-- End Nav Row -->
 
 <div class="home-body-container">
+
   <div class="row">
     <div class="col span-1-of-3">
-      <!-- Project Info and Buttons -->
-      <div ng-if="homeCtrl.currentProject">
-        <h4><strong class="project-name">{{homeCtrl.currentProject.name}}</strong></h4>
-      </div>
-
-      <!-- Display Current Line Calculations -->
       <div ng-if="homeCtrl.currentLine">
-        <h4><strong class="line-name">Current Line: {{homeCtrl.currentLine.name}}</strong></h4>
+        <h4 class="project-name"><strong>{{homeCtrl.currentProject.name}}: </strong> {{homeCtrl.currentLine.name}}</h4>
+
         <!-- Line Calculations -->
-        <div class="calculations-container">
+        <div class="calculations-container info-container">
           <h5><span>Number of Litters: </span>{{homeCtrl.numLitters}}</h5>
           <h5><span>Expected Total Pups: </span>{{homeCtrl.expectedTotalPups}}</h5>
           <h5><span>Expected Usable Pups: </span>{{homeCtrl.expectedUsablePups}}</h5>
@@ -90,23 +86,26 @@
 
       <!-- Display Selected Cage Information -->
       <div ng-if="homeCtrl.currentCage">
-        <h4><strong class="cage-name">Current Cage: {{homeCtrl.currentCage.name}} </strong></h4>
+        <h4 class="cage-name"><strong>Current Cage: </strong>{{homeCtrl.currentCage.name}}</h4>
         <!-- Cage Calculations -->
-        <div class="calculations-container">
+        <div class="calculations-container info-container">
           <h5><span>Expected Date of Birth: </span>{{homeCtrl.expectedDOB}}</h5>
           <h5><span>Number of Litters/Month: </span> need to calculate!</h5>
           <h5 ng-if="homeCtrl.currentCage.actualDOB"><span>Actual Date of Birth: </span> {{homeCtrl.actualDOB}}</h5>
           <h5 ng-if="homeCtrl.currentCage.numberOfFemales"><span>Expected Total of Pups/Cage: </span>{{homeCtrl.expectedPupsPerCage}}</h5>
           <h5 ng-if="homeCtrl.currentCage.numberOfFemales"><span>Expected Number of Usable Pups/Cage: </span>{{homeCtrl.expectedUsablePupsPerCage}}</h5>
+          </br>
+          <!-- Display list of breeders for selected cage-->
+          <mouse-container ng-if="homeCtrl.currentCage.numberOfFemales" cage="homeCtrl.currentCage"></mouse-container>
         </div>
-        <!-- Display list of breeders for selected cage-->
-        <mouse-container ng-if="homeCtrl.currentCage" cage="homeCtrl.currentCage"></mouse-container>
+
       </div>
     </div> <!-- end span-1-of-3 -->
 
       <!-- Display Calendar -->
       <div class="col span-2-of-3">
-        <calendar ng-if="homeCtrl.currentLine" line="homeCtrl.currentLine"></calendar>
+        <line-info ng-if="homeCtrl.currentLine" line="homeCtrl.currentLine"></line-info>
+        <!-- <calendar ng-if="homeCtrl.currentLine" line="homeCtrl.currentLine"></calendar> -->
       </div> <!-- end span-2-of-3 -->
 
     </div> <!-- end row -->
