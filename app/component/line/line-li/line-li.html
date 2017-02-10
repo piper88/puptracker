@@ -1,3 +1,8 @@
-
-<li class="line-li-container">{{lineLICtrl.line.name}}</li>
+<li class="line-li-container">
+  <div class="edit-delete-container">
+    {{lineLICtrl.line.name}}
+    <span ng-click="lineLICtrl.open3(2, lineLICtrl.line)" class="fa fa-pencil"></span>
+    <span ng-click="lineLICtrl.open2(lineLICtrl.line)" class="fa fa-trash"></span>
+  </div>
+</li>
 <li class="divider"></li>

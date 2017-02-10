@@ -17,32 +17,6 @@ function HomeController($log, $location, $rootScope, $uibModal, projectService, 
     isopen3: false,
   };
 
-  // Opens Delete Project Modal
-  this.open = function(project) {
-    let modalInstance = $uibModal.open({
-      component: 'delete-modal',
-      resolve: {
-        deleteProject: function(){
-          return project._id;
-        },
-      },
-    });
-    return modalInstance;
-  };
-
-  // Opens Delete Line Modal
-  this.open2 = function(line) {
-    let modalInstance = $uibModal.open({
-      component: 'delete-line-modal',
-      resolve: {
-        deleteLine: function(){
-          return line._id;
-        },
-      },
-    });
-    return modalInstance;
-  };
-
   // Opens Edit Project, Line, Cage Modal
   this.open3 = function(itemToEdit, data) {
     let modalInstance = $uibModal.open({

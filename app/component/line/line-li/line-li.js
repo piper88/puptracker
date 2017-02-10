@@ -2,24 +2,44 @@
 
 module.exports = {
   template: require('./line-li.html'),
-  controller: ['$log', 'lineService',  lineLIController],
+  controller: ['$log', '$uibModal',  lineLIController],
   controllerAs: 'lineLICtrl',
   bindings: {
     line: '<',
-    deleteLineCheck: '&',
-    project: '<',
   },
 };
 
-function lineLIController($log, lineService){
+function lineLIController($log, $uibModal){
   $log.debug('init lineLICtrl');
 
-  this.showEditLine = false;
-
-  this.deleteLine = function(){
-    lineService.deleteLine(this.project, this.line)
-    .then(() => {
-      this.deleteLineCheck();
+  // Opens Delete Line Modal
+  this.open2 = function(line) {
+    let modalInstance = $uibModal.open({
+      component: 'delete-line-modal',
+      resolve: {
+        deleteLine: function(){
+          return line._id;
+        },
+      },
     });
+    return modalInstance;
   };
+
+  // Opens Edit Project, Line, Cage Modal
+  this.open3 = function(itemToEdit, data) {
+    let modalInstance = $uibModal.open({
+      component: 'edit-modal',
+      resolve: {
+        editToggle: function(){
+          return itemToEdit;
+        },
+
+        editData: function(){
+          return data;
+        },
+      },
+    });
+    return modalInstance;
+  };
+
 }

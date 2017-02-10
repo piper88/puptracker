@@ -73,24 +73,12 @@
     <div class="col span-1-of-3">
         <!-- Project Info and Buttons -->
         <div ng-if="homeCtrl.currentProject">
-          <!-- Name and Edit/Delete Icons -->
-          <div class="edit-delete-container">
-            <h4><strong class="project-name">{{homeCtrl.currentProject.name}}</strong>
-              <span ng-click="homeCtrl.open3(1, homeCtrl.currentProject)" class="fa fa-pencil"></span>
-              <span ng-click="homeCtrl.open(homeCtrl.currentProject)" class="fa fa-trash"></span>
-            </h4>
-          </div>
+          <h4><strong class="project-name">{{homeCtrl.currentProject.name}}</strong></h4>
         </div>
 
         <!-- Display Current Line Calculations -->
         <div ng-if="homeCtrl.currentLine">
-          <!-- Name and Edit/Delete Icons -->
-          <div class="edit-delete-container">
-            <h4><strong class="line-name">{{homeCtrl.currentLine.name}}</strong>
-              <span ng-click="homeCtrl.open3(2, homeCtrl.currentLine)" class="fa fa-pencil"></span>
-              <span ng-click="homeCtrl.open2(homeCtrl.currentLine)" class="fa fa-trash"></span>
-            </h4>
-          </div>
+          <h4><strong class="line-name">{{homeCtrl.currentLine.name}}</strong></h4>
           <!-- Line Calculations -->
           <div class="calculations-container">
             <h5><span>Number of Litters: </span>{{homeCtrl.numLitters}}</h5>
@@ -99,6 +87,7 @@
             <h5 ng-if="homeCtrl.currentLine.actualTotalPups"><span>Actual Total Pups: </span> {{homeCtrl.currentLine.actualTotalPups}}</h5>
           </div>
         </div>
+
 
         <!-- Display Selected Cage Information -->
         <div ng-if="homeCtrl.currentCage">
@@ -122,12 +111,13 @@
           <!-- Display list of breeders for selected cage-->
           <mouse-container ng-if="homeCtrl.currentCage" cage="homeCtrl.currentCage"></mouse-container>
         </div>
-      </div>
+      </div> <!-- end span-1-of-3 -->
 
       <!-- Display Calendar -->
       <div class="col span-2-of-3">
         <calendar ng-if="homeCtrl.currentLine" line="homeCtrl.currentLine"></calendar>
-      </div>
+      </div> <!-- end span-2-of-3 -->
+
     </div> <!-- end row -->
   </div> <!-- end home-body-container -->
 
