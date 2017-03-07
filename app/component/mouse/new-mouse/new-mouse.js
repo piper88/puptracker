@@ -18,6 +18,7 @@ function NewMouseController($log, $http, $scope, $rootScope, mouseService){
   };
 
   this.mouse = {};
+  this.mouse.geneticMakeup = [];
 
 //the method that runs on submit
   this.createNewMouse = function() {
