@@ -1,5 +1,5 @@
 <section class="new-mouse-container">
-  <form class="generalForm" novalidate ng-submit="newMouseCtrl.createNewMouse()">
+  <!-- <form class="generalForm" novalidate ng-submit="newMouseCtrl.createNewMouse(newMouseCtrl.mouse)"> -->
 
     <label>Name</label>
     <input name="name" type="text"
@@ -9,11 +9,39 @@
       tooltip-trigger="'focus'">
 
     <label>Genetic Makeup</label>
-    <input name="geneticMakeup" type="text"
-      ng-model="newMouseCtrl.mouse.geneticMakeup"
-      uib-tooltip="Genetic Makeup Required"
-      tooltip-placement="bottom-right"
-      tooltip-trigger="'focus'">
+
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Type</label>
+      <div class="col-md-8">
+        <select class="form-control" name="geneticMakeup" class="form-control" id="geneticMakeup" ng-model="newMouseCtrl.mouse.geneticMakeup[0]" required>
+          <option>het</option>
+          <option>homo</option>
+          <option>wild</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Type</label>
+      <div class="col-md-8">
+        <select class="form-control" name="geneticMakeup" class="form-control" id="geneticMakeup" ng-model="newMouseCtrl.mouse.geneticMakeup[1]" required>
+          <option>het</option>
+          <option>homo</option>
+          <option>wild</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Type</label>
+      <div class="col-md-8">
+        <select class="form-control" name="geneticMakeup" class="form-control" id="geneticMakeup" ng-model="newMouseCtrl.mouse.geneticMakeup[2]" required>
+          <option>het</option>
+          <option>homo</option>
+          <option>wild</option>
+        </select>
+      </div>
+    </div>
 
     <label>Date of Birth</label>
     <div class='input-group date'>
@@ -23,7 +51,7 @@
           type="text"
           class="form-control"
           uib-datepicker-popup="{{format}}"
-          ng-model="mouseMouseCtrl.mouse.DOB"
+          ng-model="newMouseCtrl.mouse.DOB"
           ng-model="dt" is-open="popup5.opened"
           datepicker-options="dateOptions"
           close-text="Close" alt-input-formats="altInputFormats"
@@ -36,6 +64,6 @@
       </p>
     </div>
 
-  <button class="btn-round submit-btn" type="submit"> Add </button>
-  </form>
+  <button class="btn-round submit-btn" ng-click="newMouseCtrl.createNewMouse()"> Add </button>
+  <!-- </form> -->
 </section>
