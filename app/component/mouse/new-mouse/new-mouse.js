@@ -13,13 +13,20 @@ module.exports = {
 function NewMouseController($log, $http, $scope, $rootScope, mouseService){
   $log.debug('init newMouseCtrl');
 
+  $scope.status = {
+    isOpen: false,
+  };
+
   this.mouse = {};
 
+//the method that runs on submit
   this.createNewMouse = function() {
     $log.debug('init createNewMouse()');
+    $log.debug('the mouse right before it goes to the service to be created', this.mouse);
     mouseService.createMouse(this.cage._id, this.mouse)
-    .then( mouse => {
-      this.mouse = mouse;
+    .then( mousey => {
+      this.mouse = mousey;
+      $log.debug('the geneticMakeup of the mouse just created', mousey.geneticMakeup[0]);
       this.mouse.name = null;
       this.updateSuccess();
     });
@@ -101,9 +108,6 @@ function NewMouseController($log, $http, $scope, $rootScope, mouseService){
         }
       }
     }
-
     return '';
   }
-
-
 }

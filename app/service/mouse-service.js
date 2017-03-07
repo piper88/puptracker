@@ -30,7 +30,7 @@ function mouseService($q, $log, $http, authService){
     });
   };
 
-  service.createMouse = function(cageId, mouse){
+  service.createMouse = function(cageId, mousey){
     $log.debug('MouseService.createMouse()');
 
     return authService.getToken()
@@ -44,7 +44,7 @@ function mouseService($q, $log, $http, authService){
           Authorization: `Bearer ${token}`,
         },
       };
-      return $http.post(url, mouse, config);
+      return $http.post(url, mousey, config);
     })
     .then(res => {
       $log.debug('successfully created mouse');
