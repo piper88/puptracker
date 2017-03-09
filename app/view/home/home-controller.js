@@ -91,13 +91,13 @@ function HomeController($log, $location, $rootScope, $uibModal, projectService, 
     //calculate expected usable pups
     //a line has multiple cages, each cage has multiple mice,
     //iterate through the cages of the current line
-    for (var i = 0; i < this.currentLine.cages.length; i++) {
-      //iterate through all the mice of the cage[i]
-      for (var i = 0; i < this.currentLine.cage[i].mice.length; i++) {
-        ????
-      };
-    }
-    let usablePercent = this.currentLine.
+    // for (var i = 0; i < this.currentLine.cages.length; i++) {
+    //   //iterate through all the mice of the cage[i]
+    //   for (var i = 0; i < this.currentLine.cage[i].mice.length; i++) {
+    //     ????
+    //   };
+    // }
+    // let usablePercent = this.currentLine.
   };
 
   this.calculateLineInfo = function(){

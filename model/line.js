@@ -20,6 +20,8 @@ const Mouse = require('./mouse.js');
 //   - Usable % will be determined per cage using male and female genotypes AND Expected DOB of each cage
 
 const lineSchema = mongoose.Schema({
+  //the name is the crazy cree47-emx12;poop99-piper8;blurg9
+  //will be separated by semi colons, sometimes will only have two genes
   name: {type: String, required: true},
   userId: {type: mongoose.Schema.Types.ObjectId, required: true},
   projectId: {type: mongoose.Schema.Types.ObjectId, required: true},
