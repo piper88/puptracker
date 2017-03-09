@@ -7,15 +7,31 @@ const debug = require('debug')('puptracker:line');
 const Cage = require('./cage.js');
 const Mouse = require('./mouse.js');
 
+// ### Line
+// Initial User Inputs - `name`
+// Update User Inputs - `actualTotalPups`
+//
+// ` expectedTotalPups`
+//   - calculated by # of breeding females x litter size (6)
+// `actualTotalPups`
+//   - displayed when user inputs actual litter size after birth dates
+// `expectedUsablePups`
+//   - calculated by # of breeding females in the line x litter size (6) x Usable %
+//   - Usable % will be determined per cage using male and female genotypes AND Expected DOB of each cage
+
 const lineSchema = mongoose.Schema({
   name: {type: String, required: true},
   userId: {type: mongoose.Schema.Types.ObjectId, required: true},
   projectId: {type: mongoose.Schema.Types.ObjectId, required: true},
   cages: [{type: mongoose.Schema.Types.ObjectId, ref: 'cage'}],
+
+  //TOTAL PUPS EXPECTED AND ACTUAL
+  expectedTotalPups: {type: Number},
   actualTotalPups: {type: Number},
-  //expectedTotalPups: {type: Number}, CALCULATED ON FRONT END
-  // expectedUsablePups: {type: Number}, CALCULATED ON FRONT END
-  // actualUsablePups: {type: Number}, CALCULATED ON FRONT END
+
+  //USABLE PUPS EXPECTED AND ACTUAL
+  expectedUsablePups: {type: Number},
+  actualUsablePups: {type: Number},
 });
 
 const Line = module.exports = mongoose.model('line', lineSchema);
