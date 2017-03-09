@@ -8,12 +8,20 @@
       tooltip-placement="bottom-right"
       tooltip-trigger="'focus'">
 
+    <label>Gender</label>
+    <div class="col-md-8">
+      <select class="form-control" name="gender" id="gender" ng-model="newMouseCtrl.mouse.gender" required>
+        <option>Female</option>
+        <option>Male</option>
+      </select>
+    </div>
+
     <label>Genetic Makeup</label>
 
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">Type</label>
       <div class="col-md-8">
-        <select class="form-control" name="geneticMakeup" class="form-control" id="geneticMakeup" ng-model="newMouseCtrl.mouse.geneticMakeup[0]" required>
+        <select class="form-control" name="geneticMakeup" id="geneticMakeup" ng-model="newMouseCtrl.mouse.geneticMakeup[0]" required>
           <option>het</option>
           <option>homo</option>
           <option>wild</option>
@@ -24,7 +32,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">Type</label>
       <div class="col-md-8">
-        <select class="form-control" name="geneticMakeup" class="form-control" id="geneticMakeup" ng-model="newMouseCtrl.mouse.geneticMakeup[1]" required>
+        <select class="form-control" name="geneticMakeup" id="geneticMakeup" ng-model="newMouseCtrl.mouse.geneticMakeup[1]" required>
           <option>het</option>
           <option>homo</option>
           <option>wild</option>
@@ -35,7 +43,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">Type</label>
       <div class="col-md-8">
-        <select class="form-control" name="geneticMakeup" class="form-control" id="geneticMakeup" ng-model="newMouseCtrl.mouse.geneticMakeup[2]" required>
+        <select class="form-control" name="geneticMakeup" id="geneticMakeup" ng-model="newMouseCtrl.mouse.geneticMakeup[2]" required>
           <option>N/A</option>
           <option>het</option>
           <option>homo</option>
