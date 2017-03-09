@@ -78,6 +78,28 @@ function HomeController($log, $location, $rootScope, $uibModal, projectService, 
   //Fetch all projects on page load
   this.fetchProjects();
 
+  //calculate expected total pups
+  //calculate expected usable pups
+  this.calculateLineInfo = function() {
+    $log.debug('homeCtrl.calculateLineInfo()');
+    //calculate expected total pups
+    let numBreedingFemales = this.currentLine.cages.numberOfFemales;
+    let litterSize = 6;
+    let numberLittersMonthly = this.currentLine.cages.numberLittersMonthly;
+    this.expectedTotalPups = numBreedingFemales * litterSize * numberLittersMonthly;
+
+    //calculate expected usable pups
+    //a line has multiple cages, each cage has multiple mice,
+    //iterate through the cages of the current line
+    // for (var i = 0; i < this.currentLine.cages.length; i++) {
+    //   //iterate through all the mice of the cage[i]
+    //   for (var i = 0; i < this.currentLine.cage[i].mice.length; i++) {
+    //     ????
+    //   };
+    // }
+    // let usablePercent = this.currentLine.
+  };
+
   this.calculateLineInfo = function(){
     $log.debug('homeCtrl.calculateLineInfo');
     let numCages = this.currentLine.cages.length;

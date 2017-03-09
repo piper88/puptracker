@@ -5,6 +5,23 @@ const debug = require('debug')('puptracker:cage');
 
 const Mouse = require('./mouse.js');
 
+// Initial User Inputs - `name`, `breedingStart`
+// Update User Inputs - `actualDOB`
+//
+// `breedingEnd`
+//   - Calculated: Set end date for when youngest breeder in cage is 200 days old
+// `expectedDOB`
+//   - Calculated. 22 days after Breeding Start Date
+// `actualDOB`
+//   - Entered by user after litter is physically born. Will then reset "Breeding Start Date" so the subsequent litter in that cage will have an "Expected DOB" 22 days from then
+// `Number of Litters per month`
+//   - Calculated using Expected DOB
+// `expectedTotalPups`
+//   - Set by default to 6 per breeding female (can have more than 1 breeding female in a cage)
+// `expectedUsablePups`
+//   - Calculated by # of breeding females in the cage x litter size (6) per female in the cage x Usable %
+//   - Usable % will be determined by genotype of male and female(s)
+
 const cageSchema = mongoose.Schema({
   name: {type: String, required:true},
   numberOfFemales: {type: Number},
@@ -18,8 +35,8 @@ const cageSchema = mongoose.Schema({
   breedingEndDate: {type: Date},  //end date will be calculated as when youngest mouse breeder is 200 days old
   actualDOB: {type: Date},
   //should calculate, on average 25 days after putting in cage together, should eventually have an option for min and max days
-  //numberLittersMonthly: {type: Number},
-  actualTotalPups: {type: Number},
+  numberLittersMonthly: {type: Number},
+  numberPupsBorn: {type: Number},
   expectedPercentUsableProgeny: {type: Number},
 });
 
