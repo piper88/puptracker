@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "",
-    "start": "node server.js"
+    "start": "DEBUG='puptracker*' node server.js"
   },
   "repository": {
     "type": "git",
